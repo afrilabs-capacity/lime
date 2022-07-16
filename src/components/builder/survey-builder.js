@@ -11,13 +11,13 @@ import { useDrop } from "react-dnd";
 import { TutorialApp } from "./drag-and-drop/tutorial-app";
 import DropZone from "./drag-and-drop/drop-zone.js";
 import ToolBar from "./drag-and-drop/toolbar.js";
+import axios from "axios";
 
 export default function Survey() {
   return (
     <>
       <DndProvider backend={HTML5Backend}>
         <div>
-          <Header />
           <div className="grid md:grid-cols-1">
             <div className="main-right col-span-2 bg-green">
               <div className="grid md:grid-cols-3 gap-4">

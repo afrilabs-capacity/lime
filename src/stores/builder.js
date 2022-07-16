@@ -10,75 +10,13 @@ export const useBuilderStore = create((set) => ({
   widgetEditorModal: false,
   widgetPreviewModal: false,
   bears: 0,
-  widgets: [
-    {
-      unique_key: "6abd2ad2-82ee-4b9a-9c2e-76585feb70b2",
-      name: "text-input",
-      title: "Text Input",
-      label: "<p>First Name</p>",
-      required: true,
-    },
-    {
-      unique_key: "e4574f99-7c5e-48df-a427-cada51bce5df",
-      name: "divider",
-      title: "Line Break",
-    },
-    {
-      unique_key: "1efe2a4a-3c74-428c-9170-3728a2400f7d",
-      name: "dropdown",
-      title: "Dropdown",
-      label: "<p>Country</p>",
-      required: true,
-      options: [
-        {
-          unique_key: "5e414685-f6c7-4773-ace8-ffe46a74fb3c",
-          option: "America",
-          value: "America",
-        },
-        {
-          unique_key: "edcf070e-66db-40f4-90d0-fa8210c1d9f8",
-          option: "Nigeria",
-          value: "Nigeria",
-        },
-        {
-          unique_key: "188d5409-0b97-4b1b-ab0f-5935130d55ac",
-          option: "Canada",
-          value: "Canada",
-        },
-      ],
-    },
-    {
-      unique_key: "85b1cbfb-c635-4cac-9b3b-448f9898163f",
-      name: "multi-line-input",
-      title: "Multiline Input",
-      label: "<p>Occupation</p>",
-      required: true,
-    },
-    {
-      unique_key: "2bc9319f-2d46-495b-a838-6c9b578249cb",
-      name: "dropdown",
-      title: "Dropdown",
-      label: "<p>Work Experience</p>",
-      required: true,
-      options: [
-        {
-          unique_key: "f0835386-0165-45de-a99c-645a617c4a28",
-          option: "1-3 years",
-          value: "1-3",
-        },
-        {
-          unique_key: "e08af438-f27c-4ec6-ae84-08c0ff622e1a",
-          option: "3-5 years",
-          value: "3-5",
-        },
-        {
-          unique_key: "3ede7553-a49a-46fd-bc8a-321edfd38e53",
-          option: "5-10 years",
-          value: "5-10",
-        },
-      ],
-    },
-  ],
+  widgets: [],
+  setWidgetsFromTemplate: (widgets) => {
+    // alert(JSON.stringify(widgets));
+    set((state) => ({
+      widgets: (state.widgets = JSON.parse(widgets)),
+    }));
+  },
   showWidgetEditorModal: (item) => {
     set((state) => ({
       widgetEditorModal: (state.widgetEditorModal = true),
