@@ -32,7 +32,7 @@ export default function SurveyTemplates() {
           {surveyTemplates.map((survey) => {
             return (
               <a href={`/new-survey/${survey.uuid}`}>
-                <div className="p-8 AsideBackground rounded shadow cursor-pointer">
+                <div className="m-2 p-8  border-side border-sky-400 border-l-8 hover:border-sky-900 border-l-8 shadow cursor-pointer">
                   <p className="text-lg">{survey.name}</p>
                 </div>
               </a>

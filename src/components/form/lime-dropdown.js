@@ -14,6 +14,7 @@ export function LimeDropDownPreview({ item }) {
     <div className="p-0 bg-white">
       <div className="p-2">
         {" "}
+        <span className="font-bold">Q. </span>
         <label
           for="exampleFormControlInput1"
           class="form-label inline-block mb-2 text-gray-700 mr-2"

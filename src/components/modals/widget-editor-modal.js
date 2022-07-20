@@ -7,6 +7,8 @@ import {
   getWidgetIndex,
 } from "../../utils/helper-functions";
 import DropDownOption from "../builder/drag-and-drop/widgets/components/dropdown/dropdown-option";
+import CheckboxOption from "../builder/drag-and-drop/widgets/components/checkbox/checkbox-option";
+import RadioOption from "../builder/drag-and-drop/widgets/components/radiobutton/radio-option";
 
 export default function WidetEditor() {
   const {
@@ -84,11 +86,31 @@ export default function WidetEditor() {
                           parentWidget={widgets[widgetIndex]}
                         />
                       ))}
-                      {/* <DropDownOption />
-                      <DropDownOption />
-                      <DropDownOption /> */}
                     </>
                   )}
+
+                {currentEditingWidget &&
+                  currentEditingWidget.name == "checkbox" && (
+                    <>
+                      {widgets[widgetIndex].options.map((obj) => (
+                        <CheckboxOption
+                          item={obj}
+                          parentWidget={widgets[widgetIndex]}
+                        />
+                      ))}
+                    </>
+                  )}
+
+                {currentEditingWidget && currentEditingWidget.name == "radio" && (
+                  <>
+                    {widgets[widgetIndex].options.map((obj) => (
+                      <RadioOption
+                        item={obj}
+                        parentWidget={widgets[widgetIndex]}
+                      />
+                    ))}
+                  </>
+                )}
 
                 {/* widget content end */}
               </div>

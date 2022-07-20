@@ -14,8 +14,8 @@ import BasicButton from "./components/builder/drag-and-drop/widgets/components/b
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<p>Welcome</p>} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/" element={<Master component={<Dashboard />} />} />
+      <Route path="/dashboard" element={<Master component={<Dashboard />} />} />
       <Route path="/new-survey/:uuid" element={<SurveyBuilder />} />
       <Route
         path="/new-survey"

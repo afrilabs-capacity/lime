@@ -34,7 +34,9 @@ export default function DashboardLayout() {
       <div>
         <div className="grid md:grid-cols-3">
           <div className="main-right col-span-2 p-2">
-            <TopCards />
+            <div className="my-6">
+              <TopCards />
+            </div>
             <div>
               <h1 className="text-2xl text-blue-900 m-2">Surveys</h1>
             </div>
