@@ -1,9 +1,9 @@
-import { useBuilderStore } from "../../stores/builder.js";
+import { useBuilderStore } from "../../../stores/builder.js";
 import { useState, useEffect } from "react";
 import {
   getActiveWidgetLabel,
   getActiveWidgetRequired,
-} from "../../utils/helper-functions.js";
+} from "../../../utils/helper-functions.js";
 export function LimeRadioPreview({ item }) {
   const [disableFields, setDisabledFields] = useState(true);
   const { showWidgetEditorModal, currentEditingItem, widgets } =

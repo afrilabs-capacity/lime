@@ -6,13 +6,21 @@ import LimeDropDown from "../components/builder/drag-and-drop/widgets/lime-dropd
 import LimeCheckbox from "../components/builder/drag-and-drop/widgets/lime-checkbox";
 import LimeRadio from "../components/builder/drag-and-drop/widgets/lime-radio";
 
-import LimeDividerPreview from "../components/form/lime-divider";
-import LimeInputPreview from "../components/form/lime-text-input";
-import LimeParagraphPreview from "../components/form/lime-paragraph";
-import LimeDropDownPreview from "../components/form/lime-dropdown";
-import LimeMultiLinePreview from "../components/form/lime-multiline";
-import LimeCheckboxPreview from "../components/form/lime-checkbox";
-import LimeRadioPreview from "../components/form/lime-radio";
+import LimeDividerPreview from "../components/form/preview/lime-divider";
+import LimeInputPreview from "../components/form/preview/lime-text-input";
+import LimeParagraphPreview from "../components/form/preview/lime-paragraph";
+import LimeDropDownPreview from "../components/form/preview/lime-dropdown";
+import LimeMultiLinePreview from "../components/form/preview/lime-multiline";
+import LimeCheckboxPreview from "../components/form/preview/lime-checkbox";
+import LimeRadioPreview from "../components/form/preview/lime-radio";
+
+import LimeDividerWeb from "../components/form/web/lime-divider";
+import LimeInputWeb from "../components/form/web/lime-text-input";
+import LimeParagraphWeb from "../components/form/web/lime-paragraph";
+import LimeDropDownWeb from "../components/form/web/lime-dropdown";
+import LimeMultiLineWeb from "../components/form/web/lime-multiline";
+import LimeCheckboxWeb from "../components/form/web/lime-checkbox";
+import LimeRadioWeb from "../components/form/web/lime-radio";
 
 export const getWidgetIndex = (currentEditingWidget, widgets) => {
   return currentEditingWidget
@@ -124,6 +132,49 @@ export const getPreviewWidgetByKey = (item) => {
   }
   if (item && item.name == "radio") {
     return <LimeRadioPreview item={item} />;
+  }
+
+  //   if (item && item.key == "header-text") {
+  //     addWidget(<LimeHeader />);
+  //   }
+  //   if (item && item.key == "checkboxes") {
+  //     addWidget(<LimeCheckBoxes />);
+  //   }
+  //   if (item && item.key == "radio-buttons") {
+  //     addWidget(<LimeRadioButtons />);
+  //   }
+
+  //   if (item && item.key == "date") {
+  //     addWidget(<LimeDate />);
+  //   }
+
+  //   if (item && item.key == "rating") {
+  //     addWidget(<LimeRating />);
+  //   }
+};
+
+export const getWebWidgetByKey = (item) => {
+  if (item && item.name == "text-input") {
+    return <LimeInputWeb item={item} />;
+  }
+
+  if (item && item.name == "divider") {
+    return <LimeDividerWeb item={item} />;
+  }
+  if (item && item.name == "paragraph") {
+    return <LimeParagraphWeb item={item} />;
+  }
+  if (item && item.name == "multi-line-input") {
+    return <LimeMultiLineWeb item={item} />;
+  }
+  if (item && item.name == "dropdown") {
+    return <LimeDropDownWeb item={item} />;
+  }
+  if (item && item.name == "checkbox") {
+    return <LimeCheckboxWeb item={item} />;
+  }
+  if (item && item.name == "radio") {
+    return <LimeRadioWeb item={item} />;
   }
 
   //   if (item && item.key == "header-text") {

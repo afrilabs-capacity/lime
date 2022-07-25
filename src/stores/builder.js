@@ -11,6 +11,7 @@ export const useBuilderStore = create((set) => ({
   widgetPreviewModal: false,
   bears: 0,
   widgets: [],
+  surveyResponse: [],
   setWidgetsFromTemplate: (widgets) => {
     // alert(JSON.stringify(widgets));
     set((state) => ({
@@ -45,13 +46,65 @@ export const useBuilderStore = create((set) => ({
       };
     });
   },
+  updateWebWidgetField: (item, field, data) =>
+    set((state) => {
+      const widgetIndex = getWidgetIndex(item, state.widgets);
+      console.log("Before widget update", state.widgets[widgetIndex].label);
+      if (item.name !== "checkbox") {
+        const updateObject = () => {
+          return state.widgets.map((obj) => {
+            console.log("obj", state.widgets[widgetIndex].unique_key);
+            if (obj.unique_key == state.widgets[widgetIndex].unique_key) {
+              return { ...obj, [field]: data };
+            }
+
+            return obj;
+          });
+        };
+        console.log("After widget update", state.widgets);
+        return {
+          widgets: updateObject(),
+        };
+      } else {
+        const { value, checked } = data.target;
+
+        const updateObject = () => {
+          return state.widgets.map((obj) => {
+            console.log("obj", state.widgets[widgetIndex].unique_key);
+            if (obj.unique_key == state.widgets[widgetIndex].unique_key) {
+              if (checked) {
+                if (!obj.data) {
+                  obj.data = [];
+                  obj.data.push(value);
+                } else {
+                  obj.data.push(value);
+                }
+              } else {
+                if (obj.data && obj.data.length) {
+                  let objWithoutItem = obj.data.filter((e) => e !== value);
+                  obj.data = objWithoutItem;
+                  console.log("new obj", obj.data);
+                }
+              }
+            }
+            return obj;
+          });
+        };
+        console.log("After widget update", state.widgets);
+        return {
+          widgets: updateObject(),
+        };
+      }
+
+      // return state.widgets;
+    }),
   updateWidgetField: (field, data) =>
     set((state) => {
       const widgetIndex = getWidgetIndex(
         state.currentEditingWidget,
         state.widgets
       );
-      console.log("Before widget update", state.widgets[widgetIndex].label);
+      // console.log("Before widget update", state.widgets[widgetIndex].label);
       const updateObject = () => {
         return state.widgets.map((obj) => {
           console.log("obj", state.widgets[widgetIndex].unique_key);

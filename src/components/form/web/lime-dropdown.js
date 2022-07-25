@@ -1,13 +1,17 @@
-import { useBuilderStore } from "../../stores/builder.js";
+import { useBuilderStore } from "../../../stores/builder.js";
 import { useState, useEffect } from "react";
 import {
   getActiveWidgetLabel,
   getActiveWidgetRequired,
-} from "../../utils/helper-functions.js";
-export function LimeDropDownPreview({ item }) {
+} from "../../../utils/helper-functions.js";
+export function LimeDropDownWeb({ item }) {
   const [disableFields, setDisabledFields] = useState(false);
-  const { showWidgetEditorModal, currentEditingItem, widgets } =
-    useBuilderStore((state) => state);
+  const {
+    showWidgetEditorModal,
+    currentEditingItem,
+    updateWebWidgetField,
+    widgets,
+  } = useBuilderStore((state) => state);
   const widgetRquired = getActiveWidgetRequired(item, widgets);
 
   return (
@@ -30,6 +34,7 @@ export function LimeDropDownPreview({ item }) {
         {/* widget content start */}
         <fieldset disabled={disableFields}>
           <select
+            onChange={(e) => updateWebWidgetField(item, "data", e.target.value)}
             className=" form-control
         block
         w-full
@@ -56,4 +61,4 @@ export function LimeDropDownPreview({ item }) {
   );
 }
 
-export default LimeDropDownPreview;
+export default LimeDropDownWeb;

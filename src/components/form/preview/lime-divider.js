@@ -1,6 +1,6 @@
-import { useBuilderStore } from "../../stores/builder.js";
+import { useBuilderStore } from "../../../stores/builder.js";
 import { useState, useEffect } from "react";
-import { getActiveWidgetLabel } from "../../utils/helper-functions.js";
+import { getActiveWidgetLabel } from "../../../utils/helper-functions.js";
 
 export function LimeDividerPreview({ item }) {
   return (

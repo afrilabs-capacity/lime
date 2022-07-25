@@ -1,13 +1,17 @@
-import { useBuilderStore } from "../../stores/builder.js";
+import { useBuilderStore } from "../../../stores/builder.js";
 import { useState, useEffect } from "react";
 import {
   getActiveWidgetLabel,
   getActiveWidgetRequired,
-} from "../../utils/helper-functions.js";
-export function LimeCheckboxPreview({ item }) {
+} from "../../../utils/helper-functions.js";
+export function LimeCheckboxWeb({ item }) {
   const [disableFields, setDisabledFields] = useState(true);
-  const { showWidgetEditorModal, currentEditingItem, widgets } =
-    useBuilderStore((state) => state);
+  const {
+    showWidgetEditorModal,
+    currentEditingItem,
+    updateWebWidgetField,
+    widgets,
+  } = useBuilderStore((state) => state);
   const widgetRquired = getActiveWidgetRequired(item, widgets);
 
   return (
@@ -29,7 +33,10 @@ export function LimeCheckboxPreview({ item }) {
         )}
         {/* widget content start */}
         <div className="p-2 bg-white">
-          <div className="p-2">
+          <div
+            className="p-2"
+            onChange={(e) => updateWebWidgetField(item, "data", e)}
+          >
             {/* widget content start */}{" "}
             {item.options.map((option) => (
               <div>
@@ -62,4 +69,4 @@ export function LimeCheckboxPreview({ item }) {
   );
 }
 
-export default LimeCheckboxPreview;
+export default LimeCheckboxWeb;

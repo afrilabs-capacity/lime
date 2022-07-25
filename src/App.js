@@ -8,6 +8,8 @@ import Surveys from "./pages/admin/surveys/surveys";
 import SurveyName from "./pages/admin/surveys/survey-name";
 import SurveyTemplates from "./pages/admin/surveys/survey-templates";
 import NewSurvey from "./pages/admin/surveys/new-servey";
+import FillSurvey from "./pages/web/survey/fill-survey";
+import Login from "./pages/login";
 
 import BasicButton from "./components/builder/drag-and-drop/widgets/components/buttons/basic-button";
 
@@ -15,8 +17,10 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Master component={<Dashboard />} />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/dashboard" element={<Master component={<Dashboard />} />} />
       <Route path="/new-survey/:uuid" element={<SurveyBuilder />} />
+      <Route path="/survey/share/:uuid" element={<FillSurvey />} />
       <Route
         path="/new-survey"
         element={<Master component={<NewSurvey />} />}

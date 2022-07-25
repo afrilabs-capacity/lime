@@ -1,15 +1,19 @@
-import { useBuilderStore } from "../../stores/builder.js";
+import { useBuilderStore } from "../../../stores/builder.js";
 import { useState, useEffect } from "react";
-import TextField from "../../components/builder/drag-and-drop/widgets/components/input/textfield";
+import TextField from "../../../components/builder/drag-and-drop/widgets/components/input/textfield";
 import {
   getActiveWidgetLabel,
   getActiveWidgetRequired,
-} from "../../utils/helper-functions.js";
+} from "../../../utils/helper-functions.js";
 
-export function LimeInputPreview({ item }) {
+export function LimeInputWeb({ item }) {
   const [disableFields, setDisabledFields] = useState(false);
-  const { showWidgetEditorModal, currentEditingWidget, widgets } =
-    useBuilderStore((state) => state);
+  const {
+    showWidgetEditorModal,
+    currentEditingWidget,
+    updateWebWidgetField,
+    widgets,
+  } = useBuilderStore((state) => state);
   const widgetRquired = getActiveWidgetRequired(item, widgets);
 
   useEffect(
@@ -42,7 +46,30 @@ export function LimeInputPreview({ item }) {
           </span>
         )}
         <fieldset disabled={disableFields}>
-          <TextField placeholder={"Options 1"} />
+          <input
+            type="text"
+            readonly
+            className="
+        form-control
+        block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            id="exampleFormControlInput1"
+            placeholder={`Text here...`}
+            onChange={(e) => updateWebWidgetField(item, "data", e.target.value)}
+          />
+          {/* <TextField placeholder={"Text here..."} /> */}
         </fieldset>
         {/* widget content end */}
       </div>
@@ -52,4 +79,4 @@ export function LimeInputPreview({ item }) {
   );
 }
 
-export default LimeInputPreview;
+export default LimeInputWeb;
