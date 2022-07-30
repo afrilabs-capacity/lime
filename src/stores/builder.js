@@ -15,7 +15,7 @@ export const useBuilderStore = create((set) => ({
   setWidgetsFromTemplate: (widgets) => {
     // alert(JSON.stringify(widgets));
     set((state) => ({
-      widgets: (state.widgets = JSON.parse(widgets)),
+      widgets: (state.widgets = widgets.length ? JSON.parse(widgets) : []),
     }));
   },
   showWidgetEditorModal: (item) => {

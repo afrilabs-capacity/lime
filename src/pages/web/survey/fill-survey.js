@@ -13,10 +13,13 @@ import axios from "axios";
 export default function FillSurvey() {
   let { uuid } = useParams();
   const [survey, setSurvey] = useState({});
+  const [submitting, setSubmitting] = useState(false);
+  const [surveySubmitted, setSurveySubmitted] = useState(false);
   const { widgets, showWidgetPreviewModal, setWidgetsFromTemplate } =
     useBuilderStore((state) => state);
 
   const getSurvey = () => {
+    setWidgetsFromTemplate([]);
     const url = "/api/survey/" + uuid;
     axios
       .get(url)
@@ -26,7 +29,6 @@ export default function FillSurvey() {
           if (response.data.survey.data) {
             setWidgetsFromTemplate(response.data.survey.data);
           }
-
           //   console.log(response.data.series);
         }
       })
@@ -36,21 +38,25 @@ export default function FillSurvey() {
       });
   };
 
-  const updateSurvey = () => {
-    const url = "/api/survey/update";
+  const submitSurvey = () => {
+    setSubmitting(true);
+    const url = "/api/survey/response";
     axios
       .post(url, { uuid: uuid, data: JSON.stringify(widgets) })
       .then((response) => {
         if (response.status == 200) {
-          setSurvey(response.data.survey);
-          console.log(response.data.series);
+          setSurveySubmitted(true);
         }
+        setSubmitting(false);
       })
       .catch((error) => {
         alert(error.message);
+        setSubmitting(false);
         console.error("There was an error!", error);
       });
   };
+
+  const setupSurveyTracker = () => {};
 
   useEffect(() => {
     getSurvey();
@@ -64,17 +70,32 @@ export default function FillSurvey() {
             {survey && survey.name}
           </h1>
         </div>
-        <div className="md:w-6/12 p-2 my-4 border border-gray-100">
-          {" "}
-          <div className="p-2">
-            {widgets.map((item, key) => (
-              <div className="m-2">{getWebWidgetByKey(item)}</div>
-            ))}
+        {!surveySubmitted && (
+          <div className="md:w-6/12 p-2 my-4 border border-gray-100">
+            {" "}
+            <div className="p-2">
+              {widgets.map((item, key) => (
+                <div className="m-2">{getWebWidgetByKey(item)}</div>
+              ))}
+            </div>
+            <div className="flex justify-center">
+              <BasicButton
+                title={`${submitting ? "Submitting..." : "Submit Survey"}`}
+                classes={`w-8/12`}
+                disabled={!widgets.length}
+                handleClick={() => submitSurvey()}
+              />
+            </div>
           </div>
-          <div className="flex justify-center">
-            <BasicButton title="Submit Survey" classes={`w-8/12`} />
+        )}
+        {surveySubmitted && (
+          <div className="md:w-6/12 p-2 my-4  flex justify-center">
+            {" "}
+            <div className="p-2">
+              <p>Your submission was successfully received.</p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

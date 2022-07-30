@@ -25,7 +25,7 @@ export default function Login() {
                 localStorage.setItem("user_email", user.email);
                 localStorage.setItem("token", response.access_token);
                 localStorage.setItem("roles", JSON.stringify(user.roles));
-                naviagte("/dashboard");
+                naviagte("/");
               } else {
                 alert("no roles");
                 // alertMe.show("Unauthorized Access", { type: "error" });

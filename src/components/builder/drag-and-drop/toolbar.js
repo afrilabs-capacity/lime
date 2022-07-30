@@ -298,6 +298,7 @@ export const Box = function Box({ name }) {
         const widgetUniqueId = uuid();
         addWidget({
           unique_key: widgetUniqueId,
+          type: "data",
           name: "text-input",
           title: "Text Input",
           label: "Placeholder Text",
