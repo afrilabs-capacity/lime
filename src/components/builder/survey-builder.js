@@ -13,6 +13,8 @@ import { useDrop } from "react-dnd";
 import { useEffect, useState } from "react";
 import DemoBar from "./demobar";
 import axios from "axios";
+import { useBuilderStore } from "../../stores/builder";
+import Chart from "react-apexcharts";
 
 export default function Survey() {
   const initialTabData = {
@@ -23,12 +25,20 @@ export default function Survey() {
   const [tabData, setTabData] = useState(initialTabData);
   const [activeTab, setActiveTab] = useState(0);
 
+  const { survey } = useBuilderStore((state) => state);
+
   return (
     <>
       <div class="p-4">
         <div>
+          <h1 className="text-5xl text-center my-2 mb-6">
+            {survey && survey.name}
+          </h1>
           <div class="grid md:grid-cols-4 gap-4">
             {tabData.tabs.map((tab, i) => {
+              {
+                /* alert(`${activeTab} ${i}`); */
+              }
               return (
                 <BasicButton
                   title={tab}
@@ -46,7 +56,7 @@ export default function Survey() {
           <div class="mt-4">
             {activeTab == 0 && <BuilderTools />}
             {activeTab == 1 && <SurveyResponses />}
-            {activeTab == 2 && <div>Content 3</div>}
+            {activeTab == 2 && <Analytics />}
             {activeTab == 3 && <div>Content 4</div>}
           </div>
         </div>
@@ -91,7 +101,7 @@ export function SurveyResponses() {
         if (response.status == 200) {
           if (response.data.responses) {
             setResponses(response.data.responses.data);
-            console.log("responses", response.data.responses.data);
+            // console.log("responses", response.data.responses.data);
           }
           //   console.log(response.data.series);
         }
@@ -113,31 +123,50 @@ export function SurveyResponses() {
         <table class="table-fixed border-gray-100">
           <thead>
             <tr className="divide-x">
-              {JSON.parse(responses[0].data).map((data) => {
-                if (data.type === "data") {
-                  return (
-                    <th
-                      dangerouslySetInnerHTML={{
-                        __html: data.label,
-                      }}
-                      className="p-2 text-blue-900 text-sm font-normal"
-                      style={{ width: "1%", whiteSpace: "nowrap" }}
-                    ></th>
-                  );
-                }
-              })}
+              {responses.length
+                ? JSON.parse(responses[0].data).map((data) => {
+                    if (data.type === "data") {
+                      return (
+                        <th
+                          dangerouslySetInnerHTML={{
+                            __html: data.label,
+                          }}
+                          className="p-2 text-blue-900 text-sm font-normal"
+                          style={{ width: "1%", whiteSpace: "nowrap" }}
+                        ></th>
+                      );
+                    }
+                  })
+                : ""}
+              <th className="p-2 text-blue-900 text-sm font-normal">
+                Timestamp
+              </th>
             </tr>
           </thead>
           <tbody className="bg-white">
-            {responses.map((response) => {
+            {responses.map((response, i) => {
               console.log("response loop", JSON.parse(response.data));
               return (
                 <tr className="text-center divide-x border-gray-100">
                   {JSON.parse(response.data).map((data) => {
                     if (data.type === "data") {
-                      return <td>{data.data}</td>;
+                      {
+                        /* if (data.name == "checkbox") {
+                        console.log("checkbox mmm", data.data);
+                      } */
+                      }
+                      return (
+                        <td className="texm-sm">
+                          {data.data
+                            ? data.name == "checkbox"
+                              ? data.data.toString()
+                              : data.data
+                            : "N/A"}
+                        </td>
+                      );
                     }
                   })}
+                  <td className="texm-sm">{response.created_at}</td>
                 </tr>
               );
               {
@@ -145,6 +174,132 @@ export function SurveyResponses() {
             })}
           </tbody>
         </table>
+      </div>
+    </>
+  );
+}
+
+export function Analytics() {
+  const defaultOptions = {
+    chart: {
+      width: 380,
+      type: "pie",
+    },
+    labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
+    responsive: [
+      {
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 200,
+          },
+          legend: {
+            position: "bottom",
+          },
+        },
+      },
+    ],
+  };
+  let { uuid } = useParams();
+  const [responses, setResponses] = useState([]);
+  const [analytics, setAnalytics] = useState();
+  const [series, setSeries] = useState([44, 55, 13, 43, 22]);
+  const [options, setOptions] = useState(defaultOptions);
+
+  const getResponses = () => {
+    const url = "/api/survey/responses/" + uuid;
+    axios
+      .get(url)
+      .then((response) => {
+        if (response.status == 200) {
+          setAnalytics(response.data.analytics);
+          setResponses(response.data.responses);
+          // alert(JSON.stringify(analytics));
+        }
+      })
+      .catch((error) => {
+        alert(error.message);
+        console.error("There was an error!", error);
+      });
+  };
+
+  useEffect(() => {
+    getResponses();
+  }, []);
+
+  useEffect(() => {
+    if (analytics) {
+    }
+  }, [analytics]);
+  return (
+    <>
+      <div>
+        <div className="text-center divide-x border-gray-100">
+          {analytics &&
+            Object.keys(analytics).map((keyparent, key) => {
+              return (
+                <div className="my-2 bg-white p-4">
+                  <h1
+                    dangerouslySetInnerHTML={{
+                      __html: analytics[keyparent].label,
+                    }}
+                    className="text-2xl font-bold text-blue-900 text-left"
+                  ></h1>
+                  <div className="grid md:grid-cols-2">
+                    <div>
+                      {" "}
+                      {Object.keys(analytics[keyparent]).map((item, i) => {
+                        console.log("test", item);
+                        {
+                          /* alert(responses.data.length); */
+                        }
+                        {
+                          return (
+                            i > 0 && (
+                              <>
+                                {" "}
+                                <div className="text-center  border-gray-100 flex justify-between shadow p-2 my-1">
+                                  <div>{item}</div>{" "}
+                                  <div>
+                                    {(analytics[keyparent][item] /
+                                      responses.data.length) *
+                                      100}
+                                    % {analytics[keyparent][item]}
+                                  </div>
+                                </div>
+                              </>
+                            )
+                          );
+                        }
+                      })}
+                    </div>
+
+                    <Chart
+                      options={options}
+                      series={series}
+                      type="pie"
+                      width={380}
+                    />
+                  </div>
+                  {/* <div className="text-center divide-x border-gray-100 flex justify-between">
+                      <div>Very Good</div> <div>8.6%</div>
+                    </div>
+
+                    <div className="text-center divide-x border-gray-100 flex justify-between">
+                      <div>Good</div> <div>3%</div>
+                    </div>
+
+                    <div className="text-center divide-x border-gray-100 flex justify-between">
+                      <div>Fair</div> <div>2.1%</div>
+                    </div>
+
+                    <div className="text-center divide-x border-gray-100 flex justify-between">
+                      <div>Poor</div> <div>3.4%</div>
+                    </div> */}
+                </div>
+              );
+            })}
+        </div>
       </div>
     </>
   );

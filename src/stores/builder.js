@@ -12,6 +12,13 @@ export const useBuilderStore = create((set) => ({
   bears: 0,
   widgets: [],
   surveyResponse: [],
+  survey: null,
+  setGlobalSurvey: (survey) => {
+    // alert(JSON.stringify(widgets));
+    set((state) => ({
+      widgets: (state.survey = survey),
+    }));
+  },
   setWidgetsFromTemplate: (widgets) => {
     // alert(JSON.stringify(widgets));
     set((state) => ({

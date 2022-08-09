@@ -11,8 +11,12 @@ import axios from "axios";
 export default function DropZone() {
   let { uuid } = useParams();
   const [survey, setSurvey] = useState({});
-  const { widgets, showWidgetPreviewModal, setWidgetsFromTemplate } =
-    useBuilderStore((state) => state);
+  const {
+    widgets,
+    showWidgetPreviewModal,
+    setWidgetsFromTemplate,
+    setGlobalSurvey,
+  } = useBuilderStore((state) => state);
 
   const [{ isOver, canDrop }, drop] = useDrop(
     () => ({
@@ -34,10 +38,10 @@ export default function DropZone() {
       .then((response) => {
         if (response.status == 200) {
           setSurvey(response.data.survey);
+          setGlobalSurvey(response.data.survey);
           if (response.data.survey.data) {
             setWidgetsFromTemplate(response.data.survey.data);
           }
-
           //   console.log(response.data.series);
         }
       })
@@ -69,13 +73,15 @@ export default function DropZone() {
   return (
     <div ref={drop} className="grid col-span-2 content-start">
       <div className="bg-white m-2 p-2 flex justify-between">
-        <div>
+        {/* <div>
           <h1 className="text-2xl text-center m-2 font-bold">
             {survey && survey.name}
           </h1>
-        </div>
+        </div> */}
         <div className="flex justify-between gap-4">
           <BasicButton title={"Preview"} handleClick={showWidgetPreviewModal} />
+        </div>
+        <div className="flex justify-between gap-4">
           <BasicButton
             disabled={!widgets.length}
             title={"Save Survey"}
