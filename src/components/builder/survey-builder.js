@@ -24,7 +24,6 @@ export default function Survey() {
 
   const [tabData, setTabData] = useState(initialTabData);
   const [activeTab, setActiveTab] = useState(0);
-
   const { survey } = useBuilderStore((state) => state);
 
   return (
@@ -203,8 +202,8 @@ export function Analytics() {
   let { uuid } = useParams();
   const [responses, setResponses] = useState([]);
   const [analytics, setAnalytics] = useState();
-  const [series, setSeries] = useState([44, 55, 13, 43, 22]);
-  const [options, setOptions] = useState(defaultOptions);
+  // const [series, setSeries] = useState([44, 55, 13, 43, 22]);
+  // const [options, setOptions] = useState(defaultOptions);
 
   const getResponses = () => {
     const url = "/api/survey/responses/" + uuid;
@@ -223,6 +222,49 @@ export function Analytics() {
       });
   };
 
+  const ComposeChartData = ({ data, uuid, responses }) => {
+    const options = {
+      chart: {
+        width: 380,
+        type: "pie",
+      },
+      labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+            legend: {
+              position: "bottom",
+            },
+          },
+        },
+      ],
+    };
+    let label = [];
+    let series = [];
+    Object.keys(data).map((item, i) => {
+      if (i > 0) {
+        series.push(data[item]);
+        label.push(item);
+      }
+    });
+
+    options.labels = label;
+    // alert(JSON.stringify(defaultChartOptions.labels));
+    return (
+      <Chart
+        key={uuid}
+        options={options}
+        series={series}
+        type="pie"
+        width={380}
+      />
+    );
+  };
+
   useEffect(() => {
     getResponses();
   }, []);
@@ -237,6 +279,12 @@ export function Analytics() {
         <div className="text-center divide-x border-gray-100">
           {analytics &&
             Object.keys(analytics).map((keyparent, key) => {
+              let mapData = defaultOptions;
+
+              {
+                /* alert(JSON.stringify(mapData)); */
+              }
+
               return (
                 <div className="my-2 bg-white p-4">
                   <h1
@@ -247,7 +295,6 @@ export function Analytics() {
                   ></h1>
                   <div className="grid md:grid-cols-2">
                     <div>
-                      {" "}
                       {Object.keys(analytics[keyparent]).map((item, i) => {
                         console.log("test", item);
                         {
@@ -273,29 +320,14 @@ export function Analytics() {
                         }
                       })}
                     </div>
+                    {/* {alert(keyparent)} */}
 
-                    <Chart
-                      options={options}
-                      series={series}
-                      type="pie"
-                      width={380}
+                    <ComposeChartData
+                      data={analytics[keyparent]}
+                      uuid={keyparent}
+                      responses={responses}
                     />
                   </div>
-                  {/* <div className="text-center divide-x border-gray-100 flex justify-between">
-                      <div>Very Good</div> <div>8.6%</div>
-                    </div>
-
-                    <div className="text-center divide-x border-gray-100 flex justify-between">
-                      <div>Good</div> <div>3%</div>
-                    </div>
-
-                    <div className="text-center divide-x border-gray-100 flex justify-between">
-                      <div>Fair</div> <div>2.1%</div>
-                    </div>
-
-                    <div className="text-center divide-x border-gray-100 flex justify-between">
-                      <div>Poor</div> <div>3.4%</div>
-                    </div> */}
                 </div>
               );
             })}
