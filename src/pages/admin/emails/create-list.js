@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import TextField from "../../../components/builder/drag-and-drop/widgets/components/input/textfield";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import axios from "axios";
 
 export default function CreateEmailList() {

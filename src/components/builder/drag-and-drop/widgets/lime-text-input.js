@@ -68,7 +68,7 @@ export function LimeInput({ item }) {
           </span>
         )}
         <fieldset disabled={disableFields}>
-          <TextField placeholder={"Options 1"} />
+          <TextField placeholder={"Text here.."} />
         </fieldset>
         {/* widget content end */}
       </div>

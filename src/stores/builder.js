@@ -13,10 +13,16 @@ export const useBuilderStore = create((set) => ({
   widgets: [],
   surveyResponse: [],
   survey: null,
+  activeNavigationMenu: 0,
+  setActiveNavigationMenu: (tabIndex) => {
+    set((state) => ({
+      activeNavigationMenu: (state.activeNavigationMenu = tabIndex),
+    }));
+  },
   setGlobalSurvey: (survey) => {
     // alert(JSON.stringify(widgets));
     set((state) => ({
-      widgets: (state.survey = survey),
+      survey: (state.survey = survey),
     }));
   },
   setWidgetsFromTemplate: (widgets) => {

@@ -48,7 +48,7 @@ export default function EmailListName() {
             <BasicButton
               disabled={!name}
               title={"CREATE LIST"}
-              classes={"py-4 w-4/12 mt-0"}
+              classes={"w-4/12 mt-0 p-4 h-14"}
               handleClick={addSurveyName}
             />
           </div>

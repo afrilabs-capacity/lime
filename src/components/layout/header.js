@@ -4,9 +4,14 @@ export default function Header({ fixed }) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
     <>
-      <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-white">
+      <nav className="relative flex flex-wrap items-center justify-between px-2 py-1 bg-white">
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
-          <form>
+          <h1 className="text text-2xl font-bold my-3 ml-2 text-blue-900">
+            {" "}
+            {/* {localStorage.getItem("activeTabName")} */}
+            Dashboard
+          </h1>
+          {/* <form>
             <label
               for="default-search"
               class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
@@ -44,7 +49,7 @@ export default function Header({ fixed }) {
                 Search
               </button>
             </div>
-          </form>
+          </form> */}
 
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             {/* <button

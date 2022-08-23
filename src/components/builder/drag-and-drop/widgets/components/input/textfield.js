@@ -4,10 +4,12 @@ export default function TextField({
   handleChange,
   field,
   widget,
+  type,
+  value,
 }) {
   return (
     <input
-      type="text"
+      type={type ? type : "text"}
       readonly
       className="
         form-control
@@ -29,6 +31,7 @@ export default function TextField({
       id="exampleFormControlInput1"
       placeholder={placeholder}
       onChange={(e) => handleChange && handleChange(e, field, widget)}
+      value={value && value}
     />
   );
 }

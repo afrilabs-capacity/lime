@@ -1,4 +1,4 @@
-@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css");
 /* @import url("https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"); */
 
 .App {
@@ -81,6 +81,16 @@
 .react-form-builder-toolbar{
   /* width: 300px!important; */
    
+}
+
+.active {
+  text-decoration: underline;
+  background-color: none;
+  box-shadow: none;
+ 
+}
+.pagination li {
+  margin: 1em;
 }
 
 

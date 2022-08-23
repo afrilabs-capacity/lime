@@ -26,22 +26,20 @@ export default function Surveys() {
   return (
     <>
       <div className="">
-        <div className="flex justify-end m-2">
-          <div className="w-3/12 bg-sky-700 rounded-lg text-center">
-            <i class="fas fa-plus  text-white"></i>
-            <a href="/new-survey">
-              <BasicButton
-                title={"CREATE SURVEY"}
-                classes={"py-4 mt-0 bg-sky-700"}
-                handleClick={() => null}
-              />
-            </a>
-          </div>
-        </div>
+        {/* <div className="flex justify-end m-2 mt-6">
+          <a href="/new-survey">
+            <BasicButton
+              icon={`fas fa-plus text-white`}
+              title={"CREATE SURVEY"}
+              classes={"py-4 mt-0 bg-sky-700"}
+              handleClick={() => null}
+            />
+          </a>
+        </div> */}
         <div>
-          <div className="main-right col-span-2 p-2">
+          <div className="main-right col-span-2 p-2 my-6 ">
             <div>
-              <h1 className="text-2xl text-blue-900 m-2">Pinned</h1>
+              <h1 className="text-lg text-blue-900 mb-6">Pinned Surveys</h1>
             </div>
             {surveyTemplates &&
               surveyTemplates.map((survey) => {
@@ -56,7 +54,7 @@ export default function Surveys() {
         <div>
           <div className="main-right col-span-2 p-2">
             <div>
-              <h1 className="text-2xl text-blue-900 m-2">Surveys</h1>
+              <h1 className="text-lg text-blue-900 mb-6">All Surveys</h1>
             </div>
             {surveyTemplates &&
               surveyTemplates.map((survey) => {

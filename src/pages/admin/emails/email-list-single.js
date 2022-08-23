@@ -30,7 +30,7 @@ export default function EmailListSingle() {
   return (
     <>
       <div className="flex flex-col items-center m-2">
-        <h1 className="text text-3xl font-bold my-3 ml-2  text-blue-900">
+        <h1 className="text text-3xl  my-3 mt-6 ml-2  text-blue-900">
           {emailList.name}
         </h1>
         <p></p>

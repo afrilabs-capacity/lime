@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function SurveyTemplates() {
+  let { projectuuid } = useParams();
   const [surveyTemplates, setSurveyTemplates] = useState([]);
   const getSurveys = () => {
     const url = "/api/surveys";
@@ -31,8 +32,10 @@ export default function SurveyTemplates() {
         <div className="w-10/12">
           {surveyTemplates.map((survey) => {
             return (
-              <a href={`/new-survey/${survey.uuid}`}>
-                <div className="m-2 p-8  border-side border-sky-400 border-l-8 hover:border-sky-900 border-l-8 shadow cursor-pointer">
+              <a
+                href={`/new-survey-name-template/project/${projectuuid}/survey/${survey.uuid}`}
+              >
+                <div className="p-8 border-side border-sky-400 border-l-8 hover:border-sky-900 border-l-8 my-2 rounded-lg shadow cursor-pointer AsideBackground">
                   <p className="text-lg">{survey.name}</p>
                 </div>
               </a>

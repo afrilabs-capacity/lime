@@ -1,22 +1,27 @@
 import { useState } from "react";
 import BasicTextField from "../../../components/builder/drag-and-drop/widgets/components/input/basic-textfield";
 import BasicButton from "../../../components/builder/drag-and-drop/widgets/components/buttons/basic-button";
+import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 import axios from "axios";
 export default function SurveyName() {
+  let { projectuuid } = useParams();
   const [name, setName] = useState("");
 
   const url = "/api/survey";
 
   const addSurveyName = () => {
     axios
-      .post(url, { name: name })
+      .post(url, { name: name, project_uuid: projectuuid })
       .then((response) => {
         if (response.status == 200) {
-          window.location.href = `/new-survey/${response.data.survey.uuid}`;
+          toast("Survey Created!", { type: "success" });
+          window.location.href = `/project/${projectuuid}/survey/${response.data.survey.uuid}`;
         }
       })
       .catch((error) => {
-        alert(error.message);
+        toast("Something went wrong!", { type: "error" });
         console.error("There was an error!", error);
       });
   };
@@ -35,7 +40,7 @@ export default function SurveyName() {
           <div className="m-2 mb-3">
             {/* <label className="text-black">Name</label> */}
             <BasicTextField
-              classes={"py-6 my-2 text-lg"}
+              classes={"my-2 text-lg h-20"}
               placeholder={"e.g Community Health Opinion Survey"}
               handleChange={handleNameChange}
             />
@@ -46,7 +51,7 @@ export default function SurveyName() {
             <BasicButton
               disabled={!name}
               title={"CREATE SURVEY"}
-              classes={"py-4 w-4/12 mt-0"}
+              classes={"w-4/12 mt-0 p-4 h-14"}
               handleClick={addSurveyName}
             />
           </div>

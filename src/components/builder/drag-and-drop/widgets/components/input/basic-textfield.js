@@ -4,6 +4,7 @@ export default function BasicTextField({
   handleChange,
   classes,
   disabled,
+  value,
 }) {
   return (
     <input
@@ -30,6 +31,7 @@ export default function BasicTextField({
       id="exampleFormControlInput1"
       placeholder={placeholder}
       onChange={(e) => handleChange && handleChange(e.target.value)}
+      value={value && value}
     />
   );
 }

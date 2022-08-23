@@ -10,15 +10,15 @@ export default function SurveyCard({ survey }) {
             Ended
           </span>
         </div>
-        <div>
+        <div className="px-2">
           <p className="text-lg font-normal text-blue-900">{survey.name}</p>
         </div>
-        <div>
-          <p className="text-xs">Project Name</p>
+        <div className="px-2">
+          <p className="text-xs">{survey.project_name}</p>
         </div>
         <div className="flex justify-end">
           <a
-            href={`/new-survey/${survey.uuid}`}
+            href={`/project/${survey.project_uuid}/survey/${survey.uuid}`}
             className="border border-gray w-5/12 p-1 text-center"
           >
             <div>
@@ -29,7 +29,9 @@ export default function SurveyCard({ survey }) {
         <div></div>
       </div>
       <div className="flex flex-col items-center justify-center">
-        <p className="font-bold mb-2 text-blue-900 text-2xl">1568</p>
+        <p className="font-bold mb-2 text-blue-900 text-2xl">
+          {survey.responses}
+        </p>
         <p className="text-xs">Responses</p>
       </div>
       <div className="flex flex-col items-center justify-center">
