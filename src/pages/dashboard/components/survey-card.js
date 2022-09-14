@@ -78,7 +78,7 @@ export default function SurveyCard({ survey }) {
       <div className="flex flex-col items-center justify-center">
         {survey.project_id && (isAdmin() || isCollector()) ? (
           <>
-            <p className="font-bold mb-2 text-blue-900 text-2xl">88%</p>
+            <p className="font-bold mb-2 text-blue-900 text-2xl">0%</p>
             <p className="text-xs">Completion Rate</p>
           </>
         ) : (
