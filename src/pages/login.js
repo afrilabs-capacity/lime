@@ -74,7 +74,7 @@ export default function Login() {
         </div>
         <div class="w-full md:w-full lg:w-9/12 mx-auto md:mx-0">
           <div class="bg-white p-10 flex flex-col w-full shadow-xl rounded-xl">
-            <h2 class="text-2xl font-bold text-gray-800 text-left mb-5">
+            <h2 class="text-2xl font-bold text-gray-800 text-center mb-5">
               Sign in
             </h2>
             <form action="" class="w-full">
