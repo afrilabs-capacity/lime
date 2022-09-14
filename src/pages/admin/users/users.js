@@ -76,7 +76,8 @@ export default function Users() {
                   </div>
                 </a>
               ))}
-            {users.data && !users.data.length && <EmptyPage text={"User"} />}
+            {(users.data && !users.data.length) ||
+              (!users.data && <EmptyPage text={"User"} />)}
           </div>
           {users.first_page_url && !isLoading && (
             <Pagination pagination={users} doPagination={doPagination} />
