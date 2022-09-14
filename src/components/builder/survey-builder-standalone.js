@@ -20,6 +20,7 @@ import Chart from "react-apexcharts";
 import EmptyPage from "../section/empty-page.js";
 import Pagination from "../pagination/pagination.js";
 import AnimatedLoader from "../loader/loader.js";
+import { API_BASE } from "../../utils/helper-functions";
 
 export default function SurveyStandalone() {
   const initialTabData = {
