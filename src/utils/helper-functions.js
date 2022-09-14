@@ -272,7 +272,7 @@ export function isCollector() {
   return false;
 }
 
-// export const API_BASE = "/api";
-// export const BASE_URL = "https://wordalbums.com/api";
-export const API_BASE = "";
-export const BASE_URL = "";
+export const API_BASE = "/api";
+export const BASE_URL = "https://wordalbums.com/api";
+// export const API_BASE = "";
+// export const BASE_URL = "";
