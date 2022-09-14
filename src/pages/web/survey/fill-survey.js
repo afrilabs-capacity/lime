@@ -3,6 +3,7 @@ import React from "react";
 import {
   getWidgetByKey,
   getWebWidgetByKey,
+  API_BASE,
 } from "../../../utils/helper-functions.js";
 
 import { useState, useEffect } from "react";
@@ -20,7 +21,7 @@ export default function FillSurvey() {
 
   const getSurvey = () => {
     setWidgetsFromTemplate([]);
-    const url = "/api/survey/" + uuid;
+    const url = API_BASE + "/api/survey/" + uuid;
     axios
       .get(url)
       .then((response) => {
@@ -40,7 +41,7 @@ export default function FillSurvey() {
 
   const submitSurvey = () => {
     setSubmitting(true);
-    const url = "/api/survey/response";
+    const url = API_BASE + "/api/survey/response";
     axios
       .post(url, { uuid: uuid, data: JSON.stringify(widgets) })
       .then((response) => {
