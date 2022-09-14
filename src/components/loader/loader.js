@@ -7,12 +7,18 @@ const override = {
   borderColor: "blue",
 };
 
-export default function AnimatedLoader() {
+export default function AnimatedLoader({ classes }) {
   let [loading, setLoading] = useState(true);
   let [color, setColor] = useState("blue");
 
   return (
-    <div className="flex  justify-center m-2 h-screen items-center">
+    <div
+      className={`flex justify-center m-2 h-screen ${
+        classes && classes.indexOf("items-start") != -1
+          ? "items-start"
+          : "items-center"
+      }`}
+    >
       <div className="sweet-loading flex flex-col items-center">
         <ClockLoader
           color={color}

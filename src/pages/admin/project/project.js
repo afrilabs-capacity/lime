@@ -20,6 +20,7 @@ export default function ProjectSingle() {
   const [projectUsers, setProjectUsers] = useState([]);
   const [isDetaching, setIsDetaching] = useState(false);
   const [currentProjectSurveysPage, setCurrentProjectSurveysPage] = useState(1);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const getProject = () => {
     const url = "/api/project/" + projectuuid;
@@ -32,7 +33,7 @@ export default function ProjectSingle() {
         }
       })
       .catch((error) => {
-        alert(error.message);
+        toast("Something went wrong!", { type: "error" });
         console.error("There was an error!", error);
       });
   };
@@ -47,7 +48,7 @@ export default function ProjectSingle() {
         }
       })
       .catch((error) => {
-        alert(error.message);
+        toast("Something went wrong!", { type: "error" });
         console.error("There was an error!", error);
       });
   };
@@ -62,7 +63,7 @@ export default function ProjectSingle() {
         }
       })
       .catch((error) => {
-        alert(error.message);
+        toast("Something went wrong!", { type: "error" });
         console.error("There was an error!", error);
       });
   };
@@ -82,7 +83,7 @@ export default function ProjectSingle() {
       })
       .catch((error) => {
         setIsDetaching(false);
-        alert(error.message);
+        toast("Something went wrong!", { type: "error" });
         console.error("There was an error!", error);
       });
   };
@@ -102,7 +103,7 @@ export default function ProjectSingle() {
       })
       .catch((error) => {
         setIsDetaching(false);
-        alert(error.message);
+        toast("Something went wrong!", { type: "error" });
         console.error("There was an error!", error);
       });
   };
@@ -155,6 +156,8 @@ export default function ProjectSingle() {
     }
   };
 
+  const deleteProject = () => {};
+
   useEffect(() => {
     getProject();
     getProjectSurveys();
@@ -170,24 +173,22 @@ export default function ProjectSingle() {
         <p></p>
         <br />
 
-        <div className=" w-10/12 mt-6 rounded-lg  divide-y">
-          {/* {project &&
-            project.surveys &&
-            project.surveys.map((survey, i) => (
-              <div className="flex justify-between p-2 ">
-                <div>
-                  <p className="p-2">{""}</p>
-                </div>
+        <div className=" w-10/12 mt-6 rounded-lg divide-y">
+          {/* <div className="flex justify-center p-2 ">
+            <div>
+              <p className="p-2">{""}</p>
+            </div>
 
-                <div className="flex flex-col md:flex-row justify-between gap-4">
-                  <BasicButton
-                    title={"DELETE"}
-                    classes={"mt-0 bg-red-700"}
-                    handleClick={() => null}
-                  />
-                </div>
-              </div>
-            ))} */}
+            <div className="flex flex-col md:flex-row justify-between gap-4">
+              <BasicButton
+                disabled={isDeleting}
+                title={isDeleting ? "Deleting..." : "Delete Project"}
+                handleClick={deleteProject}
+                classes="bg-red-500 hover:bg-red-400"
+              />
+            </div>
+          </div> */}
+
           {projectSurveys && (
             <div className="mb-6 bg-white rounded-lg p-2">
               <div className="flex flex-col md:flex-row justify-between gap-4">
@@ -246,7 +247,7 @@ export default function ProjectSingle() {
                 <div>
                   <BasicButton
                     icon={`fas fa-plus text-white`}
-                    title={"ATTACH SURVEY"}
+                    title={"ATTACH USER"}
                     classes={"mt-0 bg-sky-700"}
                     handleClick={openAttachUserModal}
                   />

@@ -4,6 +4,7 @@ import {
   getActiveWidgetLabel,
   getActiveWidgetRequired,
 } from "../../../utils/helper-functions.js";
+import { v4 as uuid } from "uuid";
 export function LimeRadioWeb({ item }) {
   const [disableFields, setDisabledFields] = useState(true);
   const {
@@ -13,6 +14,7 @@ export function LimeRadioWeb({ item }) {
     widgets,
   } = useBuilderStore((state) => state);
   const widgetRquired = getActiveWidgetRequired(item, widgets);
+  const radioUniqueName = uuid();
 
   return (
     <div className="p-0 bg-white">
@@ -50,7 +52,7 @@ export function LimeRadioWeb({ item }) {
                     id="default-checkbox"
                     type="radio"
                     value={option.value}
-                    name="xxx"
+                    name={radioUniqueName}
                     class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label

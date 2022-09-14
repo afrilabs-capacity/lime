@@ -17,6 +17,10 @@ import DemoBar from "./demobar";
 import axios from "axios";
 import { useBuilderStore } from "../../stores/builder";
 import Chart from "react-apexcharts";
+import EmptyPage from "../section/empty-page.js";
+import Pagination from "../pagination/pagination.js";
+import AnimatedLoader from "../loader/loader.js";
+import { formatAMPM } from "../../utils/helper-functions";
 
 export default function Survey() {
   const initialTabData = {
@@ -26,10 +30,16 @@ export default function Survey() {
 
   const [tabData, setTabData] = useState(initialTabData);
   const [activeTab, setActiveTab] = useState(0);
+  const [activeTabClasses, setActiveTabClasses] = useState("");
   const { survey } = useBuilderStore((state) => state);
   useEffect(() => {
     setActiveTab(0);
+    initActiveTabClasses();
   }, []);
+
+  const initActiveTabClasses = () => {
+    setActiveTabClasses("text-white bg-orange-400");
+  };
 
   return (
     <>
@@ -46,10 +56,8 @@ export default function Survey() {
               return (
                 <BasicButton
                   title={tab}
-                  classes={`cursor-pointer focus:outline-0 py-3 px-4 rounded-lg transition bg-blue-200 hover:bg-orange-300 text-blue-900 ${
-                    activeTab == i
-                      ? "bg-orange-600 text-white"
-                      : "text-gray-500"
+                  classes={`cursor-pointer focus:outline-0 py-3 px-4 rounded-lg transition  hover:bg-orange-400 text-white ${
+                    activeTab == i ? activeTabClasses : "text-white-500"
                   }`}
                   handleClick={() => setActiveTab(i)}
                 />
@@ -75,19 +83,11 @@ export function BuilderTools() {
       <div>
         <div className="grid md:grid-cols-1">
           <div className="main-right col-span-2 bg-green">
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-4 gap-4">
               <DropZone />
               <ToolBar />
             </div>
-
-            {/* <TutorialApp /> */}
-            {/* <DemoBar variables={variables} />
-            <ReactFormBuilder url="/api/formdata" saveUrl="/api/formdata" /> */}
           </div>
-
-          {/* <div className="main-left col-span-5 md:col-span-1 ">
-            <RightNav />
-          </div> */}
         </div>
       </div>
     </DndProvider>
@@ -97,23 +97,45 @@ export function BuilderTools() {
 export function SurveyResponses() {
   let { surveyuuid } = useParams();
   const [responses, setResponses] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
   const getResponses = () => {
+    setIsLoading(true);
     const url = "/api/survey/responses/" + surveyuuid;
     axios
       .get(url)
       .then((response) => {
         if (response.status == 200) {
+          setIsLoading(false);
           if (response.data.responses) {
-            setResponses(response.data.responses.data);
+            setResponses(response.data.responses);
             // console.log("responses", response.data.responses.data);
           }
           //   console.log(response.data.series);
         }
       })
       .catch((error) => {
-        alert(error.message);
+        toast("Something went wrong!", { type: "error" });
+        setIsLoading(false);
         console.error("There was an error!", error);
       });
+  };
+
+  const doPagination = (page) => {
+    if (responses.first_page_url) {
+      setIsLoading(true);
+      let queryString = responses.first_page_url.split("page=");
+      setCurrentPage(page);
+      axios
+        .get(queryString[0] + "page=" + page)
+        .then((res) => {
+          setResponses(res.data.responses);
+          setIsLoading(false);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => setIsLoading(false));
+    }
   };
 
   useEffect(() => {
@@ -123,67 +145,83 @@ export function SurveyResponses() {
     <>
       <br />
       <br />
-      <div className="w-full overflow-x-scroll border">
-        <table class="table-fixed border-gray-100">
-          <thead>
-            <tr className="divide-x">
-              {responses.length
-                ? JSON.parse(responses[0].data).map((data) => {
-                    if (data.type === "data") {
-                      return (
-                        <th
-                          dangerouslySetInnerHTML={{
-                            __html: data.label,
-                          }}
-                          className="p-2 text-blue-900 text-sm font-normal"
-                          style={{ width: "1%", whiteSpace: "nowrap" }}
-                        ></th>
-                      );
-                    }
-                  })
-                : ""}
-              <th className="p-2 text-blue-900 text-sm font-normal">
-                Timestamp
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white">
-            {responses.map((response, i) => {
-              console.log("response loop", JSON.parse(response.data));
-              return (
-                <tr className="text-center divide-x border-gray-100">
-                  {JSON.parse(response.data).map((data) => {
-                    if (data.type === "data") {
-                      {
-                        /* if (data.name == "checkbox") {
+      <div className="w-full overflow-x-scroll border flex flex-col items-center">
+        {responses && responses.data && responses.data.length ? (
+          <table class="table-fixed border-gray-100 w-full">
+            <thead>
+              <tr className="divide-x">
+                {JSON.parse(responses.data[0].data).map((data) => {
+                  if (data.type === "data") {
+                    return (
+                      <th
+                        dangerouslySetInnerHTML={{
+                          __html: data.label,
+                        }}
+                        className="p-2 text-blue-900 text-sm font-normal"
+                        style={{ whiteSpace: "nowrap" }}
+                      ></th>
+                    );
+                  }
+                })}
+                <th className="p-2 text-blue-900 text-sm font-normal">
+                  Timestamp
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white">
+              {responses.data.map((response, i) => {
+                console.log("response loop", JSON.parse(response.data));
+                return (
+                  <tr className="text-center divide-x border border-gray-100">
+                    {JSON.parse(response.data).map((data) => {
+                      if (data.type === "data") {
+                        {
+                          /* if (data.name == "checkbox") {
                         console.log("checkbox mmm", data.data);
                       } */
+                        }
+                        return (
+                          <td className="texm-sm">
+                            {data.data
+                              ? data.name == "checkbox"
+                                ? data.data.toString()
+                                : data.data
+                              : "N/A"}
+                          </td>
+                        );
                       }
-                      return (
-                        <td className="texm-sm">
-                          {data.data
-                            ? data.name == "checkbox"
-                              ? data.data.toString()
-                              : data.data
-                            : "N/A"}
-                        </td>
-                      );
-                    }
-                  })}
-                  <td className="texm-sm">{response.created_at}</td>
-                </tr>
-              );
-              {
-              }
-            })}
-          </tbody>
-        </table>
+                    })}
+                    <td className="texm-sm">
+                      {/* {.replace(/-/g, "/")} */}
+                      {formatAMPM(new Date(response.created_at))}
+                    </td>
+                  </tr>
+                );
+                {
+                }
+              })}
+            </tbody>
+          </table>
+        ) : (
+          ""
+        )}
+        <div className="w-full">
+          {responses.data && !responses.data.length && (
+            <EmptyPage text={"response"} />
+          )}
+        </div>
+        {responses && (
+          <Pagination pagination={responses} doPagination={doPagination} />
+        )}
       </div>
+      {isLoading && <AnimatedLoader />}
     </>
   );
 }
 
 export function Analytics() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const defaultOptions = {
     chart: {
       width: 380,
@@ -218,11 +256,11 @@ export function Analytics() {
         if (response.status == 200) {
           setAnalytics(response.data.analytics);
           setResponses(response.data.responses);
-          // alert(JSON.stringify(analytics));
+          // alert(response.data.analytics);
         }
       })
       .catch((error) => {
-        alert(error.message);
+        toast("Something went wrong!", { type: "error" });
         console.error("There was an error!", error);
       });
   };
@@ -313,10 +351,11 @@ export function Analytics() {
                                 <div className="text-center  border-gray-100 flex justify-between shadow p-2 my-1">
                                   <div>{item}</div>{" "}
                                   <div>
-                                    {(analytics[keyparent][item] /
+                                    {/* {(analytics[keyparent][item] /
                                       responses.data.length) *
                                       100}
-                                    % {analytics[keyparent][item]}
+                                    % {analytics[keyparent][item]} */}
+                                    {analytics[keyparent][item]}
                                   </div>
                                 </div>
                               </>
@@ -333,6 +372,7 @@ export function Analytics() {
                       responses={responses}
                     />
                   </div>
+                  {!analytics && <EmptyPage text={"analytic"} />}
                 </div>
               );
             })}
@@ -360,7 +400,7 @@ export function DistributeSurvey() {
         }
       })
       .catch((error) => {
-        alert(error.message);
+        toast("Something went wrong!", { type: "error" });
         console.error("There was an error!", error);
       });
   };
@@ -377,7 +417,7 @@ export function DistributeSurvey() {
         }
       })
       .catch((error) => {
-        alert(error.message);
+        toast("Something went wrong!", { type: "error" });
         setIsBroacasting(false);
         console.error("There was an error!", error);
       });

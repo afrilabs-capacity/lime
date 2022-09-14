@@ -2,10 +2,14 @@ import create from "zustand";
 import {
   getWidgetIndex,
   getWidgetOptionIndex,
+  getWidgetIndexByKey,
 } from "../utils/helper-functions";
 import { v4 as uuid } from "uuid";
 
 export const useBuilderStore = create((set) => ({
+  isAuthUser: () => {
+    return localStorage.getItem("user_id");
+  },
   currentEditingWidget: null,
   widgetEditorModal: false,
   widgetPreviewModal: false,
@@ -14,6 +18,19 @@ export const useBuilderStore = create((set) => ({
   surveyResponse: [],
   survey: null,
   activeNavigationMenu: 0,
+  indexOfWidgetToReplace: null,
+  indexOfCurrentWidget: null,
+  setIndexOfWidgetToReplace: (indexOfWidgetToReplace) => {
+    set((state) => ({
+      indexOfWidgetToReplace: (state.indexOfWidgetToReplace =
+        indexOfWidgetToReplace),
+    }));
+  },
+  setIndexOfCurrentWidget: (indexOfCurrentWidget) => {
+    set((state) => ({
+      indexOfCurrentWidget: (state.indexOfCurrentWidget = indexOfCurrentWidget),
+    }));
+  },
   setActiveNavigationMenu: (tabIndex) => {
     set((state) => ({
       activeNavigationMenu: (state.activeNavigationMenu = tabIndex),
@@ -52,7 +69,7 @@ export const useBuilderStore = create((set) => ({
       widgetPreviewModal: (state.widgetPreviewModal = false),
     })),
   addWidget: (widget) => {
-    console.log(widget);
+    // console.log(widget);
     set((state) => {
       return {
         widgets: [...state.widgets, widget],
@@ -226,6 +243,131 @@ export const useBuilderStore = create((set) => ({
     //   }),
     // );
   },
+  deleteWidget: (item) => {
+    set((state) => ({
+      widgets: state.widgets.filter(
+        (widget) => widget.unique_key !== item.unique_key
+      ),
+    }));
+    // alert(item.unique_key);
+  },
+  reorderWidget: (widgetToReplace, currentWidget, position) => {
+    // // alert(position);
+    // set((state) => {
+    //   let finalWidgets = [];
+    //   let indexOfWidgetToReplace = getWidgetIndexByKey(
+    //     widgetToReplace,
+    //     state.widgets
+    //   );
+    //   let indexOfCurrentWidget = getWidgetIndexByKey(
+    //     currentWidget,
+    //     state.widgets
+    //   );
+    //   console.log(
+    //     "found widget",
+    //     `${indexOfWidgetToReplace + "*" + indexOfCurrentWidget + position}`
+    //   );
+    //   let widgetToReplaceData = state.widgets[indexOfWidgetToReplace];
+    //   let currentWidgetData = state.widgets[indexOfCurrentWidget];
+    //   // let removeCurrentWidgetFromWidgets = state.widgets.filter(
+    //   //   (widget) => widget.unique_key !== currentWidgetData.unique_key
+    //   // );
+    //   let removeCurrentWidgetFromWidgets = state.widgets;
+    //   let IndexesToBeRemoved = [indexOfCurrentWidget];
+    //   while (IndexesToBeRemoved.length) {
+    //     removeCurrentWidgetFromWidgets.splice(IndexesToBeRemoved.pop(), 1);
+    //   }
+    //   for (
+    //     let index = 0;
+    //     index < removeCurrentWidgetFromWidgets.length;
+    //     index++
+    //   ) {
+    //     // if (position == "bottom") {
+    //     //   finalWidgets.push(removeCurrentWidgetFromWidgets[index]);
+    //     //   if (index == indexOfWidgetToReplace) {
+    //     //     finalWidgets.push(currentWidgetData);
+    //     //   }
+    //     // } else if (indexOfWidgetToReplace == 0) {
+    //     //   finalWidgets.push(currentWidgetData);
+    //     //   finalWidgets.push(removeCurrentWidgetFromWidgets[index]);
+    //     // } else {
+    //     //   if (index == indexOfWidgetToReplace) {
+    //     //     finalWidgets.push(currentWidgetData);
+    //     //   }
+    //     //   finalWidgets.push(removeCurrentWidgetFromWidgets[index]);
+    //     // }
+    //     // if (index == indexOfWidgetToReplace - 1) {
+    //     //   finalWidgets.push(currentWidgetData);
+    //     //   finalWidgets.push(removeCurrentWidgetFromWidgets[index]);
+    //     // }
+    //     // if (index == indexOfWidgetToReplace - 1) {
+    //     //   finalWidgets.push(currentWidgetData);
+    //     // } else {
+    //     //   finalWidgets.push(removeCurrentWidgetFromWidgets[index]);
+    //     // }
+    //     // if()
+    //   }
+    //   // alert(indexOfWidgetToReplace);
+    //   removeCurrentWidgetFromWidgets.splice(
+    //     indexOfWidgetToReplace < indexOfCurrentWidget
+    //       ? indexOfWidgetToReplace
+    //       : indexOfWidgetToReplace - 1,
+    //     0,
+    //     currentWidgetData
+    //   );
+    //   // console.log("final widgets", finalWidgets);
+    //   return {
+    //     widgets: (state.widgets = removeCurrentWidgetFromWidgets),
+    //   };
+    // });
+  },
+  reorderUp: (item) => {
+    set((state) => {
+      let indexOfCurrentWidget = getWidgetIndexByKey(
+        item.unique_key,
+        state.widgets
+      );
+      let currentWidgetData = state.widgets[indexOfCurrentWidget];
+
+      let widgets = state.widgets;
+
+      let currentWidgetSwapData = state.widgets[indexOfCurrentWidget - 1];
+      widgets[indexOfCurrentWidget - 1] = currentWidgetData;
+      widgets[indexOfCurrentWidget] = currentWidgetSwapData;
+      console.log(widgets);
+      return {
+        widgets: (state.widgets = widgets),
+      };
+    });
+    // alert(item.unique_key);
+  },
+  reorderDown: (item) => {
+    set((state) => {
+      let indexOfCurrentWidget = getWidgetIndexByKey(
+        item.unique_key,
+        state.widgets
+      );
+      let currentWidgetData = state.widgets[indexOfCurrentWidget];
+
+      let widgets = state.widgets;
+
+      let currentWidgetSwapData = state.widgets[indexOfCurrentWidget + 1];
+      widgets[indexOfCurrentWidget + 1] = currentWidgetData;
+      widgets[indexOfCurrentWidget] = currentWidgetSwapData;
+      console.log(widgets);
+      return {
+        widgets: (state.widgets = widgets),
+      };
+    });
+  },
   increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
   removeAllBears: () => set({ bears: 0 }),
+  loout: () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("user_email");
+    localStorage.removeItem("user_name");
+    localStorage.removeItem("token");
+    localStorage.removeItem("roles");
+  },
 }));

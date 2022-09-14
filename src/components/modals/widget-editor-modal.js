@@ -104,7 +104,7 @@ export default function WidetEditor() {
                 {currentEditingWidget && currentEditingWidget.name == "radio" && (
                   <>
                     {widgets[widgetIndex].options.map((obj) => (
-                      <RadioOption
+                      <CheckboxOption
                         item={obj}
                         parentWidget={widgets[widgetIndex]}
                       />

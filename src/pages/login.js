@@ -1,5 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import axios from "axios";
 
 export default function Login() {
@@ -23,11 +24,12 @@ export default function Login() {
               if (user.roles && user.roles.length > 0) {
                 localStorage.setItem("user_id", user.id);
                 localStorage.setItem("user_email", user.email);
-                localStorage.setItem("token", response.access_token);
+                localStorage.setItem("user_name", user.name);
+                localStorage.setItem("token", response.data.access_token);
                 localStorage.setItem("roles", JSON.stringify(user.roles));
-                naviagte("/");
+                naviagte("/dashboard");
               } else {
-                alert("no roles");
+                // alert("no roles");
                 // alertMe.show("Unauthorized Access", { type: "error" });
               }
             }
@@ -36,7 +38,7 @@ export default function Login() {
         setIsAuthenticating(false);
       })
       .catch((error) => {
-        alert(error.message);
+        toast("Invalid Email or Password", { type: "error" });
         setIsAuthenticating(false);
         console.error("There was an error!", error);
       });
@@ -55,26 +57,18 @@ export default function Login() {
   };
 
   return (
-    <div class="container px-6 mx-auto">
-      <div class="flex flex-col text-center md:text-left md:flex-row h-screen justify-evenly md:items-center">
-        <div class="flex flex-col w-full">
-          <div>
-            <svg
-              class="w-20 h-20 mx-auto md:float-left fill-stroke text-gray-800"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-              ></path>
-            </svg>
-          </div>
-          <h1 class="text-5xl text-gray-800 font-bold">Admin Area</h1>
+    <div
+      class=" w-full flex justify-center py-10"
+      style={{
+        backgroundImage: "url(/assets/login-bg.jpg)",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+      }}
+    >
+      <div class="flex flex-col text-center md:text-left  h-screen justify-evenly md:items-center w-9/12 md:w-6/12">
+        <div class="flex flex-col items-center w-full ite">
+          <img src={"/assets/backgrounds/lime_logo.png"} className="w-4/12" />
           <p class="w-5/12 mx-auto md:mx-0 text-gray-500"></p>
         </div>
         <div class="w-full md:w-full lg:w-9/12 mx-auto md:mx-0">

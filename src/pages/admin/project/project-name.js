@@ -37,7 +37,7 @@ export default function ProjectName() {
           <div className="m-2 mb-3">
             {/* <label className="text-black">Name</label> */}
             <BasicTextField
-              classes={"py-6 my-2 text-lg"}
+              classes={"py-6 my-2 text-lg h-20"}
               placeholder={"e.g My Project"}
               handleChange={handleNameChange}
             />

@@ -28,15 +28,17 @@ export default function CreateEmailList() {
     axios
       .post(url, formData)
       .then((response) => {
-        setIsUploading(false);
         if (response.status == 200) {
           toast("Upload Successful!", { type: "success" });
-          window.location.href = `/email-list-single/${listuuid}`;
+          setTimeout(function () {
+            setIsUploading(false);
+            window.location.href = `/email-list-single/${listuuid}`;
+          }, 3000);
         }
       })
       .catch((error) => {
         setIsUploading(false);
-        alert(error.message);
+        toast("Something wenr wrong!", { type: "error" });
         console.error("There was an error!", error);
       });
   };
@@ -153,12 +155,14 @@ export default function CreateEmailList() {
                 {fileSelected && (
                   <div className="w-32 h-32  p-2 relative  border rounded-full dotted border-color-black-500">
                     <img src={"/excel.png"} className="w-full" />
-                    <div
-                      className="rounded rounded-full p-0 top-0 right-0 absolute px-1 cursor-pointer"
-                      onClick={() => removeCover()}
-                    >
-                      <i class="fa fa-times-circle text-red-500  z-50 text-2xl"></i>
-                    </div>
+                    {!isUploading && (
+                      <div
+                        className="rounded rounded-full p-0 top-0 right-0 absolute px-1 cursor-pointer"
+                        onClick={() => removeCover()}
+                      >
+                        <i class="fa fa-times-circle text-red-500  z-50 text-2xl"></i>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>

@@ -187,7 +187,7 @@ export default function Footer() {
             </div>
           </div> */}
 
-          <div class="sm:flex sm:flex-wrap sm:-mx-4 mt-3 pt-6 sm:mt-12 sm:pt-12 border-t">
+          {/* <div class="sm:flex sm:flex-wrap sm:-mx-4 mt-3 pt-6 sm:mt-12 sm:pt-12 border-t">
             <div class="sm:w-full px-4 md:w-1/6">
               <strong>FWR</strong>
             </div>
@@ -208,7 +208,7 @@ export default function Footer() {
                 Sign Out
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </footer>
     </>

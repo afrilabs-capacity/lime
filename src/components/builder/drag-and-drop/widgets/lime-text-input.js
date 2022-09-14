@@ -7,18 +7,9 @@ import {
   getActiveWidgetLabel,
   getActiveWidgetRequired,
 } from "../../../../utils/helper-functions.js";
+import WidgetAction from "./components/action/widget-action.js";
 
 export function LimeInput({ item }) {
-  const [{ isDragging }, drag, preview] = useDrag(
-    () => ({
-      type: ItemTypes.BOX,
-      collect: (monitor) => ({
-        isDragging: !!monitor.isDragging(),
-      }),
-    }),
-    []
-  );
-
   const [disableFields, setDisabledFields] = useState(true);
   const { showWidgetEditorModal, currentEditingWidget, widgets } =
     useBuilderStore((state) => state);
@@ -44,13 +35,7 @@ export function LimeInput({ item }) {
           </span>
         </div>
         <div className="m-2">
-          {" "}
-          <i className="fa fa-trash cursor-pointer" aria-hidden="true"></i>
-          <i
-            className="fas fa-edit mx-2 cursor-pointer"
-            onClick={() => showWidgetEditorModal(item)}
-          ></i>
-          <i className="fas fa-grip-vertical cursor-pointer"></i>
+          <WidgetAction item={item} />
         </div>
       </div>
       <div className="p-2">

@@ -22,6 +22,12 @@ import LimeMultiLineWeb from "../components/form/web/lime-multiline";
 import LimeCheckboxWeb from "../components/form/web/lime-checkbox";
 import LimeRadioWeb from "../components/form/web/lime-radio";
 
+export const getWidgetIndexByKey = (currentEditingWidgetKey, widgets) => {
+  return currentEditingWidgetKey
+    ? widgets.findIndex((x) => x.unique_key === currentEditingWidgetKey)
+    : null;
+};
+
 export const getWidgetIndex = (currentEditingWidget, widgets) => {
   return currentEditingWidget
     ? widgets.findIndex((x) => x.unique_key === currentEditingWidget.unique_key)
@@ -195,3 +201,73 @@ export const getWebWidgetByKey = (item) => {
   //     addWidget(<LimeRating />);
   //   }
 };
+
+const getLinkOfNamedOrUnmamedSurvey = (survey) => {
+  if (survey.project_id) {
+    return `/project/${survey.project_uuid}/survey/${survey.uuid}`;
+  } else {
+    return `/survey/${survey.uuid}/standalone`;
+  }
+};
+
+export const getActivityResourceLink = (activity) => {
+  if (activity.model == "User") {
+    return "/user/" + activity.model_data.uuid;
+  }
+
+  if (activity.model == "Survey") {
+    return getLinkOfNamedOrUnmamedSurvey(activity.model_data);
+  }
+};
+
+export const formatAMPM = (date) => {
+  // gets the hours
+  let hours = date.getHours();
+  // gets the day
+  let days = date.getDay();
+  // gets the month
+  let minutes = date.getMinutes();
+  // gets AM/PM
+  let ampm = hours >= 12 ? "pm" : "am";
+  // converts hours to 12 hour instead of 24 hour
+  hours = hours % 12;
+  // converts 0 (midnight) to 12
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  // converts minutes to have leading 0
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+
+  // the time string
+  let time = hours + ":" + minutes + " " + ampm;
+
+  // gets the match for the date string we want
+  let match = date.toString().match(/\w{3} \w{3} \d{1,2} \d{4}/);
+
+  //the result
+  return match[0] + " " + time;
+};
+
+export function isAuthUser() {
+  return localStorage.getItem("user_id");
+}
+
+export function isAdmin() {
+  if (isAuthUser()) {
+    return JSON.parse(localStorage.getItem("roles")).filter(
+      (role) => role.name == "admin"
+    ).length
+      ? true
+      : false;
+  }
+  return false;
+}
+
+export function isCollector() {
+  if (isAuthUser) {
+    return JSON.parse(localStorage.getItem("roles")).filter(
+      (role) => role.name == "collector"
+    ).length
+      ? true
+      : false;
+  }
+  return false;
+}

@@ -6,19 +6,23 @@ import { toast } from "react-toastify";
 import axios from "axios";
 export default function EmailListName() {
   const [name, setName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const url = "/api/email-list/create";
 
   const addSurveyName = () => {
+    setIsLoading(true);
     axios
       .post(url, { name: name })
       .then((response) => {
         if (response.status == 200) {
+          setIsLoading(false);
           window.location.href = `/create-email-list/${response.data.list.uuid}`;
         }
       })
       .catch((error) => {
-        alert(error.message);
+        setIsLoading(false);
+        toast("Something went wrong!", { type: "error" });
         console.error("There was an error!", error);
       });
   };
@@ -37,7 +41,7 @@ export default function EmailListName() {
           <div className="m-2 mb-3">
             {/* <label className="text-black">Name</label> */}
             <BasicTextField
-              classes={"py-6 my-2 text-lg"}
+              classes={"py-6 my-2 text-lg h-20"}
               placeholder={"e.g Health List"}
               handleChange={handleNameChange}
             />
@@ -46,8 +50,8 @@ export default function EmailListName() {
           <div className="text-center">
             <br />
             <BasicButton
-              disabled={!name}
-              title={"CREATE LIST"}
+              disabled={!name || isLoading}
+              title={isLoading ? "Creating..." : "CREATE LIST"}
               classes={"w-4/12 mt-0 p-4 h-14"}
               handleClick={addSurveyName}
             />

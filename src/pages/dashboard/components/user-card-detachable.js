@@ -7,9 +7,7 @@ export default function UserCardDetachable({ user, detachUser, isDetaching }) {
     >
       <div className="col-span-1">
         <div className="flex justify-end">
-          <span className="text-xs bg-orange-50 px-3  text-orange-400 rounded">
-            Ended
-          </span>
+          <span className="text-xs bg-orange-50 px-3  text-orange-400 rounded"></span>
         </div>
         <div>
           <p className="text-lg font-normal text-blue-900">{user.name}</p>

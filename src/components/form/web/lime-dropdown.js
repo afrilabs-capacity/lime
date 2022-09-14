@@ -51,6 +51,9 @@ export function LimeDropDownWeb({ item }) {
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           >
+            <option value="" selected default disabled>
+              Select
+            </option>
             {item.options.map((option) => (
               <option value={option.value}>{option.option}</option>
             ))}
