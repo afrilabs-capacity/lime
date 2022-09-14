@@ -3,12 +3,13 @@ import { useState, useEffect } from "react";
 import {
   formatAMPM,
   getActivityResourceLink,
+  API_BASE,
 } from "../../utils/helper-functions";
 
 export default function RightNav() {
   const [activities, setActivities] = useState([]);
   const getActivities = () => {
-    const url = "/api/activities";
+    const url = API_BASE + "/api/activities";
     axios
       .get(url)
       .then((response) => {

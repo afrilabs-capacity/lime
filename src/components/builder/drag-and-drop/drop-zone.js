@@ -2,7 +2,11 @@ import { useDrop } from "react-dnd";
 import { ItemTypes } from "./item-types.js";
 import { useBuilderStore } from "../../../stores/builder.js";
 import React from "react";
-import { getWidgetByKey, isAdmin } from "../../../utils/helper-functions.js";
+import {
+  getWidgetByKey,
+  isAdmin,
+  API_BASE,
+} from "../../../utils/helper-functions.js";
 import BasicButton from "./widgets/components/buttons/basic-button.js";
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
@@ -63,7 +67,7 @@ export default function DropZone() {
   );
 
   const getSurvey = () => {
-    const url = "/api/survey/" + surveyuuid;
+    const url = API_BASE + "/api/survey/" + surveyuuid;
     setIsLoading(true);
     axios
       .get(url)
@@ -86,7 +90,7 @@ export default function DropZone() {
   };
 
   const updateSurvey = () => {
-    const url = "/api/survey/update";
+    const url = API_BASE + "/api/survey/update";
     setIsUpdating(true);
     axios
       .post(url, {
@@ -110,7 +114,7 @@ export default function DropZone() {
   };
 
   const deleteSurvey = () => {
-    const url = "/api/survey/delete/" + surveyuuid;
+    const url = API_BASE + "/api/survey/delete/" + surveyuuid;
     setIsUpdating(true);
     axios
       .delete(url)

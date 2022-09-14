@@ -20,7 +20,7 @@ import Chart from "react-apexcharts";
 import EmptyPage from "../section/empty-page.js";
 import Pagination from "../pagination/pagination.js";
 import AnimatedLoader from "../loader/loader.js";
-import { formatAMPM } from "../../utils/helper-functions";
+import { formatAMPM, API_BASE } from "../../utils/helper-functions";
 
 export default function Survey() {
   const initialTabData = {
@@ -102,7 +102,7 @@ export function SurveyResponses() {
 
   const getResponses = () => {
     setIsLoading(true);
-    const url = "/api/survey/responses/" + surveyuuid;
+    const url = API_BASE + "/api/survey/responses/" + surveyuuid;
     axios
       .get(url)
       .then((response) => {
@@ -249,7 +249,7 @@ export function Analytics() {
   // const [options, setOptions] = useState(defaultOptions);
 
   const getResponses = () => {
-    const url = "/api/survey/responses/" + surveyuuid;
+    const url = API_BASE + "/api/survey/responses/" + surveyuuid;
     axios
       .get(url)
       .then((response) => {
@@ -389,7 +389,7 @@ export function DistributeSurvey() {
   const [isBroadcasting, setIsBroacasting] = useState(false);
 
   const getEmailLists = () => {
-    const url = "/api/email-list";
+    const url = API_BASE + "/api/email-list";
 
     axios
       .get(url)
@@ -407,7 +407,7 @@ export function DistributeSurvey() {
 
   const broadcastSurvey = (list) => {
     setIsBroacasting(true);
-    const url = "/api/survey/distribute";
+    const url = API_BASE + "/api/survey/distribute";
     axios
       .post(url, { survey_uuid: surveyuuid, list_uuid: list.uuid })
       .then((response) => {
