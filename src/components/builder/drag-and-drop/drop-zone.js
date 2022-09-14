@@ -150,11 +150,6 @@ export default function DropZone() {
       {!isLoading && (
         <div className="grid col-span-3 content-start">
           <div className="bg-white m-2 p-2 flex justify-between">
-            <h1 className="text-2xl text-center m-2 font-bold">
-              {survey && survey.name}
-            </h1>
-          </div>
-          <div className="bg-white m-2 p-2 flex justify-between">
             {/* <div>
           <h1 className="text-2xl text-center m-2 font-bold">
             {survey && survey.name}
