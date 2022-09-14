@@ -55,7 +55,7 @@ export default function ProjectSingle() {
   };
 
   const getProjectUsers = () => {
-    const url = "/api/project/" + projectuuid + "/users";
+    const url = API_BASE + "/api/project/" + projectuuid + "/users";
     axios
       .get(url)
       .then((response) => {
