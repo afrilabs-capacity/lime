@@ -2,12 +2,13 @@ import { useState } from "react";
 import BasicTextField from "../../../components/builder/drag-and-drop/widgets/components/input/basic-textfield";
 import BasicButton from "../../../components/builder/drag-and-drop/widgets/components/buttons/basic-button";
 import "react-toastify/dist/ReactToastify.css";
+import { API_BASE } from "../../../utils/helper-functions";
 import { toast } from "react-toastify";
 import axios from "axios";
 export default function ProjectName() {
   const [name, setName] = useState("");
 
-  const url = "/api/project/create";
+  const url = API_BASE + "/api/project/create";
 
   const addProjejctName = () => {
     axios

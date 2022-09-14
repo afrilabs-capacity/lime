@@ -2,6 +2,7 @@ import BasicButton from "../../../components/builder/drag-and-drop/widgets/compo
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import TextField from "../../../components/builder/drag-and-drop/widgets/components/input/textfield";
+import { API_BASE } from "../../../utils/helper-functions";
 import { toast } from "react-toastify";
 
 import axios from "axios";
@@ -19,7 +20,7 @@ export default function CreateEmailList() {
 
   const uploadList = () => {
     setIsUploading(true);
-    const url = "/api/emaill-list/import";
+    const url = API_BASE + "/api/emaill-list/import";
     let formData = new FormData();
     // formData.append("user_uuid", useruuid);
     formData.append("list_uuid", listuuid);

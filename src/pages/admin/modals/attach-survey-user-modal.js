@@ -3,6 +3,7 @@ import TextField from "../../../components/builder/drag-and-drop/widgets/compone
 import { forwardRef, useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { API_BASE } from "../../../utils/helper-functions";
 import axios from "axios";
 
 export default function AttachSurveyUserModal({
@@ -16,7 +17,7 @@ export default function AttachSurveyUserModal({
   const [isAttaching, setIsAttaching] = useState(false);
 
   const getDetachedUsers = () => {
-    const url = `/api/surveys/detached/survey/${surveyuuid}/users`;
+    const url = API_BASE + `/api/surveys/detached/survey/${surveyuuid}/users`;
     axios
       .get(url)
       .then((response) => {
@@ -34,7 +35,7 @@ export default function AttachSurveyUserModal({
 
   const attachUser = (useruuid) => {
     setIsAttaching(true);
-    const url = "/api/survey/attach/user";
+    const url = API_BASE + "/api/survey/attach/user";
 
     axios
       .post(url, { useruuid: useruuid, surveyuuid: surveyuuid })

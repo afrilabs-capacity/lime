@@ -5,6 +5,7 @@ import EmptyPage from "../../../components/section/empty-page";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { API_BASE } from "../../../utils/helper-functions";
 import axios from "axios";
 
 export default function EmailListSingle() {
@@ -14,7 +15,7 @@ export default function EmailListSingle() {
   const [isLoading, setIsLoading] = useState(false);
 
   const getContacts = () => {
-    const url = "/api/email-list/" + listuuid + "/contacts";
+    const url = API_BASE + "/api/email-list/" + listuuid + "/contacts";
     setIsLoading(true);
     axios
       .get(url)
@@ -34,7 +35,7 @@ export default function EmailListSingle() {
 
   const deleteContact = (contactuuid) => {
     setIsDeleting(true);
-    const url = "/api/email-list/delete/contact/" + contactuuid;
+    const url = API_BASE + "/api/email-list/delete/contact/" + contactuuid;
     axios
       .delete(url)
       .then((response) => {

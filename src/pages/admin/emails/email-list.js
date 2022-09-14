@@ -4,12 +4,13 @@ import { toast } from "react-toastify";
 import AnimatedLoader from "../../../components/loader/loader";
 import Pagination from "../../../components/pagination/pagination";
 import EmptyPage from "../../../components/section/empty-page";
+import { API_BASE } from "../../../utils/helper-functions";
 import axios from "axios";
 
 export default function EmailList() {
   const [emailLists, setEmailLists] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const url = "/api/email-list";
+  const url = API_BASE + "/api/email-list";
   const getEmailLists = () => {
     setIsLoading(true);
     axios

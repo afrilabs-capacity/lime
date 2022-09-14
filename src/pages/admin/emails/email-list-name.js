@@ -2,13 +2,14 @@ import { useState } from "react";
 import BasicTextField from "../../../components/builder/drag-and-drop/widgets/components/input/basic-textfield";
 import BasicButton from "../../../components/builder/drag-and-drop/widgets/components/buttons/basic-button";
 import "react-toastify/dist/ReactToastify.css";
+import { API_BASE } from "../../../utils/helper-functions";
 import { toast } from "react-toastify";
 import axios from "axios";
 export default function EmailListName() {
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const url = "/api/email-list/create";
+  const url = API_BASE + "/api/email-list/create";
 
   const addSurveyName = () => {
     setIsLoading(true);

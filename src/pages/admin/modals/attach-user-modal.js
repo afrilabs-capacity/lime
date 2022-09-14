@@ -3,6 +3,7 @@ import TextField from "../../../components/builder/drag-and-drop/widgets/compone
 import { forwardRef, useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { API_BASE } from "../../../utils/helper-functions";
 import axios from "axios";
 
 export default function AttachUserModal({
@@ -16,7 +17,7 @@ export default function AttachUserModal({
   const [isAttaching, setIsAttaching] = useState(false);
 
   const getDetachedUsers = () => {
-    const url = "/api/users/detached/project/" + projectuuid;
+    const url = API_BASE + "/api/users/detached/project/" + projectuuid;
     axios
       .get(url)
       .then((response) => {
@@ -34,7 +35,7 @@ export default function AttachUserModal({
 
   const attachUser = (useruuid) => {
     setIsAttaching(true);
-    const url = "/api/project/attach/user";
+    const url = API_BASE + "/api/project/attach/user";
 
     axios
       .post(url, { useruuid: useruuid, projectuuid: projectuuid })

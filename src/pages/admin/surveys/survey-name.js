@@ -1,6 +1,7 @@
 import { useState } from "react";
 import BasicTextField from "../../../components/builder/drag-and-drop/widgets/components/input/basic-textfield";
 import BasicButton from "../../../components/builder/drag-and-drop/widgets/components/buttons/basic-button";
+import { API_BASE } from "../../../utils/helper-functions";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
@@ -9,7 +10,7 @@ export default function SurveyName() {
   let { projectuuid } = useParams();
   const [name, setName] = useState("");
 
-  const url = "/api/survey";
+  const url = API_BASE + "/api/survey";
 
   const addSurveyName = () => {
     axios

@@ -9,6 +9,7 @@ import SurveyCardDetachable from "../../dashboard/components/survey-card-detacha
 import SurveyCard from "../../dashboard/components/survey-card";
 import UserCardDetachable from "../../dashboard/components/user-card-detachable";
 import Pagination from "../../../components/pagination/pagination";
+import { API_BASE } from "../../../utils/helper-functions";
 import axios from "axios";
 
 export default function ProjectSingle() {
@@ -23,7 +24,7 @@ export default function ProjectSingle() {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const getProject = () => {
-    const url = "/api/project/" + projectuuid;
+    const url = API_BASE + "/api/project/" + projectuuid;
     axios
       .get(url)
       .then((response) => {
@@ -39,7 +40,7 @@ export default function ProjectSingle() {
   };
 
   const getProjectSurveys = () => {
-    const url = "/api/project/" + projectuuid + "/surveys";
+    const url = API_BASE + "/api/project/" + projectuuid + "/surveys";
     axios
       .get(url)
       .then((response) => {
@@ -70,7 +71,7 @@ export default function ProjectSingle() {
 
   const detachSurvey = (surveyuuid) => {
     setIsDetaching(true);
-    const url = "/api/project/detach/survey";
+    const url = API_BASE + "/api/project/detach/survey";
 
     axios
       .post(url, { surveyuuid: surveyuuid, projectuuid: projectuuid })
@@ -90,7 +91,7 @@ export default function ProjectSingle() {
 
   const detachUser = (useruuid) => {
     setIsDetaching(true);
-    const url = "/api/project/detach/user";
+    const url = API_BASE + "/api/project/detach/user";
 
     axios
       .post(url, { useruuid: useruuid, projectuuid: projectuuid })

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import EmptyPage from "../../../components/section/empty-page";
 import Pagination from "../../../components/pagination/pagination";
 import AnimatedLoader from "../../../components/loader/loader";
+import { API_BASE } from "../../../utils/helper-functions";
 import { toast } from "react-toastify";
 import axios from "axios";
 
@@ -11,7 +12,7 @@ export default function Users() {
   const [paginationData, setPaginationData] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
-  const url = "/api/users";
+  const url = API_BASE + "/api/users";
   const getUsers = () => {
     setIsLoading(true);
     axios

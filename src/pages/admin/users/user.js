@@ -3,6 +3,7 @@ import TextField from "../../../components/builder/drag-and-drop/widgets/compone
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+import { API_BASE } from "../../../utils/helper-functions";
 import { toast } from "react-toastify";
 import axios from "axios";
 
@@ -33,7 +34,7 @@ export default function User() {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none`;
 
   const getUser = () => {
-    const url = "/api/user/" + uuid;
+    const url = API_BASE + "/api/user/" + uuid;
     axios
       .get(url)
       .then((response) => {
@@ -61,7 +62,7 @@ export default function User() {
   };
 
   const getRoles = () => {
-    const url = "/api/roles";
+    const url = API_BASE + "/api/roles";
     axios
       .get(url)
       .then((response) => {
@@ -77,7 +78,7 @@ export default function User() {
   };
 
   const updateUser = () => {
-    const url = "/api/user/update";
+    const url = API_BASE + "/api/user/update";
     const payload = {
       ...user,
       roles: selectedRoles

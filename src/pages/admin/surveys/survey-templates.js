@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { API_BASE } from "../../../utils/helper-functions";
 import axios from "axios";
 
 export default function SurveyTemplates() {
   let { projectuuid } = useParams();
   const [surveyTemplates, setSurveyTemplates] = useState([]);
   const getSurveys = () => {
-    const url = "/api/surveys";
+    const url = API_BASE + "/api/surveys";
     axios
       .get(url)
       .then((response) => {

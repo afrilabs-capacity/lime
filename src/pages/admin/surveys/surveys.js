@@ -5,12 +5,13 @@ import { toast } from "react-toastify";
 import EmptyPage from "../../../components/section/empty-page";
 import AnimatedLoader from "../../../components/loader/loader";
 import Pagination from "../../../components/pagination/pagination";
+import { API_BASE } from "../../../utils/helper-functions";
 import axios from "axios";
 export default function Surveys() {
   const [surveyTemplates, setSurveyTemplates] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const getSurveys = () => {
-    const url = "/api/surveys";
+    const url = API_BASE + "/api/surveys";
     setIsLoading(true);
     axios
       .get(url)

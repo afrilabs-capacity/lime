@@ -12,6 +12,7 @@ import UserCardDetachable from "../../dashboard/components/user-card-detachable"
 import Pagination from "../../../components/pagination/pagination";
 import axios from "axios";
 import DatePicker from "react-datepicker";
+import { API_BASE } from "../../../utils/helper-functions";
 import { CSVLink, CSVDownload } from "react-csv";
 
 export default function GenerateReport() {
@@ -44,7 +45,7 @@ export default function GenerateReport() {
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none`;
   const getProjectSurveys = () => {
-    const url = "/api/project/" + projectuuid + "/surveys";
+    const url = API_BASE + "/api/project/" + projectuuid + "/surveys";
     setIsLoading(true);
     axios
       .get(url)
@@ -63,7 +64,7 @@ export default function GenerateReport() {
   };
 
   const getProjects = () => {
-    const url = "/api/projects/all";
+    const url = API_BASE + "/api/projects/all";
     setIsLoading(true);
     axios
       .get(url)
@@ -82,7 +83,7 @@ export default function GenerateReport() {
   };
 
   const generateReport = () => {
-    const url = "/api/survey/report";
+    const url = API_BASE + "/api/survey/report";
     setIsLoading(true);
 
     axios

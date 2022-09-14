@@ -7,13 +7,14 @@ import EmptyPage from "../../../components/section/empty-page";
 import {
   getActivityResourceLink,
   formatAMPM,
+  API_BASE,
 } from "../../../utils/helper-functions";
 import axios from "axios";
 
 export default function Activity() {
   const [activities, setActivities] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const url = "/api/activities";
+  const url = API_BASE + "/api/activities";
   const getActivities = () => {
     setIsLoading(true);
     axios

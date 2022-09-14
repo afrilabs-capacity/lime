@@ -6,6 +6,7 @@ import AnimatedLoader from "../../../components/loader/loader";
 import EmptyPage from "../../../components/section/empty-page";
 import { toast } from "react-toastify";
 import Pagination from "../../../components/pagination/pagination";
+import { API_BASE } from "../../../utils/helper-functions";
 
 export default function Projects() {
   const [projects, setProjects] = useState([]);
@@ -14,7 +15,7 @@ export default function Projects() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const getProjects = () => {
-    const url = "/api/projects";
+    const url = API_BASE + "/api/projects";
     setIsLoading(true);
     axios
       .get(url)
@@ -49,7 +50,7 @@ export default function Projects() {
   };
 
   const deleteSurvey = (project) => {
-    const url = "/api/project/delete/" + project.uuid;
+    const url = API_BASE + "/api/project/delete/" + project.uuid;
     setIsLoading(true);
     axios
       .delete(url)

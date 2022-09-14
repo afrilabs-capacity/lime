@@ -1,6 +1,7 @@
 import { useState } from "react";
 import BasicTextField from "../../../../components/builder/drag-and-drop/widgets/components/input/basic-textfield";
 import BasicButton from "../../../../components/builder/drag-and-drop/widgets/components/buttons/basic-button";
+import { API_BASE } from "../../../../utils/helper-functions";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
@@ -12,7 +13,7 @@ export default function SurveyNameStandalone() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingProjects, setIsLoadingProjects] = useState(false);
 
-  const url = "/api/survey";
+  const url = API_BASE + "/api/survey";
 
   const addSurveyName = () => {
     setIsLoading(true);
@@ -42,7 +43,7 @@ export default function SurveyNameStandalone() {
   };
 
   const getProjects = () => {
-    const url = "/api/projects";
+    const url = API_BASE + "/api/projects";
     setIsLoadingProjects(true);
     axios
       .get(url)

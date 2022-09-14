@@ -10,6 +10,7 @@ import SurveyCardDetachable from "../../dashboard/components/survey-card-detacha
 import SurveyCard from "../../dashboard/components/survey-card";
 import UserCardDetachable from "../../dashboard/components/user-card-detachable";
 import Pagination from "../../../components/pagination/pagination";
+import { API_BASE } from "../../../utils/helper-functions";
 import axios from "axios";
 
 export default function SurveyUser() {
@@ -21,7 +22,7 @@ export default function SurveyUser() {
   const [currentSurveyUsersPage, setCurrentSurveyUsersPage] = useState(1);
 
   const getSurvey = () => {
-    const url = "/api/survey/" + surveyuuid;
+    const url = API_BASE + "/api/survey/" + surveyuuid;
     axios
       .get(url)
       .then((response) => {
@@ -36,7 +37,7 @@ export default function SurveyUser() {
   };
 
   const getSurveyUsers = () => {
-    const url = "/api/survey/" + surveyuuid + "/users";
+    const url = API_BASE + "/api/survey/" + surveyuuid + "/users";
     axios
       .get(url)
       .then((response) => {
@@ -52,7 +53,7 @@ export default function SurveyUser() {
 
   const detachUser = (useruuid) => {
     setIsDetaching(true);
-    const url = "/api/survey/detach/user";
+    const url = API_BASE + "/api/survey/detach/user";
 
     axios
       .post(url, { useruuid: useruuid, surveyuuid: surveyuuid })

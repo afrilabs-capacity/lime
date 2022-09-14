@@ -1,6 +1,7 @@
 import { useState } from "react";
 import BasicTextField from "../../../components/builder/drag-and-drop/widgets/components/input/basic-textfield";
 import BasicButton from "../../../components/builder/drag-and-drop/widgets/components/buttons/basic-button";
+import { API_BASE } from "../../../utils/helper-functions";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -11,7 +12,7 @@ export default function SurveyNameFromTemplate() {
   const [creating, setIsCreating] = useState(false);
 
   const addSurveyName = () => {
-    const url = "/api/survey/clone";
+    const url = API_BASE + "/api/survey/clone";
     setIsCreating(true);
     axios
       .post(url, {

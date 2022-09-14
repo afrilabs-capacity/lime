@@ -2,6 +2,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { API_BASE, BASE_URL } from "../utils/helper-functions";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -11,7 +12,7 @@ export default function Login() {
 
   const login = () => {
     setIsAuthenticating(true);
-    const url = "/api/login";
+    const url = API_BASE + "/api/login";
     axios
       .post(url, { email: email, password: password })
       .then((response) => {
