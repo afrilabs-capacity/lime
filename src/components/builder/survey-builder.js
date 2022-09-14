@@ -444,7 +444,7 @@ export function DistributeSurvey() {
           ${channel == 1 ? "bg-gray-50  text-black border" : "bg-gray-200 "}`}
           onClick={() => setChannel(1)}
         >
-          <span class="text-3xl">Paper Or Phone</span>
+          <span class="text-3xl">Offline</span>
         </div>
       </div>
 
