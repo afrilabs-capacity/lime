@@ -16,6 +16,7 @@ import {
   API_BASE,
   shouldRenderEmptyPage,
   authHeader,
+  isAuthUser,
 } from "../../utils/helper-functions";
 
 export default function DashboardLayout() {
@@ -42,7 +43,7 @@ export default function DashboardLayout() {
       })
       .catch((error) => {
         setIsLoading(false);
-        toast("Something wenr wrong!", { type: "error" });
+        toast("Something went wrong!", { type: "error" });
         console.error("There was an error!", error);
       });
   };
@@ -69,9 +70,9 @@ export default function DashboardLayout() {
   };
 
   useEffect(() => {
-    setTimeout(() => {
+    if (isAuthUser()) {
       getSurveys();
-    }, 3000);
+    }
   }, []);
   return (
     <>
