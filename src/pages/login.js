@@ -28,7 +28,9 @@ export default function Login() {
                 localStorage.setItem("user_name", user.name);
                 localStorage.setItem("token", response.data.access_token);
                 localStorage.setItem("roles", JSON.stringify(user.roles));
-                naviagte("/dashboard");
+                setTimeout(() => {
+                  naviagte("/dashboard");
+                }, 2000);
               } else {
                 // alert("no roles");
                 // alertMe.show("Unauthorized Access", { type: "error" });
