@@ -69,7 +69,9 @@ export default function DashboardLayout() {
   };
 
   useEffect(() => {
-    getSurveys();
+    setTimeout(() => {
+      getSurveys();
+    }, 3000);
   }, []);
   return (
     <>
