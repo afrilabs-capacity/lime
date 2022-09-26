@@ -8,6 +8,7 @@ import {
   getActivityResourceLink,
   formatAMPM,
   API_BASE,
+  shouldRenderEmptyPage,
 } from "../../../utils/helper-functions";
 import axios from "axios";
 
@@ -104,8 +105,9 @@ export default function Activity() {
                   </div>
                 </div>
               ))}
-            {activities.data && !activities.data.length && (
-              <EmptyPage text={"activity"} />
+
+            {shouldRenderEmptyPage(activities) && (
+              <EmptyPage text={"Activities"} disablePluralize={true} />
             )}
           </div>
         )}

@@ -100,8 +100,8 @@ export default function LeftNav() {
 
   return (
     <>
-      <aside class="col-span-5 md:col-span-1 " aria-label="Sidebar">
-        <div class="overflow-y-auto py-4 px-3  rounded  h-full bg-repeat AsideBackground">
+      <aside class="col-span-5 md:col-span-1 md:h-screen" aria-label="Sidebar">
+        <div class="overflow-y-auto py-4 px-3  rounded  h-full  bg-repeat AsideBackground">
           {/* <p onClick={() => setShowSidebar((prev) => (prev = !prev))}>
             {" "}
             toggle sidebar

@@ -5,6 +5,7 @@ import {
   getActivityResourceLink,
   API_BASE,
 } from "../../utils/helper-functions";
+import EmptyPage from "../section/empty-page";
 
 export default function RightNav() {
   const [activities, setActivities] = useState([]);
@@ -62,6 +63,9 @@ export default function RightNav() {
                 <hr />
               </div>
             ))}
+            {!activities.length && (
+              <EmptyPage text={"Activities"} disablePluralize={true} />
+            )}
             {/* <div className="text-center font-bold">
               {" "}
               <a href="/activity">View All</a>

@@ -37,13 +37,17 @@ export default function SurveyNameStandalone() {
       })
       .catch((error) => {
         setIsLoading(false);
-        toast("Something went wrong!", { type: "error" });
+        if (error.response.status == 422) {
+          toast("Survey name already exists!", { type: "error" });
+        } else {
+          toast("Something went wrong!", { type: "error" });
+        }
         console.error("There was an error!", error);
       });
   };
 
   const getProjects = () => {
-    const url = API_BASE + "/api/projects";
+    const url = API_BASE + "/api/projects/all";
     setIsLoadingProjects(true);
     axios
       .get(url)

@@ -6,7 +6,10 @@ import AnimatedLoader from "../../../components/loader/loader";
 import EmptyPage from "../../../components/section/empty-page";
 import { toast } from "react-toastify";
 import Pagination from "../../../components/pagination/pagination";
-import { API_BASE } from "../../../utils/helper-functions";
+import {
+  API_BASE,
+  shouldRenderEmptyPage,
+} from "../../../utils/helper-functions";
 
 export default function Projects() {
   const [projects, setProjects] = useState([]);
@@ -118,13 +121,11 @@ export default function Projects() {
                   </div>
                 </div>
               ))}
+            {shouldRenderEmptyPage(projects) && <EmptyPage text={"project"} />}
+            {projects && (
+              <Pagination pagination={projects} doPagination={doPagination} />
+            )}
           </div>
-          {projects.data && !projects.data.length && (
-            <EmptyPage text={"project"} />
-          )}
-          {projects && (
-            <Pagination pagination={projects} doPagination={doPagination} />
-          )}
         </div>
       )}{" "}
       {isLoading && <AnimatedLoader />}

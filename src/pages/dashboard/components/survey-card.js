@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { isAdmin, isCollector } from "../../../utils/helper-functions";
 export default function SurveyCard({ survey }) {
   const getLink = (survey) => {
@@ -14,9 +15,7 @@ export default function SurveyCard({ survey }) {
     >
       <div className="col-span-2">
         <div className="flex justify-end">
-          <span className="text-xs bg-orange-50 px-3  text-orange-400 rounded">
-            Ended
-          </span>
+          <SurveyStatus survey={survey} />
         </div>
         <div className="px-2">
           <p className="text-lg font-normal text-blue-900">{survey.name}</p>
@@ -49,7 +48,7 @@ export default function SurveyCard({ survey }) {
           </a>
           {survey.project_id && (
             <a
-              href={getLink(survey)}
+              href={"/survey/" + survey.uuid + "/user/collect"}
               className="border border-gray w-4/12 p-1 text-center hover:bg-sky-200 rounded-lg"
             >
               <div>
@@ -108,5 +107,41 @@ export default function SurveyCard({ survey }) {
       </div>
       <div></div>
     </div>
+  );
+}
+
+export function SurveyStatus({ survey }) {
+  const statusText = () => {
+    if (!survey.project_id) {
+      return "N/A";
+    }
+
+    if (survey.project_id) {
+      if (!survey.end_date) {
+        return "N/A";
+      }
+
+      if (survey.end_date_today === true) {
+        return "Ongoing";
+      }
+      if (survey.has_ended === false) {
+        return "Ongoing";
+      } else {
+        return "Ended";
+      }
+    }
+
+    return "N/A";
+  };
+  return (
+    <span
+      className={`text-xs px-3.5 py-0.5 rounded ${
+        statusText() == "Ongoing"
+          ? "bg-green-100  text-green-400"
+          : "bg-orange-100  text-orange-400"
+      }`}
+    >
+      {statusText()}
+    </span>
   );
 }

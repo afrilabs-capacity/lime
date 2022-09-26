@@ -14,6 +14,7 @@ import LimeMultiLine from "./widgets/lime-multiline.js";
 import LimeDropDown from "./widgets/lime-dropdown.js";
 import LimeCheckbox from "./widgets/lime-checkbox.js";
 import LimeRadio from "./widgets/lime-radio.js";
+import { isAdmin } from "../../../utils/helper-functions.js";
 
 export default function ToolBar() {
   const toolbarLabels = [
@@ -41,14 +42,21 @@ export default function ToolBar() {
   const [tools, setTools] = useState([]);
 
   return (
-    <div className="col-span-1">
+    <div className="md:col-span-1">
       <div className="bg-white p-2 mt-2">
         <h1 className="text-black text-center m-2 text-2xl">Toolbar</h1>
-        {toolbarLabels.map((toolbar) => (
-          <div className="grid text-white m-1 border border-dotted p-2 cursor-pointer">
-            <Box name={toolbar} />
+        {isAdmin() &&
+          toolbarLabels.map((toolbar) => (
+            <div className="grid text-white m-1 border border-dotted p-2 cursor-pointer">
+              <Box name={toolbar} />
+            </div>
+          ))}
+
+        {!isAdmin() && (
+          <div className="grid text-black text-center m-1 border border-dotted p-2 cursor-pointer py-48">
+            Nothing to display
           </div>
-        ))}
+        )}
       </div>
       {/* <div className="grid text-white m-1 border p-2">
         <LimeBasicInput />

@@ -250,27 +250,81 @@ export function isAuthUser() {
   return localStorage.getItem("user_id");
 }
 
+export function authUserId() {
+  return localStorage.getItem("user_id");
+}
+
 export function isAdmin() {
+  //logout();
   if (isAuthUser()) {
-    return JSON.parse(localStorage.getItem("roles")).filter(
-      (role) => role.name == "admin"
-    ).length
-      ? true
-      : false;
+    // alert(JSON.parse(localStorage.getItem("roles")).length);
+    if (localStorage.getItem("roles")) {
+      return JSON.parse(localStorage.getItem("roles")).filter(
+        (role) => role.name == "admin"
+      ).length
+        ? true
+        : false;
+    }
   }
   return false;
 }
 
 export function isCollector() {
   if (isAuthUser) {
-    return JSON.parse(localStorage.getItem("roles")).filter(
-      (role) => role.name == "collector"
-    ).length
-      ? true
-      : false;
+    if (localStorage.getItem("roles")) {
+      return JSON.parse(localStorage.getItem("roles")).filter(
+        (role) => role.name == "collector"
+      ).length
+        ? true
+        : false;
+    }
   }
   return false;
 }
+
+export function shouldRenderEmptyPage(collection) {
+  if (!collection.data) {
+    return true;
+  }
+  if (!collection.data.length) {
+    return true;
+  }
+
+  return false;
+}
+
+export function renderSurveyStatusText(survey) {
+  if (!survey.project_id) {
+    return "";
+  }
+
+  if (survey.project_id) {
+    if (survey.end_date && !survey.has_ended) {
+      return "Ongoing";
+    }
+  }
+}
+
+export function authHeader() {
+  if (isAuthUser()) {
+    const token = localStorage.getItem("token");
+    if (token) {
+      //alert(user.accessToken)
+      return { Authorization: "Bearer " + token };
+    } else {
+      return {};
+    }
+  }
+}
+
+const logout = () => {
+  localStorage.removeItem("user_id");
+  localStorage.removeItem("user_email");
+  localStorage.removeItem("user_name");
+  localStorage.removeItem("token");
+  localStorage.removeItem("roles");
+  window.location.href = "/login";
+};
 
 export const API_BASE = "/api";
 export const BASE_URL = "https://wordalbums.com/api";

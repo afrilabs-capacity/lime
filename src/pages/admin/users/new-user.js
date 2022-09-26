@@ -13,6 +13,7 @@ export default function CreateUser() {
   const [selectedRoles, setSelectedRoles] = useState([]);
   const [confirmedPassword, setConfirmedPassword] = useState("");
   const [canSubmit, setCanSubmit] = useState(false);
+  const [creating, setCreating] = useState(false);
 
   const dropdownStyle = ` 
         form-control
@@ -48,6 +49,7 @@ export default function CreateUser() {
   };
 
   const createUser = () => {
+    setCreating(true);
     const url = API_BASE + "/api/user/create";
     const payload = { ...user, roles: selectedRoles };
     axios
@@ -55,10 +57,15 @@ export default function CreateUser() {
       .then((response) => {
         if (response.status == 200) {
           toast("New user created!", { type: "success" });
-          window.location.href = `/user/${response.data.user.uuid}`;
+
+          setTimeout(() => {
+            setCreating(false);
+            window.location.href = `/user/${response.data.user.uuid}`;
+          }, 2000);
         }
       })
       .catch((error) => {
+        setCreating(false);
         toast("Something went wrong!", { type: "error" });
         console.error("There was an error!", error);
       });
@@ -235,8 +242,8 @@ export default function CreateUser() {
 
               <div className="p-2 flex justify-end">
                 <BasicButton
-                  disabled={!canSubmit}
-                  title={"ADD USER"}
+                  disabled={!canSubmit || creating}
+                  title={creating ? "Creating.." : "ADD USER"}
                   classes={"mt-0 bg-sky-700 w-full"}
                   handleClick={createUser}
                 />

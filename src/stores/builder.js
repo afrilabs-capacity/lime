@@ -78,6 +78,7 @@ export const useBuilderStore = create((set) => ({
   },
   updateWebWidgetField: (item, field, data) =>
     set((state) => {
+      console.log("item", item.required);
       const widgetIndex = getWidgetIndex(item, state.widgets);
       console.log("Before widget update", state.widgets[widgetIndex].label);
       if (item.name !== "checkbox") {

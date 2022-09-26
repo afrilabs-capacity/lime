@@ -32,7 +32,7 @@ export function LimeInputWeb({ item }) {
 
       <div className="p-2">
         {/* widget content start */}
-        <span className="font-bold">Q. </span>
+        <span className="font-bold"></span>
         <label
           for="exampleFormControlInput1"
           class="form-label inline-block mb-2 text-gray-700 mr-2"

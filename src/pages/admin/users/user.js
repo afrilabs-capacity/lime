@@ -3,7 +3,7 @@ import TextField from "../../../components/builder/drag-and-drop/widgets/compone
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { API_BASE } from "../../../utils/helper-functions";
+import { API_BASE, authHeader } from "../../../utils/helper-functions";
 import { toast } from "react-toastify";
 import axios from "axios";
 
@@ -36,7 +36,11 @@ export default function User() {
   const getUser = () => {
     const url = API_BASE + "/api/user/" + uuid;
     axios
-      .get(url)
+      .request({
+        method: "get",
+        headers: authHeader(),
+        url: url,
+      })
       .then((response) => {
         if (response.status == 200) {
           setUser((prev) => ({
@@ -46,7 +50,10 @@ export default function User() {
           }));
 
           setSelectedRoles((prev) =>
-            response.data.user.roles.map((role) => ({ ...role, checked: true }))
+            response.data.user.roles.map((role) => ({
+              ...role,
+              checked: true,
+            }))
           );
 
           setUserData(response.data.user);
@@ -86,8 +93,14 @@ export default function User() {
         .map((role) => role.id),
       user_uuid: uuid,
     };
+
     axios
-      .post(url, payload)
+      .request({
+        method: "post",
+        headers: authHeader(),
+        url: url,
+        data: payload,
+      })
       .then((response) => {
         if (response.status == 200) {
           toast("Updated!", { type: "success" });

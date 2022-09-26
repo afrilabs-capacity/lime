@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 14, 2022 at 09:02 AM
+-- Generation Time: Sep 26, 2022 at 06:22 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.7
 
@@ -44,11 +44,8 @@ CREATE TABLE `activities` (
 --
 
 INSERT INTO `activities` (`id`, `uuid`, `event`, `model_uuid`, `model_id`, `user_id`, `model`, `created_at`, `updated_at`) VALUES
-(1, 'b6b68129-6e34-4fc8-90f6-6fd5394cf527', 'Survey Created', '5fbeb7b0-f383-4e4e-a75c-b2027331ca88', 1, NULL, 'Survey', '2022-09-12 18:29:11', '2022-09-12 18:29:11'),
-(2, 'e707c52a-ecaf-4d11-ac25-8353d983bf53', 'Survey Updated', '5fbeb7b0-f383-4e4e-a75c-b2027331ca88', 1, NULL, 'Survey', '2022-09-12 18:31:43', '2022-09-12 18:31:43'),
-(3, 'f79cbdef-cf74-4569-98a4-4cda19608984', 'Survey Created', '75d5f7ed-58c1-4de0-80e2-7218007a4546', 2, NULL, 'Survey', '2022-09-12 18:32:08', '2022-09-12 18:32:08'),
-(4, '7a707c10-9f48-4d1d-928a-1869adb42411', 'Survey Created', '30eb8154-427f-477c-b48c-1c5e3208579f', 3, NULL, 'Survey', '2022-09-12 19:23:47', '2022-09-12 19:23:47'),
-(5, 'e4034e72-842f-4aef-af91-20f2389eaa3f', 'Survey Updated', '0422712d-1e5e-4e66-8de2-3b2472b184b0', 4, NULL, 'Survey', '2022-09-12 19:27:56', '2022-09-12 19:27:56');
+(2, 'e26733e7-9a26-4552-ada6-f47ae1bc03c6', 'Survey Updated', '0d42e134-a568-4c60-bb04-7f8b46b163c6', 4, NULL, 'Survey', '2022-09-25 21:23:51', '2022-09-25 21:23:51'),
+(3, '50ad1c0d-59ca-43fd-a3c8-0c80acdcbb03', 'Survey Updated', '0d42e134-a568-4c60-bb04-7f8b46b163c6', 4, NULL, 'Survey', '2022-09-25 21:24:38', '2022-09-25 21:24:38');
 
 -- --------------------------------------------------------
 
@@ -89,7 +86,8 @@ INSERT INTO `mailing_lists` (`id`, `uuid`, `name`, `user_id`, `created_at`, `upd
 (1, '9f90ae0d-b2a9-4110-9856-f7d059a8f5c7', 'Abuja List', NULL, '2022-08-24 11:39:13', '2022-08-24 11:39:13'),
 (2, '0fd029db-dacd-4564-857b-be6b8f374c4a', 'Lagos List', NULL, '2022-08-27 15:50:12', '2022-08-27 15:50:12'),
 (3, '5ac42109-4489-4d96-871f-957e89485c29', 'Jos List', NULL, '2022-08-27 15:52:47', '2022-08-27 15:52:47'),
-(4, '3b0e31e4-6281-4802-80a5-96a5680171d8', 'Katsina List', NULL, '2022-08-27 15:56:25', '2022-08-27 15:56:25');
+(4, '3b0e31e4-6281-4802-80a5-96a5680171d8', 'Katsina List', NULL, '2022-08-27 15:56:25', '2022-08-27 15:56:25'),
+(5, '8f7fb6ad-75f1-4988-949e-b9ad21378a5d', 'Dummy List', NULL, '2022-09-16 14:59:23', '2022-09-16 14:59:23');
 
 -- --------------------------------------------------------
 
@@ -211,7 +209,9 @@ INSERT INTO `mailing_list_contacts` (`id`, `uuid`, `email`, `mailing_list_id`, `
 (99, '43cfe59a-35c2-4b72-b906-a804029509cf', 'malinda.hochard@yahoo.com', '3', '2022-08-27 15:55:46', '2022-08-27 15:55:46'),
 (100, '5469e03c-624b-4f5f-8f94-13755773a70a', 'natalie.fern@hotmail.com', '3', '2022-08-27 15:55:46', '2022-08-27 15:55:46'),
 (101, '521ac355-7a4b-4ea1-9df3-1de0f6cc3dde', 'lisha@centini.org', '3', '2022-08-27 15:55:46', '2022-08-27 15:55:46'),
-(102, '416e4290-b3c8-4995-b071-f402121777c8', 'braimahjake@gmail.com', '4', '2022-08-27 15:57:40', '2022-08-27 15:57:40');
+(102, '416e4290-b3c8-4995-b071-f402121777c8', 'braimahjake@gmail.com', '4', '2022-08-27 15:57:40', '2022-08-27 15:57:40'),
+(104, '6b348707-11bd-406f-9592-8776c5f8a8d0', 'braimahjake@gmail.com', '5', '2022-09-16 14:59:45', '2022-09-16 14:59:45'),
+(105, '4b4097e0-8c0b-4fd9-8da6-69aca346ceaf', 'codiakes@gmail.com', '5', '2022-09-16 14:59:45', '2022-09-16 14:59:45');
 
 -- --------------------------------------------------------
 
@@ -234,7 +234,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2019_08_19_000000_create_failed_jobs_table', 1),
 (10, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (13, '2022_07_24_092507_create_permission_tables', 2),
-(14, '2022_07_30_153451_create_survey_responses_table', 3),
 (15, '2022_08_13_182936_create_mailing_lists_table', 4),
 (16, '2022_08_13_203402_create_mailing_list_contacts_table', 5),
 (17, '2022_07_14_171208_create_projects_table', 6),
@@ -243,7 +242,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (24, '2022_08_14_120018_create_project_users_table', 9),
 (28, '2022_08_24_000250_create_activities_table', 11),
 (30, '2022_09_10_125112_create_survey_users_table', 13),
-(32, '2022_07_14_171224_create_surveys_table', 14);
+(34, '2022_07_14_171224_create_surveys_table', 16),
+(35, '2022_07_30_153451_create_survey_responses_table', 17);
 
 -- --------------------------------------------------------
 
@@ -281,7 +281,6 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (2, 'App\\Models\\User', 3),
 (2, 'App\\Models\\User', 4),
 (2, 'App\\Models\\User', 5),
-(2, 'App\\Models\\User', 6),
 (2, 'App\\Models\\User', 7),
 (2, 'App\\Models\\User', 8);
 
@@ -369,7 +368,32 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (33, 'App\\Models\\User', 1, 'auth_token', '17f2e7c7f4735f427a69acd1d17dc5af1c35ee0a9b28e00ac8216bc9be6e9dae', '[\"*\"]', NULL, '2022-09-12 16:41:12', '2022-09-12 16:41:12'),
 (34, 'App\\Models\\User', 1, 'auth_token', '25a9b252e5346feec050fa3146092a166d8c548807f8f83609bdfe0b0d5a7ce8', '[\"*\"]', NULL, '2022-09-12 18:11:57', '2022-09-12 18:11:57'),
 (35, 'App\\Models\\User', 2, 'auth_token', '3d8e1d4ac02902dd49ca5261208d25ef536a7dc0706334c36cb99b5fa07d6cc1', '[\"*\"]', NULL, '2022-09-12 18:12:16', '2022-09-12 18:12:16'),
-(36, 'App\\Models\\User', 1, 'auth_token', 'd109662bf392e746211005b74adc8f69258bdc43d93d6c5ed10b77e6946e08c7', '[\"*\"]', NULL, '2022-09-12 18:14:44', '2022-09-12 18:14:44');
+(36, 'App\\Models\\User', 1, 'auth_token', 'd109662bf392e746211005b74adc8f69258bdc43d93d6c5ed10b77e6946e08c7', '[\"*\"]', NULL, '2022-09-12 18:14:44', '2022-09-12 18:14:44'),
+(37, 'App\\Models\\User', 1, 'auth_token', '7bb573b84b1b6ea3da9f89e5b58144490401e80c387d98c557585eb3da10c5b0', '[\"*\"]', NULL, '2022-09-16 07:46:56', '2022-09-16 07:46:56'),
+(38, 'App\\Models\\User', 1, 'auth_token', '9469d0cf33151556b81a3539e6c8ea2e936b59e7ac4c680f82b8211358f3e883', '[\"*\"]', NULL, '2022-09-16 14:46:07', '2022-09-16 14:46:07'),
+(39, 'App\\Models\\User', 1, 'auth_token', '5a60b166a17628bf95ce411705fe70ee4214e3198a5d6b4af04c7ca2e8207b87', '[\"*\"]', NULL, '2022-09-21 20:24:07', '2022-09-21 20:24:07'),
+(40, 'App\\Models\\User', 2, 'auth_token', 'f142a7a1575fc75e5fe68e174b73cbfbdbc215b6add45f19aad3bc403d35128b', '[\"*\"]', NULL, '2022-09-21 20:29:05', '2022-09-21 20:29:05'),
+(41, 'App\\Models\\User', 1, 'auth_token', 'd068cca4b7725ec6658797acc21e82d02da0cd36455f362787b71a85889e8bca', '[\"*\"]', NULL, '2022-09-21 20:29:46', '2022-09-21 20:29:46'),
+(42, 'App\\Models\\User', 2, 'auth_token', 'e62d9ee1ca8f9f581a9c6adb3d7e98c668804f5539f4bd52eabb80e3e0adc63c', '[\"*\"]', NULL, '2022-09-21 20:30:55', '2022-09-21 20:30:55'),
+(43, 'App\\Models\\User', 2, 'auth_token', '4ffbe2543f5791f076fdba7f6c156212361239689801c18e404ba785fbe6ffb1', '[\"*\"]', NULL, '2022-09-21 20:31:09', '2022-09-21 20:31:09'),
+(44, 'App\\Models\\User', 2, 'auth_token', 'd96c47f00b5f64cdd0a69e72bc9eea0d535d8148377ec818ec402e5b187ed22c', '[\"*\"]', NULL, '2022-09-21 20:31:18', '2022-09-21 20:31:18'),
+(45, 'App\\Models\\User', 2, 'auth_token', '5d08080e31cab55ccfe3acadc5b07a358fbb07c72e29124335b18a76278ceb17', '[\"*\"]', NULL, '2022-09-21 20:32:34', '2022-09-21 20:32:34'),
+(46, 'App\\Models\\User', 1, 'auth_token', '056b6c12ffb021f33a9edd527188094ce9a095d574882884872d296731afdd9c', '[\"*\"]', NULL, '2022-09-21 20:32:58', '2022-09-21 20:32:58'),
+(47, 'App\\Models\\User', 1, 'auth_token', 'e7a2a24697254e06a4bcfa65f47b56b0a4fde9e5d667eaf0f063a3a0de27a53c', '[\"*\"]', NULL, '2022-09-23 08:42:16', '2022-09-23 08:42:16'),
+(48, 'App\\Models\\User', 1, 'auth_token', 'd4676f4b21591b58722c88e5d47409f5e61d8b22e3c5c255e9f9e32702391382', '[\"*\"]', '2022-09-24 06:38:51', '2022-09-23 22:43:02', '2022-09-24 06:38:51'),
+(49, 'App\\Models\\User', 1, 'auth_token', '194ba49daeba360067743170a94f1b3ff044c4b0684e5e02b965150d73f17e40', '[\"*\"]', '2022-09-24 07:06:03', '2022-09-24 06:45:37', '2022-09-24 07:06:03'),
+(50, 'App\\Models\\User', 2, 'auth_token', '826edd61bff1b19f391d136915ee32896133183cba20b62372cd349a7c1f0805', '[\"*\"]', '2022-09-24 07:12:29', '2022-09-24 06:48:34', '2022-09-24 07:12:29'),
+(51, 'App\\Models\\User', 1, 'auth_token', '1ea47410c0e23b502f7b15b767acb348ead68ec683db5b85a42a40c7ee80f65f', '[\"*\"]', '2022-09-24 07:13:01', '2022-09-24 07:13:01', '2022-09-24 07:13:01'),
+(52, 'App\\Models\\User', 2, 'auth_token', '22f7f6fe8afc6be6c5c7587f003c3df21ca51bb84e9542b725f9533fa1503e0c', '[\"*\"]', '2022-09-24 07:14:23', '2022-09-24 07:13:36', '2022-09-24 07:14:23'),
+(53, 'App\\Models\\User', 1, 'auth_token', '261002a5461205de870a6195a968caf933c072d227dc371d0e8579af96e2b988', '[\"*\"]', '2022-09-24 14:02:30', '2022-09-24 07:15:02', '2022-09-24 14:02:30'),
+(54, 'App\\Models\\User', 2, 'auth_token', '6b9ff5d8d4429c2e125a972bd7b254e9012c403cc8292fef32626ebfcbfd3331', '[\"*\"]', '2022-09-24 10:41:56', '2022-09-24 07:15:25', '2022-09-24 10:41:56'),
+(55, 'App\\Models\\User', 3, 'auth_token', '038cc893d4609b4167dd56c8fc4ad25371c0076145b497303042a5d3d5cf7605', '[\"*\"]', '2022-09-24 13:54:48', '2022-09-24 10:42:50', '2022-09-24 13:54:48'),
+(56, 'App\\Models\\User', 3, 'auth_token', '3b45c6996aca5bbfe4aeec254b10ac7c21d07f1da1f526efa2f04e6aa3bc095d', '[\"*\"]', '2022-09-24 14:15:07', '2022-09-24 14:13:11', '2022-09-24 14:15:07'),
+(57, 'App\\Models\\User', 1, 'auth_token', '4b6fba9fd9fce508f17142a81c0f4870a3c4ae9908ca701f9744753187dc9e90', '[\"*\"]', '2022-09-24 16:03:53', '2022-09-24 14:14:03', '2022-09-24 16:03:53'),
+(58, 'App\\Models\\User', 2, 'auth_token', '30433fe8ae78fda21da24c04c8ed71db020d31d2d6dca2e1dfc96fa981c8300c', '[\"*\"]', '2022-09-24 16:07:50', '2022-09-24 16:07:49', '2022-09-24 16:07:50'),
+(59, 'App\\Models\\User', 2, 'auth_token', '364442a9c5a502525aa54445995ed222e05547fdc0fc585c2897d98eee182c2d', '[\"*\"]', '2022-09-24 16:10:20', '2022-09-24 16:09:57', '2022-09-24 16:10:20'),
+(60, 'App\\Models\\User', 1, 'auth_token', 'af5656893a1d331fc6c52e4965a1e78c4c12e90e33158b12a0bf67776380f038', '[\"*\"]', '2022-09-25 21:25:46', '2022-09-24 16:11:15', '2022-09-25 21:25:46'),
+(61, 'App\\Models\\User', 2, 'auth_token', '78406586d7c1cffd25832562a379db8d89cdf8fcd15f610d0d7e58c559d440e1', '[\"*\"]', '2022-09-25 17:13:58', '2022-09-25 17:13:23', '2022-09-25 17:13:58');
 
 -- --------------------------------------------------------
 
@@ -403,7 +427,10 @@ INSERT INTO `projects` (`id`, `uuid`, `name`, `created_at`, `updated_at`) VALUES
 (11, 'ad620822-1a77-49d9-8731-ac9bf6ea9ab3', 'Dynamic Program', '2022-08-21 00:59:25', '2022-08-21 00:59:25'),
 (12, '073c45f7-44b8-4b4e-a11d-7cc700b1cf1f', 'Project Zen', '2022-08-21 01:01:21', '2022-08-21 01:01:21'),
 (14, '2d555348-7c5b-4213-b911-ba6955efdaf4', 'My Test Project', '2022-08-24 11:20:48', '2022-08-24 11:20:48'),
-(15, '9a93c738-7ed2-443a-a89c-9e2054762413', 'My First Project', '2022-08-24 11:33:24', '2022-08-24 11:33:24');
+(15, '9a93c738-7ed2-443a-a89c-9e2054762413', 'My First Project', '2022-08-24 11:33:24', '2022-08-24 11:33:24'),
+(17, '1a2d88b9-7b8c-4b4f-b24d-cc6c9605e047', 'My Tech Project', '2022-09-16 14:47:15', '2022-09-16 14:47:15'),
+(18, '8f4e2cec-cb01-4ac9-be37-52f99bfeab9f', 'My Best Project', '2022-09-25 16:52:06', '2022-09-25 16:52:06'),
+(19, '9ed91088-f3b3-41d6-8670-57c769e31c96', 'My Pet Project', '2022-09-25 16:53:36', '2022-09-25 16:53:36');
 
 -- --------------------------------------------------------
 
@@ -489,9 +516,8 @@ CREATE TABLE `surveys` (
   `project_id` int(11) DEFAULT NULL,
   `start_date` datetime DEFAULT NULL,
   `end_date` datetime DEFAULT NULL,
-  `longitude` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `latitude` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pinned` tinyint(1) NOT NULL DEFAULT 0,
+  `location` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -500,11 +526,11 @@ CREATE TABLE `surveys` (
 -- Dumping data for table `surveys`
 --
 
-INSERT INTO `surveys` (`id`, `uuid`, `name`, `data`, `project_id`, `start_date`, `end_date`, `longitude`, `latitude`, `pinned`, `created_at`, `updated_at`) VALUES
-(1, '5fbeb7b0-f383-4e4e-a75c-b2027331ca88', 'Dummy Survey', '[{\"unique_key\":\"596112fd-dbc1-428c-bfb4-42daca4de4f7\",\"type\":\"decorative\",\"name\":\"divider\",\"title\":\"Line Break\"}]', NULL, NULL, NULL, NULL, NULL, 0, '2022-09-12 18:29:11', '2022-09-12 18:31:43'),
-(2, '75d5f7ed-58c1-4de0-80e2-7218007a4546', 'Dummy Survey 2', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2022-09-12 18:32:08', '2022-09-12 18:32:08'),
-(3, '30eb8154-427f-477c-b48c-1c5e3208579f', 'Dummy Survey 3', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2022-09-12 19:23:47', '2022-09-12 19:23:47'),
-(4, '0422712d-1e5e-4e66-8de2-3b2472b184b0', 'Tech Survey', '[{\"unique_key\":\"da95307b-a0b3-407c-aad6-78579c7a1e9e\",\"type\":\"decorative\",\"name\":\"divider\",\"title\":\"Line Break\"},{\"unique_key\":\"819c0867-a2e0-4be4-bdca-6f2c36417403\",\"type\":\"data\",\"name\":\"dropdown\",\"title\":\"Dropdown\",\"label\":\"Placeholder Text\",\"required\":false,\"options\":[{\"unique_key\":\"c79af221-46b1-467c-82a3-f88852efdb73\",\"option\":\"\",\"value\":\"\"}]},{\"unique_key\":\"41c6f3df-ef7a-483a-824d-feded29e3b72\",\"type\":\"data\",\"name\":\"text-input\",\"title\":\"Text Input\",\"label\":\"Placeholder Text\",\"required\":false}]', 1, NULL, NULL, NULL, NULL, 0, '2022-09-12 19:27:45', '2022-09-12 19:27:56');
+INSERT INTO `surveys` (`id`, `uuid`, `name`, `data`, `project_id`, `start_date`, `end_date`, `pinned`, `location`, `created_at`, `updated_at`) VALUES
+(1, 'd3aaeb38-9106-42da-9d47-fea56194e0e0', 'Dummy Survey', NULL, NULL, NULL, NULL, 0, 0, '2022-09-16 09:07:38', '2022-09-16 09:07:38'),
+(2, '696e8602-03bd-4016-a4c5-3014af99417c', 'Tech Survey', '[{\"unique_key\":\"53503785-29c0-43de-94a0-14ba63b3136c\",\"type\":\"instruction\",\"name\":\"paragraph\",\"title\":\"Paragraph\",\"label\":\"<p>A health survey is&nbsp;<strong>a tool used to gather information on the behavior of a specific group of people from a determined area</strong>. This kind of survey allows health care experts to understand better how a community acts towards health.</p>\"},{\"unique_key\":\"635e344a-e152-4d22-aff4-008ec7f92dad\",\"type\":\"decorative\",\"name\":\"divider\",\"title\":\"Line Break\"},{\"unique_key\":\"21fcddd2-ca29-4c58-9f99-bc46f9408fbd\",\"type\":\"data\",\"name\":\"dropdown\",\"title\":\"Dropdown\",\"label\":\"<p>How often do you get a health checkup?</p>\",\"required\":false,\"options\":[{\"unique_key\":\"e5d74ff1-d698-46aa-bae2-f89d4d55e208\",\"option\":\"Once in 3 months\",\"value\":\"Once in 3 months\"},{\"unique_key\":\"7988959b-7c98-4953-80d7-4c4b58ce99fc\",\"option\":\"Once in 6 months\",\"value\":\"Once in 6 months\"},{\"unique_key\":\"38fd411d-7eb7-4695-ac00-0750504be9ee\",\"option\":\"Once a year\",\"value\":\"Once a year\"},{\"unique_key\":\"323ee01e-f7bf-446f-8a07-48c488d65dcb\",\"option\":\"Only when needed\",\"value\":\"Only when needed\"},{\"unique_key\":\"2b539abb-c814-4592-8a1c-da30b8863312\",\"option\":\"Never get it done\",\"value\":\"Never get it done\"}]},{\"unique_key\":\"c918d639-c1d0-4307-8ef2-f9494134f879\",\"type\":\"data\",\"name\":\"checkbox\",\"title\":\"Checkbox\",\"label\":\"<p>&nbsp;What do you say about your overall health?</p>\",\"required\":false,\"options\":[{\"unique_key\":\"47c111c4-0b2c-4cc9-bea2-cac20a42d80a\",\"option\":\"Having Good Physical Health\",\"value\":\"Having Good Physical Health\"},{\"unique_key\":\"dc39bcaa-9273-452d-b11b-17c48108b54b\",\"option\":\"Moderately physically impaired\",\"value\":\"Moderately physically impaired\"},{\"unique_key\":\"0941e203-9ffc-488a-a1aa-9b244e7dca33\",\"option\":\"Severely physically impaired\",\"value\":\"Severely physically impaired\"},{\"unique_key\":\"f38894c0-f5c3-4624-9f18-44d8fd99948b\",\"option\":\"Totally physically impaired\",\"value\":\"Totally physically impaired\"},{\"unique_key\":\"65b33adc-736a-4280-8a6e-a5a59fb2938d\",\"option\":\"Health Assessment Survey Questions\",\"value\":\"Health Assessment Survey Questions\"}]}]', 15, '2022-09-17 17:11:54', '2022-09-26 17:11:54', 0, 1, '2022-09-16 09:13:08', '2022-09-24 16:11:54'),
+(3, 'c94f2cc7-1880-4c0d-8a73-57ede2d7d2a3', 'Tech Survey Clone', '[{\"unique_key\":\"a43ffeb9-81b8-4470-b900-7e4505fa7dae\",\"type\":\"instruction\",\"name\":\"paragraph\",\"title\":\"Paragraph\",\"label\":\"<p>A health survey is&nbsp;<strong>a tool used to gather information on the behavior of a specific group of people from a determined area</strong>. This kind of survey allows health care experts to understand better how a community acts towards health.</p>\"},{\"unique_key\":\"38b94cd3-9602-4ff6-8b8c-e1a5581cdadf\",\"type\":\"decorative\",\"name\":\"divider\",\"title\":\"Line Break\"},{\"unique_key\":\"2764a831-9747-478f-b946-28b952257aec\",\"type\":\"data\",\"name\":\"checkbox\",\"title\":\"Checkbox\",\"label\":\"<p>What do you say about your overall health?</p>\",\"required\":true,\"options\":[{\"unique_key\":\"7615104c-962e-4ce9-a46f-531eec3aaeb0\",\"option\":\"Having Good Physical Health\",\"value\":\"Having Good Physical Health\"},{\"unique_key\":\"d7a3fa2b-b068-46dd-8c98-837883374acb\",\"option\":\"Moderately physically impaired\",\"value\":\"Moderately physically impaired\"},{\"unique_key\":\"0bcc94f6-cf64-42aa-88d9-4855d7dbe2dc\",\"option\":\"Severely physically impaired\",\"value\":\"Severely physically impaired\"},{\"unique_key\":\"c241736d-20c4-4fc1-9535-6178a4f4ec44\",\"option\":\"Totally physically impaired\",\"value\":\"Totally physically impaired\"},{\"unique_key\":\"214daca8-92db-4e5a-b973-a1b1fd90ec4f\",\"option\":\"Health Assessment Survey Questions\",\"value\":\"Health Assessment Survey Questions\"}]},{\"unique_key\":\"951d8edd-94b8-4e07-9d7e-9cf3dd954d30\",\"type\":\"data\",\"name\":\"dropdown\",\"title\":\"Dropdown\",\"label\":\"<p>How often do you get a health checkup?</p>\",\"required\":false,\"options\":[{\"unique_key\":\"e986ff1b-b513-418f-bee7-b42a6badd41e\",\"option\":\"Once in 3 months\",\"value\":\"Once in 3 months\"},{\"unique_key\":\"d35269fd-6cbd-4661-a306-09126d6b64be\",\"option\":\"Once in 6 months\",\"value\":\"Once in 6 months\"},{\"unique_key\":\"f5ae93b5-2c83-4a92-b3f0-7cf56a2b2e71\",\"option\":\"Once a year\",\"value\":\"Once a year\"},{\"unique_key\":\"c848c170-7c24-476f-9ade-023906868fc1\",\"option\":\"Only when needed\",\"value\":\"Only when needed\"},{\"unique_key\":\"a76b32d8-d14c-48ce-9c22-391c719b2371\",\"option\":\"Never get it done\",\"value\":\"Never get it done\"},{\"unique_key\":\"bd2d16a5-81b8-45dc-aa7f-462e8167ef71\",\"option\":\"Other\",\"value\":\"Other\"}]},{\"unique_key\":\"d4dbee25-8846-4ceb-8360-e3e69813b9fd\",\"type\":\"data\",\"name\":\"radio\",\"title\":\"Radio\",\"label\":\"<p>Select your last blood pressure reading.</p>\",\"required\":true,\"options\":[{\"unique_key\":\"f9c77c48-625a-4098-a4ea-e189eb8cb98c\",\"option\":\"Low\",\"value\":\"Low\"},{\"unique_key\":\"0e2c584c-ffef-4f9b-8df3-5cfa84b97332\",\"option\":\"Normal\",\"value\":\"Normal\"},{\"unique_key\":\"9b2a65f7-de67-44ad-b25b-9cf4516e8edb\",\"option\":\"High\",\"value\":\"High\"}]}]', 17, '2022-09-16 11:52:12', '2022-09-24 11:52:12', 0, 1, '2022-09-16 14:48:12', '2022-09-25 10:52:12'),
+(4, '0d42e134-a568-4c60-bb04-7f8b46b163c6', 'Tech Survey 2', '[{\"unique_key\":\"928aa9fb-160b-48d3-b5a8-01a2815b6be2\",\"type\":\"data\",\"name\":\"dropdown\",\"title\":\"Dropdown\",\"label\":\"<p>Nationality?</p>\",\"required\":true,\"options\":[{\"unique_key\":\"23ee6b80-2e48-46fc-ab5f-8320c56c5e32\",\"option\":\"Nierian\",\"value\":\"Nigerian\"},{\"unique_key\":\"e5c4b363-89bf-4cbe-bc87-52773d165ca6\",\"option\":\"American\",\"value\":\"American\"},{\"unique_key\":\"7343d097-c25d-4eb2-b6f6-d2ad0a94f18f\",\"option\":\"British\",\"value\":\"British\"}]}]', 15, '2022-09-25 22:24:38', '2022-09-27 22:24:38', 0, 1, '2022-09-25 17:05:30', '2022-09-25 21:24:38');
 
 -- --------------------------------------------------------
 
@@ -517,10 +543,24 @@ CREATE TABLE `survey_responses` (
   `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `collector_id` int(11) DEFAULT NULL,
   `survey_id` int(11) NOT NULL,
+  `longitude` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `latitude` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`data`)),
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `survey_responses`
+--
+
+INSERT INTO `survey_responses` (`id`, `uuid`, `collector_id`, `survey_id`, `longitude`, `latitude`, `data`, `created_at`, `updated_at`) VALUES
+(1, '37b138d6-e4a8-4187-ae18-fc6821ea434d', 1, 3, '3.416', '6.431', '[{\"unique_key\":\"a43ffeb9-81b8-4470-b900-7e4505fa7dae\",\"type\":\"instruction\",\"name\":\"paragraph\",\"title\":\"Paragraph\",\"label\":\"<p>A health survey is&nbsp;<strong>a tool used to gather information on the behavior of a specific group of people from a determined area</strong>. This kind of survey allows health care experts to understand better how a community acts towards health.</p>\"},{\"unique_key\":\"38b94cd3-9602-4ff6-8b8c-e1a5581cdadf\",\"type\":\"decorative\",\"name\":\"divider\",\"title\":\"Line Break\"},{\"unique_key\":\"2764a831-9747-478f-b946-28b952257aec\",\"type\":\"data\",\"name\":\"checkbox\",\"title\":\"Checkbox\",\"label\":\"<p>What do you say about your overall health?</p>\",\"required\":true,\"options\":[{\"unique_key\":\"7615104c-962e-4ce9-a46f-531eec3aaeb0\",\"option\":\"Having Good Physical Health\",\"value\":\"Having Good Physical Health\"},{\"unique_key\":\"d7a3fa2b-b068-46dd-8c98-837883374acb\",\"option\":\"Moderately physically impaired\",\"value\":\"Moderately physically impaired\"},{\"unique_key\":\"0bcc94f6-cf64-42aa-88d9-4855d7dbe2dc\",\"option\":\"Severely physically impaired\",\"value\":\"Severely physically impaired\"},{\"unique_key\":\"c241736d-20c4-4fc1-9535-6178a4f4ec44\",\"option\":\"Totally physically impaired\",\"value\":\"Totally physically impaired\"},{\"unique_key\":\"214daca8-92db-4e5a-b973-a1b1fd90ec4f\",\"option\":\"Health Assessment Survey Questions\",\"value\":\"Health Assessment Survey Questions\"}],\"data\":[\"Having Good Physical Health\",\"Severely physically impaired\",\"Totally physically impaired\"]},{\"unique_key\":\"951d8edd-94b8-4e07-9d7e-9cf3dd954d30\",\"type\":\"data\",\"name\":\"dropdown\",\"title\":\"Dropdown\",\"label\":\"<p>How often do you get a health checkup?</p>\",\"required\":false,\"options\":[{\"unique_key\":\"e986ff1b-b513-418f-bee7-b42a6badd41e\",\"option\":\"Once in 3 months\",\"value\":\"Once in 3 months\"},{\"unique_key\":\"d35269fd-6cbd-4661-a306-09126d6b64be\",\"option\":\"Once in 6 months\",\"value\":\"Once in 6 months\"},{\"unique_key\":\"f5ae93b5-2c83-4a92-b3f0-7cf56a2b2e71\",\"option\":\"Once a year\",\"value\":\"Once a year\"},{\"unique_key\":\"c848c170-7c24-476f-9ade-023906868fc1\",\"option\":\"Only when needed\",\"value\":\"Only when needed\"},{\"unique_key\":\"a76b32d8-d14c-48ce-9c22-391c719b2371\",\"option\":\"Never get it done\",\"value\":\"Never get it done\"},{\"unique_key\":\"bd2d16a5-81b8-45dc-aa7f-462e8167ef71\",\"option\":\"Other\",\"value\":\"Other\"}],\"data\":\"Once in 6 months\"},{\"unique_key\":\"d4dbee25-8846-4ceb-8360-e3e69813b9fd\",\"type\":\"data\",\"name\":\"radio\",\"title\":\"Radio\",\"label\":\"<p>What was your las blood pressure reading?</p>\",\"required\":true,\"options\":[{\"unique_key\":\"f9c77c48-625a-4098-a4ea-e189eb8cb98c\",\"option\":\"Low\",\"value\":\"Low\"},{\"unique_key\":\"0e2c584c-ffef-4f9b-8df3-5cfa84b97332\",\"option\":\"Normal\",\"value\":\"Normal\"},{\"unique_key\":\"9b2a65f7-de67-44ad-b25b-9cf4516e8edb\",\"option\":\"High\",\"value\":\"High\"}],\"data\":\"High\"}]', '2022-09-24 19:24:45', '2022-09-24 19:24:45'),
+(2, '714e2bf5-c20b-4aec-b40d-53d6d25077d7', 1, 3, '3.416', '6.431', '[{\"unique_key\":\"a43ffeb9-81b8-4470-b900-7e4505fa7dae\",\"type\":\"instruction\",\"name\":\"paragraph\",\"title\":\"Paragraph\",\"label\":\"<p>A health survey is&nbsp;<strong>a tool used to gather information on the behavior of a specific group of people from a determined area</strong>. This kind of survey allows health care experts to understand better how a community acts towards health.</p>\"},{\"unique_key\":\"38b94cd3-9602-4ff6-8b8c-e1a5581cdadf\",\"type\":\"decorative\",\"name\":\"divider\",\"title\":\"Line Break\"},{\"unique_key\":\"2764a831-9747-478f-b946-28b952257aec\",\"type\":\"data\",\"name\":\"checkbox\",\"title\":\"Checkbox\",\"label\":\"<p>What do you say about your overall health?</p>\",\"required\":true,\"options\":[{\"unique_key\":\"7615104c-962e-4ce9-a46f-531eec3aaeb0\",\"option\":\"Having Good Physical Health\",\"value\":\"Having Good Physical Health\"},{\"unique_key\":\"d7a3fa2b-b068-46dd-8c98-837883374acb\",\"option\":\"Moderately physically impaired\",\"value\":\"Moderately physically impaired\"},{\"unique_key\":\"0bcc94f6-cf64-42aa-88d9-4855d7dbe2dc\",\"option\":\"Severely physically impaired\",\"value\":\"Severely physically impaired\"},{\"unique_key\":\"c241736d-20c4-4fc1-9535-6178a4f4ec44\",\"option\":\"Totally physically impaired\",\"value\":\"Totally physically impaired\"},{\"unique_key\":\"214daca8-92db-4e5a-b973-a1b1fd90ec4f\",\"option\":\"Health Assessment Survey Questions\",\"value\":\"Health Assessment Survey Questions\"}],\"data\":[\"Having Good Physical Health\",\"Severely physically impaired\",\"Health Assessment Survey Questions\"]},{\"unique_key\":\"951d8edd-94b8-4e07-9d7e-9cf3dd954d30\",\"type\":\"data\",\"name\":\"dropdown\",\"title\":\"Dropdown\",\"label\":\"<p>How often do you get a health checkup?</p>\",\"required\":false,\"options\":[{\"unique_key\":\"e986ff1b-b513-418f-bee7-b42a6badd41e\",\"option\":\"Once in 3 months\",\"value\":\"Once in 3 months\"},{\"unique_key\":\"d35269fd-6cbd-4661-a306-09126d6b64be\",\"option\":\"Once in 6 months\",\"value\":\"Once in 6 months\"},{\"unique_key\":\"f5ae93b5-2c83-4a92-b3f0-7cf56a2b2e71\",\"option\":\"Once a year\",\"value\":\"Once a year\"},{\"unique_key\":\"c848c170-7c24-476f-9ade-023906868fc1\",\"option\":\"Only when needed\",\"value\":\"Only when needed\"},{\"unique_key\":\"a76b32d8-d14c-48ce-9c22-391c719b2371\",\"option\":\"Never get it done\",\"value\":\"Never get it done\"},{\"unique_key\":\"bd2d16a5-81b8-45dc-aa7f-462e8167ef71\",\"option\":\"Other\",\"value\":\"Other\"}],\"data\":\"Once a year\"},{\"unique_key\":\"d4dbee25-8846-4ceb-8360-e3e69813b9fd\",\"type\":\"data\",\"name\":\"radio\",\"title\":\"Radio\",\"label\":\"<p>What was your las blood pressure reading?</p>\",\"required\":true,\"options\":[{\"unique_key\":\"f9c77c48-625a-4098-a4ea-e189eb8cb98c\",\"option\":\"Low\",\"value\":\"Low\"},{\"unique_key\":\"0e2c584c-ffef-4f9b-8df3-5cfa84b97332\",\"option\":\"Normal\",\"value\":\"Normal\"},{\"unique_key\":\"9b2a65f7-de67-44ad-b25b-9cf4516e8edb\",\"option\":\"High\",\"value\":\"High\"}],\"data\":\"Low\"}]', '2022-09-24 19:29:06', '2022-09-24 19:29:06'),
+(3, 'ad380e33-c3b1-46e3-be6f-1ed613525826', 1, 3, '3.416', '6.431', '[{\"unique_key\":\"a43ffeb9-81b8-4470-b900-7e4505fa7dae\",\"type\":\"instruction\",\"name\":\"paragraph\",\"title\":\"Paragraph\",\"label\":\"<p>A health survey is&nbsp;<strong>a tool used to gather information on the behavior of a specific group of people from a determined area</strong>. This kind of survey allows health care experts to understand better how a community acts towards health.</p>\"},{\"unique_key\":\"38b94cd3-9602-4ff6-8b8c-e1a5581cdadf\",\"type\":\"decorative\",\"name\":\"divider\",\"title\":\"Line Break\"},{\"unique_key\":\"2764a831-9747-478f-b946-28b952257aec\",\"type\":\"data\",\"name\":\"checkbox\",\"title\":\"Checkbox\",\"label\":\"<p>What do you say about your overall health?</p>\",\"required\":true,\"options\":[{\"unique_key\":\"7615104c-962e-4ce9-a46f-531eec3aaeb0\",\"option\":\"Having Good Physical Health\",\"value\":\"Having Good Physical Health\"},{\"unique_key\":\"d7a3fa2b-b068-46dd-8c98-837883374acb\",\"option\":\"Moderately physically impaired\",\"value\":\"Moderately physically impaired\"},{\"unique_key\":\"0bcc94f6-cf64-42aa-88d9-4855d7dbe2dc\",\"option\":\"Severely physically impaired\",\"value\":\"Severely physically impaired\"},{\"unique_key\":\"c241736d-20c4-4fc1-9535-6178a4f4ec44\",\"option\":\"Totally physically impaired\",\"value\":\"Totally physically impaired\"},{\"unique_key\":\"214daca8-92db-4e5a-b973-a1b1fd90ec4f\",\"option\":\"Health Assessment Survey Questions\",\"value\":\"Health Assessment Survey Questions\"}],\"data\":[\"Having Good Physical Health\",\"Severely physically impaired\",\"Totally physically impaired\",\"Health Assessment Survey Questions\"]},{\"unique_key\":\"951d8edd-94b8-4e07-9d7e-9cf3dd954d30\",\"type\":\"data\",\"name\":\"dropdown\",\"title\":\"Dropdown\",\"label\":\"<p>How often do you get a health checkup?</p>\",\"required\":false,\"options\":[{\"unique_key\":\"e986ff1b-b513-418f-bee7-b42a6badd41e\",\"option\":\"Once in 3 months\",\"value\":\"Once in 3 months\"},{\"unique_key\":\"d35269fd-6cbd-4661-a306-09126d6b64be\",\"option\":\"Once in 6 months\",\"value\":\"Once in 6 months\"},{\"unique_key\":\"f5ae93b5-2c83-4a92-b3f0-7cf56a2b2e71\",\"option\":\"Once a year\",\"value\":\"Once a year\"},{\"unique_key\":\"c848c170-7c24-476f-9ade-023906868fc1\",\"option\":\"Only when needed\",\"value\":\"Only when needed\"},{\"unique_key\":\"a76b32d8-d14c-48ce-9c22-391c719b2371\",\"option\":\"Never get it done\",\"value\":\"Never get it done\"},{\"unique_key\":\"bd2d16a5-81b8-45dc-aa7f-462e8167ef71\",\"option\":\"Other\",\"value\":\"Other\"}],\"data\":\"Once in 6 months\"},{\"unique_key\":\"d4dbee25-8846-4ceb-8360-e3e69813b9fd\",\"type\":\"data\",\"name\":\"radio\",\"title\":\"Radio\",\"label\":\"<p>What was your las blood pressure reading?</p>\",\"required\":false,\"options\":[{\"unique_key\":\"f9c77c48-625a-4098-a4ea-e189eb8cb98c\",\"option\":\"Low\",\"value\":\"Low\"},{\"unique_key\":\"0e2c584c-ffef-4f9b-8df3-5cfa84b97332\",\"option\":\"Normal\",\"value\":\"Normal\"},{\"unique_key\":\"9b2a65f7-de67-44ad-b25b-9cf4516e8edb\",\"option\":\"High\",\"value\":\"High\"}]}]', '2022-09-24 19:40:37', '2022-09-24 19:40:37'),
+(4, 'def05be8-069d-4dfe-b1d1-a72b4a1264c1', 1, 3, '3.416', '6.431', '[{\"unique_key\":\"a43ffeb9-81b8-4470-b900-7e4505fa7dae\",\"type\":\"instruction\",\"name\":\"paragraph\",\"title\":\"Paragraph\",\"label\":\"<p>A health survey is&nbsp;<strong>a tool used to gather information on the behavior of a specific group of people from a determined area</strong>. This kind of survey allows health care experts to understand better how a community acts towards health.</p>\"},{\"unique_key\":\"38b94cd3-9602-4ff6-8b8c-e1a5581cdadf\",\"type\":\"decorative\",\"name\":\"divider\",\"title\":\"Line Break\"},{\"unique_key\":\"2764a831-9747-478f-b946-28b952257aec\",\"type\":\"data\",\"name\":\"checkbox\",\"title\":\"Checkbox\",\"label\":\"<p>What do you say about your overall health?</p>\",\"required\":true,\"options\":[{\"unique_key\":\"7615104c-962e-4ce9-a46f-531eec3aaeb0\",\"option\":\"Having Good Physical Health\",\"value\":\"Having Good Physical Health\"},{\"unique_key\":\"d7a3fa2b-b068-46dd-8c98-837883374acb\",\"option\":\"Moderately physically impaired\",\"value\":\"Moderately physically impaired\"},{\"unique_key\":\"0bcc94f6-cf64-42aa-88d9-4855d7dbe2dc\",\"option\":\"Severely physically impaired\",\"value\":\"Severely physically impaired\"},{\"unique_key\":\"c241736d-20c4-4fc1-9535-6178a4f4ec44\",\"option\":\"Totally physically impaired\",\"value\":\"Totally physically impaired\"},{\"unique_key\":\"214daca8-92db-4e5a-b973-a1b1fd90ec4f\",\"option\":\"Health Assessment Survey Questions\",\"value\":\"Health Assessment Survey Questions\"}],\"data\":[\"Health Assessment Survey Questions\",\"Severely physically impaired\",\"Moderately physically impaired\"]},{\"unique_key\":\"951d8edd-94b8-4e07-9d7e-9cf3dd954d30\",\"type\":\"data\",\"name\":\"dropdown\",\"title\":\"Dropdown\",\"label\":\"<p>How often do you get a health checkup?</p>\",\"required\":false,\"options\":[{\"unique_key\":\"e986ff1b-b513-418f-bee7-b42a6badd41e\",\"option\":\"Once in 3 months\",\"value\":\"Once in 3 months\"},{\"unique_key\":\"d35269fd-6cbd-4661-a306-09126d6b64be\",\"option\":\"Once in 6 months\",\"value\":\"Once in 6 months\"},{\"unique_key\":\"f5ae93b5-2c83-4a92-b3f0-7cf56a2b2e71\",\"option\":\"Once a year\",\"value\":\"Once a year\"},{\"unique_key\":\"c848c170-7c24-476f-9ade-023906868fc1\",\"option\":\"Only when needed\",\"value\":\"Only when needed\"},{\"unique_key\":\"a76b32d8-d14c-48ce-9c22-391c719b2371\",\"option\":\"Never get it done\",\"value\":\"Never get it done\"},{\"unique_key\":\"bd2d16a5-81b8-45dc-aa7f-462e8167ef71\",\"option\":\"Other\",\"value\":\"Other\"}]},{\"unique_key\":\"d4dbee25-8846-4ceb-8360-e3e69813b9fd\",\"type\":\"data\",\"name\":\"radio\",\"title\":\"Radio\",\"label\":\"<p>What was your last blood pressure reading?</p>\",\"required\":false,\"options\":[{\"unique_key\":\"f9c77c48-625a-4098-a4ea-e189eb8cb98c\",\"option\":\"Low\",\"value\":\"Low\"},{\"unique_key\":\"0e2c584c-ffef-4f9b-8df3-5cfa84b97332\",\"option\":\"Normal\",\"value\":\"Normal\"},{\"unique_key\":\"9b2a65f7-de67-44ad-b25b-9cf4516e8edb\",\"option\":\"High\",\"value\":\"High\"}]},{\"unique_key\":\"936be2cc-eda7-4a81-8417-faf3b41aaa7f\",\"type\":\"data\",\"name\":\"radio\",\"title\":\"Radio\",\"label\":\"<p>Gender</p>\",\"required\":false,\"options\":[{\"unique_key\":\"bdbfc3e2-7563-4769-8427-81d7fa4661df\",\"option\":\"Male\",\"value\":\"Male\"},{\"unique_key\":\"40809abd-acee-4806-8fef-95f43bcb70c7\",\"option\":\"Female\",\"value\":\"Female\"}],\"data\":\"Male\"}]', '2022-09-25 10:28:12', '2022-09-25 10:28:12'),
+(5, '93fa1c94-5de1-40b8-a2ff-c9fb06f0ebc0', 1, 3, '3.416', '6.431', '[{\"unique_key\":\"a43ffeb9-81b8-4470-b900-7e4505fa7dae\",\"type\":\"instruction\",\"name\":\"paragraph\",\"title\":\"Paragraph\",\"label\":\"<p>A health survey is&nbsp;<strong>a tool used to gather information on the behavior of a specific group of people from a determined area</strong>. This kind of survey allows health care experts to understand better how a community acts towards health.</p>\"},{\"unique_key\":\"38b94cd3-9602-4ff6-8b8c-e1a5581cdadf\",\"type\":\"decorative\",\"name\":\"divider\",\"title\":\"Line Break\"},{\"unique_key\":\"2764a831-9747-478f-b946-28b952257aec\",\"type\":\"data\",\"name\":\"checkbox\",\"title\":\"Checkbox\",\"label\":\"<p>What do you say about your overall health?</p>\",\"required\":true,\"options\":[{\"unique_key\":\"7615104c-962e-4ce9-a46f-531eec3aaeb0\",\"option\":\"Having Good Physical Health\",\"value\":\"Having Good Physical Health\"},{\"unique_key\":\"d7a3fa2b-b068-46dd-8c98-837883374acb\",\"option\":\"Moderately physically impaired\",\"value\":\"Moderately physically impaired\"},{\"unique_key\":\"0bcc94f6-cf64-42aa-88d9-4855d7dbe2dc\",\"option\":\"Severely physically impaired\",\"value\":\"Severely physically impaired\"},{\"unique_key\":\"c241736d-20c4-4fc1-9535-6178a4f4ec44\",\"option\":\"Totally physically impaired\",\"value\":\"Totally physically impaired\"},{\"unique_key\":\"214daca8-92db-4e5a-b973-a1b1fd90ec4f\",\"option\":\"Health Assessment Survey Questions\",\"value\":\"Health Assessment Survey Questions\"}],\"data\":[\"Having Good Physical Health\",\"Severely physically impaired\",\"Health Assessment Survey Questions\"]},{\"unique_key\":\"951d8edd-94b8-4e07-9d7e-9cf3dd954d30\",\"type\":\"data\",\"name\":\"dropdown\",\"title\":\"Dropdown\",\"label\":\"<p>How often do you get a health checkup?</p>\",\"required\":false,\"options\":[{\"unique_key\":\"e986ff1b-b513-418f-bee7-b42a6badd41e\",\"option\":\"Once in 3 months\",\"value\":\"Once in 3 months\"},{\"unique_key\":\"d35269fd-6cbd-4661-a306-09126d6b64be\",\"option\":\"Once in 6 months\",\"value\":\"Once in 6 months\"},{\"unique_key\":\"f5ae93b5-2c83-4a92-b3f0-7cf56a2b2e71\",\"option\":\"Once a year\",\"value\":\"Once a year\"},{\"unique_key\":\"c848c170-7c24-476f-9ade-023906868fc1\",\"option\":\"Only when needed\",\"value\":\"Only when needed\"},{\"unique_key\":\"a76b32d8-d14c-48ce-9c22-391c719b2371\",\"option\":\"Never get it done\",\"value\":\"Never get it done\"},{\"unique_key\":\"bd2d16a5-81b8-45dc-aa7f-462e8167ef71\",\"option\":\"Other\",\"value\":\"Other\"}],\"data\":\"Once in 6 months\"},{\"unique_key\":\"d4dbee25-8846-4ceb-8360-e3e69813b9fd\",\"type\":\"data\",\"name\":\"radio\",\"title\":\"Radio\",\"label\":\"<p>Select your last blood pressure reading.</p>\",\"required\":true,\"options\":[{\"unique_key\":\"f9c77c48-625a-4098-a4ea-e189eb8cb98c\",\"option\":\"Low\",\"value\":\"Low\"},{\"unique_key\":\"0e2c584c-ffef-4f9b-8df3-5cfa84b97332\",\"option\":\"Normal\",\"value\":\"Normal\"},{\"unique_key\":\"9b2a65f7-de67-44ad-b25b-9cf4516e8edb\",\"option\":\"High\",\"value\":\"High\"}],\"data\":\"Low\"}]', '2022-09-25 17:27:00', '2022-09-25 17:27:00'),
+(6, 'd1c54085-c8ca-404c-965d-8f7bfe31dd0b', 1, 3, '3.416', '6.431', '[{\"unique_key\":\"a43ffeb9-81b8-4470-b900-7e4505fa7dae\",\"type\":\"instruction\",\"name\":\"paragraph\",\"title\":\"Paragraph\",\"label\":\"<p>A health survey is&nbsp;<strong>a tool used to gather information on the behavior of a specific group of people from a determined area</strong>. This kind of survey allows health care experts to understand better how a community acts towards health.</p>\"},{\"unique_key\":\"38b94cd3-9602-4ff6-8b8c-e1a5581cdadf\",\"type\":\"decorative\",\"name\":\"divider\",\"title\":\"Line Break\"},{\"unique_key\":\"2764a831-9747-478f-b946-28b952257aec\",\"type\":\"data\",\"name\":\"checkbox\",\"title\":\"Checkbox\",\"label\":\"<p>What do you say about your overall health?</p>\",\"required\":true,\"options\":[{\"unique_key\":\"7615104c-962e-4ce9-a46f-531eec3aaeb0\",\"option\":\"Having Good Physical Health\",\"value\":\"Having Good Physical Health\"},{\"unique_key\":\"d7a3fa2b-b068-46dd-8c98-837883374acb\",\"option\":\"Moderately physically impaired\",\"value\":\"Moderately physically impaired\"},{\"unique_key\":\"0bcc94f6-cf64-42aa-88d9-4855d7dbe2dc\",\"option\":\"Severely physically impaired\",\"value\":\"Severely physically impaired\"},{\"unique_key\":\"c241736d-20c4-4fc1-9535-6178a4f4ec44\",\"option\":\"Totally physically impaired\",\"value\":\"Totally physically impaired\"},{\"unique_key\":\"214daca8-92db-4e5a-b973-a1b1fd90ec4f\",\"option\":\"Health Assessment Survey Questions\",\"value\":\"Health Assessment Survey Questions\"}],\"data\":[\"Severely physically impaired\",\"Totally physically impaired\"]},{\"unique_key\":\"951d8edd-94b8-4e07-9d7e-9cf3dd954d30\",\"type\":\"data\",\"name\":\"dropdown\",\"title\":\"Dropdown\",\"label\":\"<p>How often do you get a health checkup?</p>\",\"required\":false,\"options\":[{\"unique_key\":\"e986ff1b-b513-418f-bee7-b42a6badd41e\",\"option\":\"Once in 3 months\",\"value\":\"Once in 3 months\"},{\"unique_key\":\"d35269fd-6cbd-4661-a306-09126d6b64be\",\"option\":\"Once in 6 months\",\"value\":\"Once in 6 months\"},{\"unique_key\":\"f5ae93b5-2c83-4a92-b3f0-7cf56a2b2e71\",\"option\":\"Once a year\",\"value\":\"Once a year\"},{\"unique_key\":\"c848c170-7c24-476f-9ade-023906868fc1\",\"option\":\"Only when needed\",\"value\":\"Only when needed\"},{\"unique_key\":\"a76b32d8-d14c-48ce-9c22-391c719b2371\",\"option\":\"Never get it done\",\"value\":\"Never get it done\"},{\"unique_key\":\"bd2d16a5-81b8-45dc-aa7f-462e8167ef71\",\"option\":\"Other\",\"value\":\"Other\"}],\"data\":\"Once in 3 months\"},{\"unique_key\":\"d4dbee25-8846-4ceb-8360-e3e69813b9fd\",\"type\":\"data\",\"name\":\"radio\",\"title\":\"Radio\",\"label\":\"<p>Select your last blood pressure reading.</p>\",\"required\":true,\"options\":[{\"unique_key\":\"f9c77c48-625a-4098-a4ea-e189eb8cb98c\",\"option\":\"Low\",\"value\":\"Low\"},{\"unique_key\":\"0e2c584c-ffef-4f9b-8df3-5cfa84b97332\",\"option\":\"Normal\",\"value\":\"Normal\"},{\"unique_key\":\"9b2a65f7-de67-44ad-b25b-9cf4516e8edb\",\"option\":\"High\",\"value\":\"High\"}],\"data\":\"Low\"}]', '2022-09-25 17:37:24', '2022-09-25 17:37:24');
 
 -- --------------------------------------------------------
 
@@ -535,6 +575,16 @@ CREATE TABLE `survey_users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `survey_users`
+--
+
+INSERT INTO `survey_users` (`id`, `survey_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 3, 2, NULL, NULL),
+(2, 2, 2, NULL, NULL),
+(3, 3, 3, NULL, NULL),
+(4, 3, 6, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -560,11 +610,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `uuid`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, '15e5410a-bfb7-45b6-b5fa-8245a8ffd3a8', 'Braimah Paul', 'braimahjake@gmail.com', NULL, '$2y$10$ammHVbmLD2qIk39AjK2SsOGJdQZFRp2RTzQyI5bTErkGch5h1j5Gq', NULL, '2022-08-21 16:12:02', '2022-09-09 18:52:58'),
-(2, '45954ade-4ad8-4457-a601-3e05a4ee1d02', 'James  Simon', 'jamespaulforyou@gmail.com', NULL, '$2y$10$qpmGcrvfLtcrp1wjb2k6ieDAD38t1XfxdGVlHT/t1PHrl75Bi9.aa', NULL, '2022-08-22 13:09:34', '2022-08-29 15:40:02'),
-(3, 'f33b28f7-844c-4261-928d-a27330b90002', 'Tom Jones', 'tomjones@gmail.com', NULL, '$2y$10$JywPDZ6gU6WGc7FILPrd0uMGeGTKaLFTEv.zDcuLXHlYN2Qt9W.8u', NULL, '2022-08-22 13:10:29', '2022-09-10 13:30:40'),
+(2, '45954ade-4ad8-4457-a601-3e05a4ee1d02', 'James  Simon', 'tester@gmail.com', NULL, '$2y$10$qpmGcrvfLtcrp1wjb2k6ieDAD38t1XfxdGVlHT/t1PHrl75Bi9.aa', NULL, '2022-08-22 13:09:34', '2022-09-24 06:46:17'),
+(3, 'f33b28f7-844c-4261-928d-a27330b90002', 'Tom Jones', 'tester1@gmail.com', NULL, '$2y$10$JywPDZ6gU6WGc7FILPrd0uMGeGTKaLFTEv.zDcuLXHlYN2Qt9W.8u', NULL, '2022-08-22 13:10:29', '2022-09-24 10:42:33'),
 (4, '1203e1d4-922a-4173-ac25-542facf90ede', 'Joan Roderick', 'j.rodricko@gmail.com', NULL, '$2y$10$kcC2DKzODHwK85BfiEtGAe1WQhO50pvMShZ2ZeQIkVbQ2j506wze2', NULL, '2022-08-23 23:20:30', '2022-08-23 23:27:54'),
 (5, 'eaae405c-845e-4e96-97ab-bb23f7904db7', 'Dominic Smith', 'dominic@gmail.com', NULL, '$2y$10$ftfzf72xfPxubR0ESBQtcuy3y7GbNCasIKiVRxgBaRNGFMkWyYvma', NULL, '2022-08-23 23:30:59', '2022-08-23 23:30:59'),
-(6, '31257ca5-109d-493d-a280-cb603c7ae7ae', 'Daniel John', 'daniel@gmail.com', NULL, '$2y$10$53ul17ktwXXmS3C3gS8bieea3/6PYcLRrxAsTYQh0U1PnQINngWHi', NULL, '2022-08-24 07:18:56', '2022-08-24 07:18:56'),
 (7, '8a907629-9c91-469a-88e4-0771434e48de', 'Peter Pan', 'peter.ko@gmail.com', NULL, '$2y$10$SXvRad3W4fraKKPtFlWW5.g.DSc2lfCkzzt2yABnkt8JM7j5yt6ku', NULL, '2022-08-24 07:21:27', '2022-08-24 07:21:40'),
 (8, '1609b67b-473b-445e-bfe3-a47a2347c630', 'Michael Eigbadon', 'michael@gmail.com', NULL, '$2y$10$LwWabjWNYEjXaFXyi8tssuKVKSq9gerAl1TkCiTyvEi7ihA.Ql.v6', NULL, '2022-08-29 14:18:50', '2022-08-29 14:18:50');
 
@@ -703,7 +752,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activities`
 --
 ALTER TABLE `activities`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -715,19 +764,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `mailing_lists`
 --
 ALTER TABLE `mailing_lists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `mailing_list_contacts`
 --
 ALTER TABLE `mailing_list_contacts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -739,13 +788,13 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `project_surveys`
@@ -775,19 +824,19 @@ ALTER TABLE `surveys`
 -- AUTO_INCREMENT for table `survey_responses`
 --
 ALTER TABLE `survey_responses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `survey_users`
 --
 ALTER TABLE `survey_users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

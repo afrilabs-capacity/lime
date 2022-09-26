@@ -8,7 +8,7 @@ import Header from "../components/layout/header";
 function Master({ component }) {
   return (
     <div className="">
-      <div className="grid md:grid-cols-5 h-full">
+      <div className="grid md:grid-cols-5 h-full bg-repeat AsideBackground">
         <LeftNav />
         <main className="MainBackground col-span-4">
           <Header />

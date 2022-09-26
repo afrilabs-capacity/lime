@@ -16,6 +16,7 @@ import WidgetReorderDropzone from "./widgets/components/action/widget-reorder-dr
 import DatePicker from "react-datepicker";
 import Switch from "react-switch";
 import axios from "axios";
+import moment from "moment";
 
 export default function DropZone() {
   let { projectuuid } = useParams();
@@ -24,7 +25,7 @@ export default function DropZone() {
   const [isUpdating, setIsUpdating] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [endDate, setEndDate] = useState();
   const [enableLocation, setEnableLocation] = useState(false);
   const {
     widgets,
@@ -78,6 +79,19 @@ export default function DropZone() {
           setGlobalSurvey(response.data.survey);
           if (response.data.survey.data) {
             setWidgetsFromTemplate(response.data.survey.data);
+            if (response.data.survey.project_id) {
+              if (response.data.survey.start_date) {
+                setStartDate(new Date(response.data.survey.start_date));
+              }
+
+              if (response.data.survey.end_date) {
+                setEndDate(new Date(response.data.survey.end_date));
+              }
+
+              if (response.data.survey.location) {
+                setEnableLocation(response.data.survey.location);
+              }
+            }
           }
           //   console.log(response.data.series);
         }
@@ -97,13 +111,16 @@ export default function DropZone() {
         surveyuuid: surveyuuid,
         projectuuid: projectuuid,
         data: JSON.stringify(widgets),
+        start_date: startDate,
+        end_date: endDate,
+        location: enableLocation,
       })
       .then((response) => {
         if (response.status == 200) {
           setIsUpdating(false);
           toast("Survey Updated!", { type: "success" });
-          setSurvey(response.data.survey);
-          console.log(response.data.series);
+          // setSurvey(response.data.survey);
+          getSurvey();
         }
       })
       .catch((error) => {
@@ -148,69 +165,69 @@ export default function DropZone() {
   return (
     <>
       {!isLoading && (
-        <div className="grid col-span-3 content-start">
-          <div className="bg-white m-2 p-2 flex justify-between">
-            {/* <div>
-          <h1 className="text-2xl text-center m-2 font-bold">
-            {survey && survey.name}
-          </h1>
-        </div> */}
-
-            <div>
-              <span>Start Date:</span>
-              <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-                selectsStart
-                startDate={startDate}
-                endDate={endDate}
-                className={inputClass}
-                disabled={!widgets.length}
-              />
-            </div>
-            <div>
-              <span>End Date:</span>
-              <DatePicker
-                selected={endDate}
-                onChange={(date) => setEndDate(date)}
-                selectsEnd
-                startDate={startDate}
-                endDate={endDate}
-                minDate={startDate}
-                className={inputClass}
-                disabled={!widgets.length}
-              />
-            </div>
-          </div>
-          <div className="bg-white m-2 p-2 flex justify-between">
-            <div className="flex justify-between gap-4 items-center">
-              <BasicButton
-                disabled={!isAdmin()}
-                title={"Preview"}
-                handleClick={showWidgetPreviewModal}
-              />
-            </div>
-            <label className="flex items-center gap-4">
-              <span>Location</span>
-              <Switch
-                onChange={handleLocationChange}
-                checked={enableLocation}
-              />
-            </label>
-            <div className="flex justify-between gap-4">
-              <BasicButton
-                disabled={!widgets.length || isUpdating || !isAdmin()}
-                title={isUpdating ? "Updating..." : "Update"}
-                handleClick={updateSurvey}
-              />
-              <BasicButton
-                disabled={!widgets.length || isUpdating || !isAdmin()}
-                title={isUpdating ? "Deleting..." : "Delete"}
-                handleClick={deleteSurvey}
-                classes="bg-red-500 hover:bg-red-400"
-              />
-            </div>
-          </div>
+        <div className="grid md:col-span-2 content-start">
+          {survey && survey.project_id && isAdmin() && (
+            <>
+              {" "}
+              <div className="bg-white m-2 p-2 flex justify-between">
+                <div>
+                  <span>Start Date:</span>
+                  <DatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    selectsStart
+                    startDate={startDate}
+                    endDate={endDate}
+                    className={inputClass}
+                    disabled={!widgets.length}
+                    minDate={new Date()}
+                  />
+                </div>
+                <div>
+                  <span>End Date:</span>
+                  <DatePicker
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                    selectsEnd
+                    startDate={startDate}
+                    endDate={endDate}
+                    minDate={startDate}
+                    className={inputClass}
+                    disabled={!widgets.length}
+                  />
+                </div>
+              </div>
+              <div className="bg-white m-2 p-2 flex justify-between">
+                <div className="flex justify-between gap-4 items-center">
+                  <BasicButton
+                    disabled={!isAdmin()}
+                    title={"Preview"}
+                    handleClick={showWidgetPreviewModal}
+                  />
+                </div>
+                <label className="flex items-center gap-4">
+                  <span>Location</span>
+                  <Switch
+                    onChange={handleLocationChange}
+                    checked={enableLocation}
+                  />
+                </label>
+                <div className="flex justify-between gap-4">
+                  <BasicButton
+                    disabled={!widgets.length || isUpdating || !isAdmin()}
+                    title={isUpdating ? "Updating..." : "Update"}
+                    handleClick={updateSurvey}
+                  />
+                  <BasicButton
+                    disabled={!widgets.length || isUpdating || !isAdmin()}
+                    title={isUpdating ? "Deleting..." : "Delete"}
+                    handleClick={deleteSurvey}
+                    classes="bg-red-500 hover:bg-red-400"
+                  />
+                </div>
+              </div>
+            </>
+          )}
 
           <div className="m-2">
             <div

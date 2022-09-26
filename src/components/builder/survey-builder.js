@@ -20,7 +20,12 @@ import Chart from "react-apexcharts";
 import EmptyPage from "../section/empty-page.js";
 import Pagination from "../pagination/pagination.js";
 import AnimatedLoader from "../loader/loader.js";
-import { formatAMPM, API_BASE } from "../../utils/helper-functions";
+import {
+  formatAMPM,
+  API_BASE,
+  authHeader,
+  authUserId,
+} from "../../utils/helper-functions";
 
 export default function Survey() {
   const initialTabData = {
@@ -32,13 +37,20 @@ export default function Survey() {
   const [activeTab, setActiveTab] = useState(0);
   const [activeTabClasses, setActiveTabClasses] = useState("");
   const { survey } = useBuilderStore((state) => state);
+
+  const { tab } = useParams();
+
   useEffect(() => {
-    setActiveTab(0);
+    if (tab) {
+      setActiveTab(tab);
+    } else {
+      setActiveTab(0);
+    }
     initActiveTabClasses();
   }, []);
 
   const initActiveTabClasses = () => {
-    setActiveTabClasses("text-white bg-orange-400");
+    setActiveTabClasses("text-white bg-orange-600");
   };
 
   return (
@@ -83,7 +95,7 @@ export function BuilderTools() {
       <div>
         <div className="grid md:grid-cols-1">
           <div className="main-right col-span-2 bg-green">
-            <div className="grid md:grid-cols-4 gap-4">
+            <div className="grid md:grid-cols-3 gap-4">
               <DropZone />
               <ToolBar />
             </div>
@@ -103,8 +115,15 @@ export function SurveyResponses() {
   const getResponses = () => {
     setIsLoading(true);
     const url = API_BASE + "/api/survey/responses/" + surveyuuid;
+    // axios
+    //   .get(url)
+
     axios
-      .get(url)
+      .request({
+        method: "get",
+        headers: authHeader(),
+        url: url,
+      })
       .then((response) => {
         if (response.status == 200) {
           setIsLoading(false);
@@ -149,7 +168,7 @@ export function SurveyResponses() {
         {responses && responses.data && responses.data.length ? (
           <table class="table-fixed border-gray-100 w-full">
             <thead>
-              <tr className="divide-x">
+              <tr className="divide-x w-full">
                 {JSON.parse(responses.data[0].data).map((data) => {
                   if (data.type === "data") {
                     return (
@@ -158,13 +177,18 @@ export function SurveyResponses() {
                           __html: data.label,
                         }}
                         className="p-2 text-blue-900 text-sm font-normal"
-                        style={{ whiteSpace: "nowrap" }}
                       ></th>
                     );
                   }
                 })}
                 <th className="p-2 text-blue-900 text-sm font-normal">
                   Timestamp
+                </th>
+                <th className="p-2 text-blue-900 text-sm font-normal">
+                  Longitude
+                </th>
+                <th className="p-2 text-blue-900 text-sm font-normal">
+                  Latitude
                 </th>
               </tr>
             </thead>
@@ -194,6 +218,14 @@ export function SurveyResponses() {
                     <td className="texm-sm">
                       {/* {.replace(/-/g, "/")} */}
                       {formatAMPM(new Date(response.created_at))}
+                    </td>
+                    <td className="texm-sm">
+                      {/* {.replace(/-/g, "/")} */}
+                      {response.longitude ? response.longitude : "N/A"}
+                    </td>
+                    <td className="texm-sm">
+                      {/* {.replace(/-/g, "/")} */}
+                      {response.latitude ? response.latitude : "N/A"}
                     </td>
                   </tr>
                 );
@@ -303,7 +335,7 @@ export function Analytics() {
         options={options}
         series={series}
         type="pie"
-        width={380}
+        width={500}
       />
     );
   };
@@ -408,8 +440,14 @@ export function DistributeSurvey() {
   const broadcastSurvey = (list) => {
     setIsBroacasting(true);
     const url = API_BASE + "/api/survey/distribute";
+
     axios
-      .post(url, { survey_uuid: surveyuuid, list_uuid: list.uuid })
+      .request({
+        method: "post",
+        headers: authHeader(),
+        url: url,
+        data: { survey_uuid: surveyuuid, list_uuid: list.uuid },
+      })
       .then((response) => {
         setIsBroacasting(false);
         if (response.status == 200) {
@@ -479,7 +517,9 @@ export function DistributeSurvey() {
           <br />
           <br />
           <div className="p-8 border-side border-sky-400 border-l-8 hover:border-sky-900 border-l-8 my-2 rounded-lg shadow cursor-pointer AsideBackground flex justify-between">
-            <p className="text-lg">{`${window.location.protocol}//${window.location.host}/survey/share/${surveyuuid}`}</p>
+            <p className="text-lg">{`${window.location.protocol}//${
+              window.location.host
+            }/survey/share/${authUserId()}/${surveyuuid}`}</p>
             <BasicButton
               icon={`fas fa-plus text-white`}
               title={"COPY"}

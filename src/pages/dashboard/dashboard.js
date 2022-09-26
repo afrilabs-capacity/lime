@@ -11,7 +11,12 @@ import EmptyPage from "../../components/section/empty-page";
 import AnimatedLoader from "../../components/loader/loader";
 import Pagination from "../../components/pagination/pagination";
 import { toast } from "react-toastify";
-import { isAdmin, API_BASE } from "../../utils/helper-functions";
+import {
+  isAdmin,
+  API_BASE,
+  shouldRenderEmptyPage,
+  authHeader,
+} from "../../utils/helper-functions";
 
 export default function DashboardLayout() {
   const [surveyTemplates, setSurveyTemplates] = useState([]);
@@ -19,12 +24,20 @@ export default function DashboardLayout() {
   const getSurveys = () => {
     const url = API_BASE + "/api/surveys";
     setIsLoading(true);
+    // axios.get(url);
+
     axios
-      .get(url)
+      .request({
+        method: "get",
+        headers: authHeader(),
+        url: url,
+      })
       .then((response) => {
         setIsLoading(false);
         if (response.status == 200) {
-          setSurveyTemplates(response.data.surveys);
+          if (response.data.surveys) {
+            setSurveyTemplates(response.data.surveys);
+          }
         }
       })
       .catch((error) => {
@@ -39,8 +52,13 @@ export default function DashboardLayout() {
       setIsLoading(true);
       let queryString = surveyTemplates.first_page_url.split("page=");
       // setCurrentPage(page);
+      // .get(queryString[0] + "page=" + page)
       axios
-        .get(queryString[0] + "page=" + page)
+        .request({
+          method: "get",
+          headers: authHeader(),
+          url: queryString[0] + "page=" + page,
+        })
         .then((res) => {
           setSurveyTemplates(res.data.surveys);
           setIsLoading(false);
@@ -57,7 +75,7 @@ export default function DashboardLayout() {
     <>
       {" "}
       <div>
-        <div className="grid md:grid-cols-3">
+        <div className={`grid  ${isAdmin() ? "md:grid-cols-3" : ""}`}>
           <div className="main-right col-span-2 p-2">
             <div className="my-6">{isAdmin() && <TopCards />}</div>
             <div>
@@ -68,9 +86,10 @@ export default function DashboardLayout() {
               surveyTemplates.data.map((survey) => {
                 return <SurveyCard survey={survey} />;
               })}
-            {surveyTemplates.data && !surveyTemplates.data.length && (
+            {shouldRenderEmptyPage(surveyTemplates) && (
               <EmptyPage text={"survey"} />
             )}
+
             <div className="flex justify-center">
               {" "}
               {surveyTemplates && (
@@ -80,14 +99,16 @@ export default function DashboardLayout() {
                 />
               )}
             </div>
+            {isLoading && <AnimatedLoader />}
           </div>
 
-          <div className="main-left col-span-5 md:col-span-1 ">
-            <RightNav />
-          </div>
+          {isAdmin() && (
+            <div className="main-left col-span-5 md:col-span-1 ">
+              <RightNav />
+            </div>
+          )}
         </div>
       </div>
-      {isLoading && <AnimatedLoader />}
     </>
   );
 }

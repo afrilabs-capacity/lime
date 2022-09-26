@@ -239,7 +239,7 @@ export default function ProjectSingle() {
             </div>
           )}
 
-          {projectUsers && (
+          {/* {projectUsers && (
             <div className="mb-6 bg-white rounded-lg p-2">
               <div className="flex flex-col md:flex-row justify-between gap-4">
                 <h1 className="text text-2xl font-bold my-3 ml-2  text-blue-900">
@@ -285,7 +285,7 @@ export default function ProjectSingle() {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
       {/* <AttachSurveyModal

@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import {
   getActiveWidgetLabel,
   getWidgetIndexByKey,
+  isAdmin,
 } from "../../../../utils/helper-functions.js";
 import WidgetAction from "./components/action/widget-action.js";
 
@@ -22,28 +23,30 @@ export function LimeDivider({ item }) {
             Divider
           </span>
         </div>
-        <div className="m-2">
-          {" "}
-          <i
-            className="fa fa-trash cursor-pointer mx-2"
-            aria-hidden="true"
-            onClick={() => deleteWidget(item)}
-          ></i>
-          {/* <i className="fas fa-edit mx-2 cursor-pointer"></i> */}
-          {indexOfCurrentWidget !== 0 && widgets.length > 1 && (
+        {isAdmin() && (
+          <div className="m-2">
+            {" "}
             <i
-              className={`fas fa-arrow-up mx-2 cursor-pointer`}
-              onClick={() => reorderUp(item)}
+              className="fa fa-trash cursor-pointer mx-2"
+              aria-hidden="true"
+              onClick={() => deleteWidget(item)}
             ></i>
-          )}
-          {indexOfCurrentWidget !== widgets.length - 1 &&
-            widgets.length > 1 && (
+            {/* <i className="fas fa-edit mx-2 cursor-pointer"></i> */}
+            {indexOfCurrentWidget !== 0 && widgets.length > 1 && (
               <i
-                className="fas fa-arrow-down cursor-pointer"
-                onClick={() => reorderDown(item)}
+                className={`fas fa-arrow-up mx-2 cursor-pointer`}
+                onClick={() => reorderUp(item)}
               ></i>
             )}
-        </div>
+            {indexOfCurrentWidget !== widgets.length - 1 &&
+              widgets.length > 1 && (
+                <i
+                  className="fas fa-arrow-down cursor-pointer"
+                  onClick={() => reorderDown(item)}
+                ></i>
+              )}
+          </div>
+        )}
       </div>
       <div className="p-2">
         {/* widget content start */}

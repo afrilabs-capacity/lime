@@ -7,20 +7,30 @@ import { toast } from "react-toastify";
 import axios from "axios";
 export default function ProjectName() {
   const [name, setName] = useState("");
+  const [creating, setCreating] = useState(false);
 
   const url = API_BASE + "/api/project/create";
 
   const addProjejctName = () => {
+    setCreating(true);
     axios
       .post(url, { name: name })
       .then((response) => {
         if (response.status == 200) {
-          window.location.href = `/project/${response.data.list.uuid}`;
+          toast("Project Created!", { type: "success" });
+          setTimeout(() => {
+            setCreating(false);
+            window.location.href = `/project/${response.data.list.uuid}`;
+          }, 2000);
         }
       })
       .catch((error) => {
-        alert(error.message);
-        console.error("There was an error!", error);
+        setCreating(false);
+        if (error.response.status == 422) {
+          toast("Project name already exists!", { type: "error" });
+        } else {
+          toast("Something went wrong!", { type: "error" });
+        }
       });
   };
 
@@ -47,8 +57,8 @@ export default function ProjectName() {
           <div className="text-center">
             <br />
             <BasicButton
-              disabled={!name}
-              title={"CREATE PROJECT"}
+              disabled={!name || creating}
+              title={creating ? "Creating.." : "CREATE PROJECT"}
               classes={"w-4/12 mt-0 p-4 h-14"}
               handleClick={addProjejctName}
             />

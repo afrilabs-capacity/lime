@@ -1,7 +1,10 @@
 import { useBuilderStore } from "../../../../../../stores/builder";
 import { DragPreviewImage, useDrag } from "react-dnd";
 import { ItemTypes } from "../../../item-types";
-import { getWidgetIndexByKey } from "../../../../../../utils/helper-functions";
+import {
+  getWidgetIndexByKey,
+  isAdmin,
+} from "../../../../../../utils/helper-functions";
 
 export default function WidgetAction({ item }) {
   const {
@@ -39,32 +42,37 @@ export default function WidgetAction({ item }) {
     }),
   }));
   return (
-    <div key={item.unique_key}>
-      {" "}
-      <i
-        className="fa fa-trash cursor-pointer"
-        aria-hidden="true"
-        onClick={() => deleteWidget(item)}
-      ></i>
-      <i
-        className="fas fa-edit mx-2 cursor-pointer"
-        onClick={() => showWidgetEditorModal(item)}
-      ></i>
-      {indexOfCurrentWidget !== 0 && widgets.length > 1 && (
-        <i
-          className={`fas fa-arrow-up mx-2 cursor-pointer`}
-          onClick={() => reorderUp(item)}
-        ></i>
-      )}
-      {indexOfCurrentWidget !== widgets.length - 1 && widgets.length > 1 && (
-        <i
-          className="fas fa-arrow-down cursor-pointer"
-          onClick={() => reorderDown(item)}
-        ></i>
-      )}
-      {/* <span className="m-1">
+    <>
+      {isAdmin() && (
+        <div key={item.unique_key}>
+          {" "}
+          <i
+            className="fa fa-trash cursor-pointer"
+            aria-hidden="true"
+            onClick={() => deleteWidget(item)}
+          ></i>
+          <i
+            className="fas fa-edit mx-2 cursor-pointer"
+            onClick={() => showWidgetEditorModal(item)}
+          ></i>
+          {indexOfCurrentWidget !== 0 && widgets.length > 1 && (
+            <i
+              className={`fas fa-arrow-up mx-2 cursor-pointer`}
+              onClick={() => reorderUp(item)}
+            ></i>
+          )}
+          {indexOfCurrentWidget !== widgets.length - 1 &&
+            widgets.length > 1 && (
+              <i
+                className="fas fa-arrow-down cursor-pointer"
+                onClick={() => reorderDown(item)}
+              ></i>
+            )}
+          {/* <span className="m-1">
         {getWidgetIndexByKey(item.unique_key, widgets)}
       </span> */}
-    </div>
+        </div>
+      )}
+    </>
   );
 }

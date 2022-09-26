@@ -9,20 +9,30 @@ import axios from "axios";
 export default function SurveyName() {
   let { projectuuid } = useParams();
   const [name, setName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const url = API_BASE + "/api/survey";
 
   const addSurveyName = () => {
+    setIsLoading(true);
     axios
       .post(url, { name: name, project_uuid: projectuuid })
       .then((response) => {
+        setIsLoading(false);
         if (response.status == 200) {
           toast("Survey Created!", { type: "success" });
-          window.location.href = `/project/${projectuuid}/survey/${response.data.survey.uuid}`;
+          setTimeout(() => {
+            window.location.href = `/project/${projectuuid}/survey/${response.data.survey.uuid}`;
+          }, 2000);
         }
       })
       .catch((error) => {
-        toast("Something went wrong!", { type: "error" });
+        setIsLoading(false);
+        if (error.response.status == 422) {
+          toast("Survey name already exists!", { type: "error" });
+        } else {
+          toast("Something went wrong!", { type: "error" });
+        }
         console.error("There was an error!", error);
       });
   };
@@ -50,8 +60,8 @@ export default function SurveyName() {
           <div className="text-center">
             <br />
             <BasicButton
-              disabled={!name}
-              title={"CREATE SURVEY"}
+              disabled={!name || isLoading}
+              title={isLoading ? "Creating.." : "CREATE SURVEY"}
               classes={"w-4/12 mt-0 p-4 h-14"}
               handleClick={addSurveyName}
             />

@@ -37,6 +37,7 @@ import "react-toastify/dist/ReactToastify.css";
 import BasicButton from "./components/builder/drag-and-drop/widgets/components/buttons/basic-button";
 import React, { useContext, createContext, useState, useEffect } from "react";
 import { useBuilderStore } from "../src/stores/builder";
+import SurveyUserCollect from "./pages/admin/surveys/survey-user-collect";
 
 function App() {
   const { isAuthUser } = useBuilderStore((state) => state);
@@ -238,10 +239,19 @@ function App() {
           element={<SurveyBuilder />}
         />
         <Route
+          path="/project/:projectuuid/survey/:surveyuuid/tab/:tab"
+          element={<SurveyBuilder />}
+        />
+        <Route
           path="/survey/:surveyuuid/standalone"
           element={<SurveyBuilderStandalone />}
         />
-        <Route path="/survey/share/:uuid" element={<FillSurvey />} />
+        <Route path="/survey/share/:userId/:uuid" element={<FillSurvey />} />
+        <Route
+          path="/survey/:surveyuuid/user/collect"
+          element={<Master component={<SurveyUserCollect />} />}
+        />
+
         {/* <Route
           path="/new-survey/project/:projectuuid"
           element={<Master component={<NewSurvey />} />}

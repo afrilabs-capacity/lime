@@ -19,7 +19,7 @@ export function LimeCheckboxWeb({ item }) {
     <div className="p-0 bg-white">
       <div className="p-2">
         {" "}
-        <span className="font-bold">Q. </span>
+        <span className="font-bold"></span>
         <label
           for="exampleFormControlInput1"
           class="form-label inline-block  text-gray-700 mr-2"

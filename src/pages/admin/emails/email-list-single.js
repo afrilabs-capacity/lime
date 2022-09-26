@@ -5,7 +5,7 @@ import EmptyPage from "../../../components/section/empty-page";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { API_BASE } from "../../../utils/helper-functions";
+import { API_BASE, isAdmin } from "../../../utils/helper-functions";
 import axios from "axios";
 
 export default function EmailListSingle() {
@@ -93,12 +93,14 @@ export default function EmailListSingle() {
                   </div>
 
                   <div className="flex flex-col md:flex-row justify-between gap-4">
-                    <BasicButton
-                      disabled={isDeleting}
-                      title={isDeleting ? "Deleting..." : "DELETE"}
-                      classes={"mt-0 bg-red-700"}
-                      handleClick={() => deleteContact(contact.uuid)}
-                    />
+                    {isAdmin() && (
+                      <BasicButton
+                        disabled={isDeleting}
+                        title={isDeleting ? "Deleting..." : "DELETE"}
+                        classes={"mt-0 bg-red-700"}
+                        handleClick={() => deleteContact(contact.uuid)}
+                      />
+                    )}
                   </div>
                 </div>
               ))}

@@ -5,7 +5,11 @@ import { toast } from "react-toastify";
 import EmptyPage from "../../../components/section/empty-page";
 import AnimatedLoader from "../../../components/loader/loader";
 import Pagination from "../../../components/pagination/pagination";
-import { API_BASE } from "../../../utils/helper-functions";
+import {
+  API_BASE,
+  shouldRenderEmptyPage,
+  authHeader,
+} from "../../../utils/helper-functions";
 import axios from "axios";
 export default function Surveys() {
   const [surveyTemplates, setSurveyTemplates] = useState([]);
@@ -13,8 +17,13 @@ export default function Surveys() {
   const getSurveys = () => {
     const url = API_BASE + "/api/surveys";
     setIsLoading(true);
+
     axios
-      .get(url)
+      .request({
+        method: "get",
+        headers: authHeader(),
+        url: url,
+      })
       .then((response) => {
         setIsLoading(false);
         if (response.status == 200) {
@@ -34,7 +43,11 @@ export default function Surveys() {
       let queryString = surveyTemplates.first_page_url.split("page=");
       // setCurrentPage(page);
       axios
-        .get(queryString[0] + "page=" + page)
+        .request({
+          method: "get",
+          headers: authHeader(),
+          url: queryString[0] + "page=" + page,
+        })
         .then((res) => {
           setSurveyTemplates(res.data.surveys);
           setIsLoading(false);
@@ -71,9 +84,8 @@ export default function Surveys() {
                 return <SurveyCard survey={survey} />;
               })}
 
-            {surveyTemplates.data && !surveyTemplates.data.length && (
-              <EmptyPage text={"survey"} />
-            )}
+            {(surveyTemplates.data && !surveyTemplates.data.length) ||
+              (!surveyTemplates.data && <EmptyPage text={"survey"} />)}
           </div>
 
           {/* <div className="main-left col-span-5 md:col-span-1 ">
@@ -90,8 +102,18 @@ export default function Surveys() {
               surveyTemplates.data.map((survey) => {
                 return <SurveyCard survey={survey} />;
               })}
-            {surveyTemplates.data && !surveyTemplates.data.length && (
+            {shouldRenderEmptyPage(surveyTemplates) && (
               <EmptyPage text={"survey"} />
+            )}
+          </div>
+
+          <div className="flex justify-center">
+            {" "}
+            {surveyTemplates && (
+              <Pagination
+                pagination={surveyTemplates}
+                doPagination={doPagination}
+              />
             )}
           </div>
 

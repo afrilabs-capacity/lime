@@ -4,7 +4,11 @@ import { toast } from "react-toastify";
 import AnimatedLoader from "../../../components/loader/loader";
 import Pagination from "../../../components/pagination/pagination";
 import EmptyPage from "../../../components/section/empty-page";
-import { API_BASE } from "../../../utils/helper-functions";
+import {
+  API_BASE,
+  shouldRenderEmptyPage,
+  isAdmin,
+} from "../../../utils/helper-functions";
 import axios from "axios";
 
 export default function EmailList() {
@@ -55,14 +59,16 @@ export default function EmailList() {
         <p></p>
         <br />
         <div className="flex justify-center md:justify-end m-2 w-10/12">
-          <a href="/new-email-list-name">
-            <BasicButton
-              icon={`fas fa-plus text-white`}
-              title={"CREATE NEW LIST"}
-              classes={"mt-0 bg-sky-700 w-full"}
-              handleClick={() => null}
-            />
-          </a>
+          {isAdmin() && (
+            <a href="/new-email-list-name">
+              <BasicButton
+                icon={`fas fa-plus text-white`}
+                title={"CREATE NEW LIST"}
+                classes={"mt-0 bg-sky-700 w-full"}
+                handleClick={() => null}
+              />
+            </a>
+          )}
         </div>
 
         {!isLoading && (
@@ -75,9 +81,7 @@ export default function EmailList() {
                   </div>
                 </a>
               ))}
-            {emailLists.data && !emailLists.data.length && (
-              <EmptyPage text={"List"} />
-            )}
+            {shouldRenderEmptyPage(emailLists) && <EmptyPage text={"List"} />}
           </div>
         )}
         {emailLists.first_page_url && !isLoading && (

@@ -1,22 +1,21 @@
-import { useBuilderStore } from "../../../stores/builder.js";
+import { useBuilderStore, auth } from "../../../stores/builder.js";
 import React from "react";
+import { toast } from "react-toastify";
+
 import {
   getWidgetByKey,
   getWebWidgetByKey,
   API_BASE,
-  isAuthUser,
+  authHeader,
 } from "../../../utils/helper-functions.js";
 
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import BasicButton from "../../../components/builder/drag-and-drop/widgets/components/buttons/basic-button.js";
 import axios from "axios";
-import { toast } from "react-toastify";
-import WidetEditor from "../../../components/modals/widget-editor-modal.js";
 
-export default function FillSurvey() {
-  let { uuid } = useParams();
-  let { userId } = useParams();
+export default function SurveyUserCollect() {
+  let { surveyuuid } = useParams();
   const [survey, setSurvey] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [surveySubmitted, setSurveySubmitted] = useState(false);
@@ -30,7 +29,7 @@ export default function FillSurvey() {
 
   const getSurvey = () => {
     setWidgetsFromTemplate([]);
-    const url = API_BASE + "/api/survey/" + uuid;
+    const url = API_BASE + "/api/survey/" + surveyuuid;
     axios
       .get(url)
       .then((response) => {
@@ -47,34 +46,49 @@ export default function FillSurvey() {
         }
       })
       .catch((error) => {
-        alert(error.message);
         toast("Something went wrong!", { type: "error" });
       });
   };
 
   const submitSurvey = () => {
     setSubmitting(true);
-    const url = API_BASE + "/api/survey/response/web";
+    const url = API_BASE + "/api/survey/response/user";
     axios
-      .post(url, {
-        uuid: uuid,
-        data: JSON.stringify(widgets),
-        longitude: longitude,
-        latitude: latitude,
-        collector_id: userId,
+      .request({
+        method: "post",
+        headers: authHeader(),
+        url: url,
+        data: {
+          uuid: surveyuuid,
+          data: JSON.stringify(widgets),
+          longitude: longitude,
+          latitude: latitude,
+        },
       })
       .then((response) => {
         if (response.status == 200) {
           setSurveySubmitted(true);
         }
+        toast("Submitted", { type: "success" });
         setSubmitting(false);
+        setTimeout(() => {
+          window.location.href =
+            "/project/" +
+            survey.project_uuid +
+            "/survey/" +
+            surveyuuid +
+            "/tab/1";
+        }, 2000);
       })
       .catch((error) => {
-        alert(error.message);
         setSubmitting(false);
         toast("Something went wrong!", { type: "error" });
+        // alert(error.message);
+        // console.error("There was an error!", error);
       });
   };
+
+  const setupSurveyTracker = () => {};
 
   const successCallback = (position) => {
     setLongitude(position.coords.longitude);
@@ -88,10 +102,6 @@ export default function FillSurvey() {
 
   useEffect(() => {
     getSurvey();
-
-    if (isAuthUser()) {
-      window.location.href = "/survey/" + uuid + "/user/collect";
-    }
   }, []);
 
   useEffect(
@@ -168,36 +178,38 @@ export default function FillSurvey() {
 
   return (
     <>
-      <div className="flex flex-col items-center mb-16">
-        <img src={"/assets/backgrounds/lime_logo.png"} />
+      <div className="flex flex-col items-center mb-16  p-4">
         <div>
           <h1 className="text-5xl text-center m-2 font-bold">
             {survey && survey.name}
           </h1>
+          <br />
         </div>
-        {!surveySubmitted && (
-          <div className="md:w-6/12 p-2 my-4 border border-gray-100">
-            {" "}
-            <div className="p-2">
-              {widgets.map((item, key) => (
-                <div className="m-2">{getWebWidgetByKey(item)}</div>
-              ))}
+        <div className="bg-white flex justify-center w-10/12">
+          {!surveySubmitted && (
+            <div className="md:w-10/12 p-2 my-4 border border-gray-100">
+              {" "}
+              <div className="p-2">
+                {widgets.map((item, key) => (
+                  <div className="m-2">{getWebWidgetByKey(item)}</div>
+                ))}
+              </div>
+              <div className="flex justify-center">
+                <BasicButton
+                  title={`${submitting ? "Submitting..." : "Submit Survey"}`}
+                  classes={`w-8/12`}
+                  disabled={
+                    !widgets.length ||
+                    submitting ||
+                    canSubmit > 0 ||
+                    !hasValidAnswer
+                  }
+                  handleClick={() => submitSurvey()}
+                />
+              </div>
             </div>
-            <div className="flex justify-center">
-              <BasicButton
-                title={`${submitting ? "Submitting..." : "Submit Survey"}`}
-                classes={`w-8/12`}
-                disabled={
-                  !widgets.length ||
-                  submitting ||
-                  canSubmit > 0 ||
-                  !hasValidAnswer
-                }
-                handleClick={() => submitSurvey()}
-              />
-            </div>
-          </div>
-        )}
+          )}
+        </div>
         {surveySubmitted && (
           <div className="md:w-6/12 p-2 my-4  flex justify-center">
             {" "}
