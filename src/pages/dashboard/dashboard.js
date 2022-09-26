@@ -69,10 +69,17 @@ export default function DashboardLayout() {
     }
   };
 
+  const initDashboard = () => {
+    const timer = setInterval(() => {
+      if (authHeader().Authorization) {
+        getSurveys();
+        clearInterval(timer);
+      }
+    }, 1000);
+  };
+
   useEffect(() => {
-    if (isAuthUser()) {
-      getSurveys();
-    }
+    initDashboard();
   }, []);
   return (
     <>
