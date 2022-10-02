@@ -108,7 +108,13 @@ export default function LeftNav() {
           </p>
           <p> {showSidebar ? "true" : "false"}</p> */}
 
-          <img src={"/assets/backgrounds/lime_logo.png"} />
+          <div className="flex flex-col items-center mb-4">
+            {" "}
+            <img src={"/assets/backgrounds/lime_logo.png"} className="w-4/12" />
+            <p class=" mx-auto md:mx-0 text-sky-700 text-center text-xs">
+              LoftyInc Impact Monitoring and Evaluation
+            </p>
+          </div>
           <ul class="space-y-2">
             {menuItems.map((menu, i) => {
               if (menu.title !== "Logout") {

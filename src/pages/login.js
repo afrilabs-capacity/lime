@@ -72,8 +72,10 @@ export default function Login() {
     >
       <div class="flex flex-col text-center md:text-left  h-screen justify-evenly md:items-center w-9/12 md:w-6/12">
         <div class="flex flex-col items-center w-full ite">
-          <img src={"/assets/backgrounds/lime_logo.png"} className="w-4/12" />
-          <p class="w-5/12 mx-auto md:mx-0 text-gray-500"></p>
+          <img src={"/assets/backgrounds/lime_logo.png"} className="w-2/12" />
+          <p class=" mx-auto md:mx-0 text-sky-700">
+            LoftyInc Impact Monitoring and Evaluation
+          </p>
         </div>
         <div class="w-full md:w-full lg:w-9/12 mx-auto md:mx-0">
           <div class="bg-white p-10 flex flex-col w-full shadow-xl rounded-xl">
