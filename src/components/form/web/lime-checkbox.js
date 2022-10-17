@@ -28,9 +28,11 @@ export function LimeCheckboxWeb({ item }) {
           }}
         ></label>
         {widgetRquired && (
-          <span className="rounded bg-red-700 text-white px-1 pb-1 text-xs">
-            required
-          </span>
+          <p>
+            <span className="rounded bg-red-700 text-white px-1 pb-1 text-xs">
+              required
+            </span>
+          </p>
         )}
         {/* widget content start */}
         <div className="p-2 bg-white">
@@ -51,7 +53,7 @@ export function LimeCheckboxWeb({ item }) {
                     id="default-checkbox"
                     type="checkbox"
                     value={option.value}
-                    class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    class="text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
                     for="default-checkbox"

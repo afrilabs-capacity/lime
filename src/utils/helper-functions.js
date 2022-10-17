@@ -326,7 +326,32 @@ const logout = () => {
   window.location.href = "/login";
 };
 
+export const sizes = () => {
+  let contentWidth =
+    [...document.body.children].reduce(
+      (a, el) => Math.max(a, el.getBoundingClientRect().right),
+      0
+    ) - document.body.getBoundingClientRect().x;
+
+  return {
+    windowWidth: document.documentElement.clientWidth,
+    windowHeight: document.documentElement.clientHeight,
+    pageWidth: Math.min(document.body.scrollWidth, contentWidth),
+    pageHeight: document.body.scrollHeight,
+    screenWidth: window.screen.width,
+    screenHeight: window.screen.height,
+    pageX: document.body.getBoundingClientRect().x,
+    pageY: document.body.getBoundingClientRect().y,
+    screenX: -window.screenX,
+    screenY: -window.screenY - (window.outerHeight - window.innerHeight),
+  };
+};
+
+export function isResponsiveMode() {
+  return sizes().windowWidth < 1000;
+}
+
 export const API_BASE = "/api";
-export const BASE_URL = "https://wordalbums.com/api";
+export const BASE_URL = "https://lime.loftyincltd.biz.com/api";
 // export const API_BASE = "";
 // export const BASE_URL = "";

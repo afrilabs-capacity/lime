@@ -9,6 +9,7 @@ export default function TextField({
   handleChange,
   field,
   widget,
+  disabled,
 }) {
   const { currentEditingWidget, updateWidgetField, widgets } = useBuilderStore(
     (state) => state
@@ -53,6 +54,7 @@ export default function TextField({
       placeholder={placeholder}
       onChange={(e) => handleChange && handleChange(e, field, widget)}
       value={setWidgetOptionOrValue()}
+      disabled={disabled && disabled}
     />
   );
 }

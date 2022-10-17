@@ -5,3 +5,16 @@
 input[type="file"] {
 width: 90px; /* Keep it under 100px in order to hide the unwanted text. */
 }
+
+table {
+    table-layout: auto;
+    border-collapse: collapse;
+    width: 100%;
+    white-space: nowrap;
+}
+table td{
+    border: 1px solid #ccc;
+}
+table .absorbing-column {
+    width: 100%;
+}

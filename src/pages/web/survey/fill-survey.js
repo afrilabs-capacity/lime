@@ -168,8 +168,11 @@ export default function FillSurvey() {
 
   return (
     <>
-      <div className="flex flex-col items-center mb-16">
+      <div className="flex flex-col items-center mb-16 py-2">
         <img src={"/assets/backgrounds/lime_logo.png"} />
+        <p class=" mx-auto md:mx-0 text-sky-700 text-center text-xs">
+          LoftyInc Impact Monitoring and Evaluation
+        </p>
         <div>
           <h1 className="text-5xl text-center m-2 font-bold">
             {survey && survey.name}

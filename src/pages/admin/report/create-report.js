@@ -102,19 +102,21 @@ export default function GenerateReport() {
                 if (report.type === "data") {
                   return {
                     label: report.label.replace(/(<([^>]+)>)/gi, ""),
-                    key: i.toString(),
+                    key: "xyx" + i.toString(),
                   };
                 }
               })
               .filter((item) => typeof item === "object" && item !== null);
 
-            const data = response.data.reports.map((r, i) => {
+            console.log("headers", headers);
+
+            const data = response.data.reports.map((r, m) => {
               return JSON.parse(r.data)
                 .map((report, i) => {
                   if (report.type === "data") {
                     return {
-                      [i.toString()]: report.data
-                        ? report.name == "checkbox"
+                      ["xyx" + i.toString()]: report.data
+                        ? report.name == "checkbox" || report.name == "radio"
                           ? report.data.toString()
                           : report.data
                         : "N/A",
@@ -123,13 +125,17 @@ export default function GenerateReport() {
                 })
                 .filter((item) => typeof item === "object" && item !== null);
             });
+            // console.log("report_headers", headers);
+            console.log("report_data", data);
 
             setReportsHeader(headers);
             setReportsData(data);
-            headers.length && data.length && exportBtn.current.link.click();
-            setReports(response.data.reports);
-            console.log("report_headers", headers);
-            console.log("report_data", data);
+            setTimeout(() => {
+              headers.length && data.length && exportBtn.current.link.click();
+            }, 2000);
+            // setReports(response.data.reports);
+            // console.log("report_headers", headers);
+            // console.log("report_data", data);
           }
         }
       })
@@ -234,11 +240,10 @@ export default function GenerateReport() {
           </div>
         </div>
       </div>
-      {reportsHeader && reportsData && (
+      {reportsHeader && reportsData && reportsData.length && (
         <CSVLink
           ref={exportBtn}
           target="_blank"
-          className="flex flex-row"
           headers={reportsHeader}
           data={reportsData}
           filename={`report-${new Date().toLocaleString()}.csv`}

@@ -173,6 +173,11 @@ export const useBuilderStore = create((set) => ({
               [field]: e.target.value,
             };
 
+            obj.options[widgetOptionIndex] = {
+              ...obj.options[widgetOptionIndex],
+              value: e.target.value,
+            };
+
             // console.log("###", obj.options[widgetOptionIndex]);
           }
 

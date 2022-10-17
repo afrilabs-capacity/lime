@@ -164,9 +164,9 @@ export function SurveyResponses() {
     <>
       <br />
       <br />
-      <div className="w-full overflow-x-scroll border flex flex-col items-center">
+      <div className="w-full overflow-x-scroll border">
         {responses && responses.data && responses.data.length ? (
-          <table class="table-fixed border-gray-100 w-full">
+          <table class="border-gray-100">
             <thead>
               <tr className="divide-x w-full">
                 {JSON.parse(responses.data[0].data).map((data) => {
@@ -176,23 +176,26 @@ export function SurveyResponses() {
                         dangerouslySetInnerHTML={{
                           __html: data.label,
                         }}
-                        className="p-2 text-blue-900 text-sm font-normal"
+                        className="p-2 text-blue-900 text-sm font-normal w-full"
                       ></th>
                     );
                   }
                 })}
-                <th className="p-2 text-blue-900 text-sm font-normal">
+                <th
+                  className="p-2 text-blue-900 text-sm font-normal"
+                  style={{ width: "50%" }}
+                >
                   Timestamp
                 </th>
-                <th className="p-2 text-blue-900 text-sm font-normal">
+                <th className="p-2 text-blue-900 text-sm font-normal w-full">
                   Longitude
                 </th>
-                <th className="p-2 text-blue-900 text-sm font-normal">
+                <th className="p-2 text-blue-900 text-sm font-normal w-full">
                   Latitude
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white">
+            <tbody className="bg-white w-100">
               {responses.data.map((response, i) => {
                 console.log("response loop", JSON.parse(response.data));
                 return (
@@ -205,7 +208,7 @@ export function SurveyResponses() {
                       } */
                         }
                         return (
-                          <td className="texm-sm">
+                          <td className="texm-sm w-full">
                             {data.data
                               ? data.name == "checkbox"
                                 ? data.data.toString()
@@ -215,15 +218,15 @@ export function SurveyResponses() {
                         );
                       }
                     })}
-                    <td className="texm-sm">
+                    <td className="texm-sm w-full">
                       {/* {.replace(/-/g, "/")} */}
                       {formatAMPM(new Date(response.created_at))}
                     </td>
-                    <td className="texm-sm">
+                    <td className="texm-sm w-full">
                       {/* {.replace(/-/g, "/")} */}
                       {response.longitude ? response.longitude : "N/A"}
                     </td>
-                    <td className="texm-sm">
+                    <td className="texm-sm w-full">
                       {/* {.replace(/-/g, "/")} */}
                       {response.latitude ? response.latitude : "N/A"}
                     </td>
@@ -524,7 +527,14 @@ export function DistributeSurvey() {
               icon={`fas fa-plus text-white`}
               title={"COPY"}
               classes={"mt-0 bg-sky-700"}
-              handleClick={() => null}
+              handleClick={() => {
+                toast("Copied", { type: "success" });
+                navigator.clipboard.writeText(
+                  `${window.location.protocol}//${
+                    window.location.host
+                  }/survey/share/${authUserId()}/${surveyuuid}`
+                );
+              }}
             />
           </div>
         </>

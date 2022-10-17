@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { useBuilderStore } from "../../stores/builder";
-import { isAdmin, isCollector } from "../../utils/helper-functions";
+import {
+  isAdmin,
+  isCollector,
+  isResponsiveMode,
+} from "../../utils/helper-functions";
 export default function LeftNav() {
   const [showSidebar, setShowSidebar] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const { setActiveNavigationMenu, activeNavigationMenu } = useBuilderStore(
     (state) => state
   );
@@ -107,15 +112,54 @@ export default function LeftNav() {
             toggle sidebar
           </p>
           <p> {showSidebar ? "true" : "false"}</p> */}
+          <div class="flex md:hidden flex-row justify-between w-full shadow p-2">
+            <span>
+              <img
+                src={"/assets/backgrounds/lime_logo.png"}
+                className="w-4/12"
+              />
+              {/* <p class=" mx-auto md:mx-0 text-sky-700 text-center text-xs w-5">
+                LoftyInc Impact Monitoring and Evaluation
+              </p> */}
+            </span>
 
-          <div className="flex flex-col items-center mb-4">
+            <button
+              onClick={() => setShowMobileMenu((showMenu) => !showMenu)}
+              type="button"
+              class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 border border-gray-500 shadow"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Open menu</span>
+              {/* <!-- Heroicon name: outline/menu --> */}
+              <svg
+                class="h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
+          <div className="flex flex-col items-center mb-4 hidden md:flex">
             {" "}
             <img src={"/assets/backgrounds/lime_logo.png"} className="w-4/12" />
             <p class=" mx-auto md:mx-0 text-sky-700 text-center text-xs">
               LoftyInc Impact Monitoring and Evaluation
             </p>
           </div>
-          <ul class="space-y-2">
+          <ul
+            className={`${
+              !showMobileMenu && isResponsiveMode() ? "hidden" : "block"
+            }`}
+          >
             {menuItems.map((menu, i) => {
               if (menu.title !== "Logout") {
                 return (

@@ -24,6 +24,7 @@ export default function DropDownOption({ item, parentWidget }) {
             handleChange={updateWidgetFieldOptions}
             field={"value"}
             widget={item}
+            disabled={true}
           />
         </div>
         <div className="flex items-end">

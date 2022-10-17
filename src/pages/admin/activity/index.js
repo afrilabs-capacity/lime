@@ -93,11 +93,11 @@ export default function Activity() {
                       </div>
                     </div>
                   </div>
-                  <div>
+                  <div className="text-center m-1">
                     {" "}
                     <BasicButton
                       title={"VIEW"}
-                      classes={"mt-0 bg-sky-700"}
+                      classes={"mt-0 bg-sky-700 w-8/12 md:w-full"}
                       handleClick={() =>
                         (window.location.href = getActivityResourceLink(model))
                       }

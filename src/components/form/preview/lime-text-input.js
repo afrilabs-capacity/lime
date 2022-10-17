@@ -37,7 +37,7 @@ export function LimeInputPreview({ item }) {
           }}
         ></label>{" "}
         {widgetRquired && (
-          <span className="rounded bg-red-700 text-white px-1 pb-1 text-xs">
+          <span className="rounded bg-red-700 text-white px-1 pb-1 text-xs m-2">
             required
           </span>
         )}

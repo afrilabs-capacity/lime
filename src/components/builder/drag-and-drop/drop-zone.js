@@ -166,9 +166,9 @@ export default function DropZone() {
     <>
       {!isLoading && (
         <div className="grid md:col-span-2 content-start">
-          {survey && survey.project_id && isAdmin() && (
-            <>
-              {" "}
+          <>
+            {" "}
+            {survey && survey.project_id && isAdmin() && (
               <div className="bg-white m-2 p-2 flex justify-between">
                 <div>
                   <span>Start Date:</span>
@@ -197,6 +197,8 @@ export default function DropZone() {
                   />
                 </div>
               </div>
+            )}
+            {survey && isAdmin() && (
               <div className="bg-white m-2 p-2 flex justify-between">
                 <div className="flex justify-between gap-4 items-center">
                   <BasicButton
@@ -219,15 +221,15 @@ export default function DropZone() {
                     handleClick={updateSurvey}
                   />
                   <BasicButton
-                    disabled={!widgets.length || isUpdating || !isAdmin()}
+                    disabled={isUpdating || !isAdmin()}
                     title={isUpdating ? "Deleting..." : "Delete"}
                     handleClick={deleteSurvey}
                     classes="bg-red-500 hover:bg-red-400"
                   />
                 </div>
               </div>
-            </>
-          )}
+            )}
+          </>
 
           <div className="m-2">
             <div

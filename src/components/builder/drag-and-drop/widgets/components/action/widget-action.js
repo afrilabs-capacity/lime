@@ -53,7 +53,13 @@ export default function WidgetAction({ item }) {
           ></i>
           <i
             className="fas fa-edit mx-2 cursor-pointer"
-            onClick={() => showWidgetEditorModal(item)}
+            onClick={() => {
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+              showWidgetEditorModal(item);
+            }}
           ></i>
           {indexOfCurrentWidget !== 0 && widgets.length > 1 && (
             <i

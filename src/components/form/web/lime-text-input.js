@@ -41,9 +41,11 @@ export function LimeInputWeb({ item }) {
           }}
         ></label>{" "}
         {widgetRquired && (
-          <span className="rounded bg-red-700 text-white px-1 pb-1 text-xs">
-            required
-          </span>
+          <p>
+            <span className="rounded bg-red-700 text-white px-1 pb-1 text-xs">
+              required
+            </span>
+          </p>
         )}
         <fieldset disabled={disableFields}>
           <input
@@ -64,6 +66,7 @@ export function LimeInputWeb({ item }) {
         transition
         ease-in-out
         m-0
+        mt-1
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             id="exampleFormControlInput1"
             placeholder={`Text here...`}

@@ -27,9 +27,11 @@ export function LimeDropDownWeb({ item }) {
           }}
         ></label>
         {widgetRquired && (
-          <span className="rounded bg-red-700 text-white px-1 pb-1 text-xs">
-            required
-          </span>
+          <p>
+            <span className="rounded bg-red-700 text-white px-1 pb-1 text-xs">
+              required
+            </span>
+          </p>
         )}
         {/* widget content start */}
         <fieldset disabled={disableFields}>
