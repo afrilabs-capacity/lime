@@ -102,7 +102,7 @@ export default function GenerateReport() {
                 if (report.type === "data") {
                   return {
                     label: report.label.replace(/(<([^>]+)>)/gi, ""),
-                    key: "xyx" + i.toString(),
+                    key: "xyz" + i.toString(),
                   };
                 }
               })
@@ -111,20 +111,27 @@ export default function GenerateReport() {
             console.log("headers", headers);
 
             const data = response.data.reports.map((r, m) => {
-              return JSON.parse(r.data)
-                .map((report, i) => {
-                  if (report.type === "data") {
-                    return {
-                      ["xyx" + i.toString()]: report.data
-                        ? report.name == "checkbox" || report.name == "radio"
-                          ? report.data.toString()
-                          : report.data
-                        : "N/A",
-                    };
-                  }
-                })
-                .filter((item) => typeof item === "object" && item !== null);
+              let dataObejcts = JSON.parse(r.data).map((report, i) => {
+                if (report.type === "data") {
+                  return {
+                    ["xyz" + i.toString()]: report.data
+                      ? report.name == "checkbox" || report.name == "radio"
+                        ? report.data.toString()
+                        : report.data
+                      : "N/A",
+                  };
+                  // return {
+                  //   [i.toString()]: "123",
+                  // };
+                }
+              });
+
+              return dataObejcts.reduce(function (acc, x) {
+                for (var key in x) acc[key] = x[key];
+                return acc;
+              }, {});
             });
+
             // console.log("report_headers", headers);
             console.log("report_data", data);
 
